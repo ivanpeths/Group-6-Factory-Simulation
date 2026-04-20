@@ -51,18 +51,18 @@ public class FactoryWorld extends World
     public void drawLabels(int leftStarting, int rightStarting){
         leftScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
         leftScore = leftStarting;
-        addObject(leftScoreLabel, getWidth() / 8 * 2, labelY);
+        addObject(leftScoreLabel, getWidth() / 4, labelY);
         
         rightScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
         rightScore = rightStarting;
-        addObject(rightScoreLabel, getWidth() / 8 * 6, labelY);
+        addObject(rightScoreLabel, getWidth() / 4 * 3, labelY);
     }
     
     public void drawBars(){
         leftBar = new SuperStatBar(leftBarProgress, 0, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
         rightBar = new SuperStatBar(rightBarProgress, 180, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
-        addObject(leftBar, 0, 0);
-        addObject(rightBar, getWidth() / 2, 0);
+        addObject(leftBar, getWidth() / 4, 0);
+        addObject(rightBar, getWidth() / 4 * 3, 0);
     }
     
     public void updateBars(){
@@ -75,8 +75,10 @@ public class FactoryWorld extends World
     public void act(){
         if (!started){
             startingTimer--;
-            if (startingTimer <=0){
-                
+            if (startingTimer <= 0){
+                started = true;
+                removeObject(leftBar);
+                removeObject(rightBar);
             }
             updateBars();
         }
