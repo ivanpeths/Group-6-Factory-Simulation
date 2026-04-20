@@ -23,12 +23,14 @@ public class FactoryWorld extends World
     // Bar variables
     private SuperStatBar leftBar;
     private SuperStatBar rightBar;
-    private int leftBarProgress = 180;
-    private int rightBarProgress = 0;
+    private int barProgress = 180;
     private int barHeight = 40;
     
-    // Starting timer variables;
+    // Starting timer and countdown variables;
     private int startingTimer = 180;
+    private Label countdownLabel;
+    private int countdownSize = 100;
+    private Actor overlay; 
     
     /**
      * Factory World constructor. Add parameters if needed
@@ -39,7 +41,7 @@ public class FactoryWorld extends World
         
         setBackground();
         drawLabels(1, 1);
-        drawBars();
+        drawCountdown();
         
     }
     
@@ -53,34 +55,52 @@ public class FactoryWorld extends World
         leftScore = leftStarting;
         addObject(leftScoreLabel, getWidth() / 4, labelY);
         
-        rightScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
+        rightScoreLabel = new Label("$" + rightStarting + "/$100", labelSize);
         rightScore = rightStarting;
         addObject(rightScoreLabel, getWidth() / 4 * 3, labelY);
     }
     
-    public void drawBars(){
-        leftBar = new SuperStatBar(leftBarProgress, 0, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
-        rightBar = new SuperStatBar(rightBarProgress, 180, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
+    public void drawCountdown(){
+        leftBar = new SuperStatBar(barProgress, 0, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
+        rightBar = new SuperStatBar(barProgress, 0, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
+        rightBar.setRotation(180);
         addObject(leftBar, getWidth() / 4, 0);
         addObject(rightBar, getWidth() / 4 * 3, 0);
+        
+        GreenfootImage overlayColour = new GreenfootImage(getWidth(), getHeight());
+        overlayColour.setColor(new Color(0, 0, 0, 150));
+        overlayColour.fill();
+        
+        overlay = new Actor() { public void act(){} };
+        overlay.setImage(overlayColour);
+        addObject(overlay, getWidth() / 2, getHeight() / 2);
+        
+        countdownLabel = new Label(3, countdownSize);
+        addObject(countdownLabel, getWidth() / 2, getHeight() / 2);
     }
     
-    public void updateBars(){
-        leftBarProgress--;
-        rightBarProgress--;
-        leftBar.update(leftBarProgress);
-        rightBar.update(rightBarProgress);
+    public void updateCountdown(){
+        barProgress--;
+        leftBar.update(barProgress);
+        rightBar.update(barProgress);
     }
     
+    public void removeCountdown(){
+        removeObject(leftBar);
+        removeObject(rightBar);
+        removeObject(countdownLabel);
+        removeObject(overlay);
+    }
+
     public void act(){
         if (!started){
             startingTimer--;
+            countdownLabel.setValue(startingTimer / 60 + 1);
             if (startingTimer <= 0){
                 started = true;
-                removeObject(leftBar);
-                removeObject(rightBar);
+                removeCountdown();
             }
-            updateBars();
+            updateCountdown();
         }
     }
 }
