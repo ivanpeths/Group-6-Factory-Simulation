@@ -34,6 +34,13 @@ public class FactoryWorld extends World
     
     // Starting beep
     private GreenfootSound startingSound;
+
+    // Left variables
+    private Machines leftMach;
+
+    // Right variables
+    private Machines rightMach;
+
     
     /**
      * Factory World constructor. Add parameters if needed
@@ -44,6 +51,9 @@ public class FactoryWorld extends World
         
         setBackground();
         drawLabels(0, 0);
+        drawMachines();
+
+        // Countdown above everything
         drawCountdown();
         playStartingBeep();
     }
@@ -59,6 +69,13 @@ public class FactoryWorld extends World
         }
     }
     
+    public void drawMachines(){
+        leftMach = new Machines();
+        rightMach = new Machines();
+        addObject(leftMach, getWidth() / 8, getHeight() / 2);
+        addObject(rightMach, getWidth() / 8 * 7, getHeight() / 2);
+    }
+
     public void stopped(){
         startingSound.pause();
     }
