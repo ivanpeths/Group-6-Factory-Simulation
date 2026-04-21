@@ -15,6 +15,7 @@ public class Product extends SuperSmoothMover
     public void act()
     {
         moveDown();
+        checkMachineZone();
     }
 
     public void updateImage() {
@@ -29,7 +30,7 @@ public class Product extends SuperSmoothMover
         updateImage();
     }
 
-    public void process(Product p) {
+    public void process() {
         int rand = Greenfoot.getRandomNumber(100);
 
         if (rand < 20) {
@@ -46,6 +47,14 @@ public class Product extends SuperSmoothMover
     public void moveDown()
     {
         setLocation(getExactX(), getExactY() + speed);
+    }
+
+    private void checkMachineZone()
+    {
+        if (getExactY() > 300 && type == 0)
+        {
+            process();
+        }
     }
 
     public int getOwner()
