@@ -1,30 +1,25 @@
-/**
- * Write a description of class Product here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Product extends SuperSmoothMover  
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    protected int owner;     // which player it belongs to
+    protected double speed = 1.5; // movement speed
 
-    /**
-     * Constructor for objects of class Product
-     */
-    public Product()
+    public Product(int owner)
     {
+        this.owner = owner;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
+    public void act()
     {
-        // put your code here
-        return x + y;
+        moveDown();
+    }
+
+    public void moveDown()
+    {
+        setLocation(getExactX(), getExactY() + speed);
+    }
+
+    public int getOwner()
+    {
+        return owner;
     }
 }
