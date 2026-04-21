@@ -1,3 +1,5 @@
+import greenfoot.*;
+
 public class Product extends SuperSmoothMover  
 {
     protected int owner;     // which player it belongs to
