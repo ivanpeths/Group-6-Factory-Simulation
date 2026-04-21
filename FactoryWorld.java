@@ -71,12 +71,20 @@ public class FactoryWorld extends World
         overlayColour.setColor(new Color(0, 0, 0, 150));
         overlayColour.fill();
         
-        overlay = new Actor() { public void act(){} };
+        overlay = new BlankActor();
         overlay.setImage(overlayColour);
         addObject(overlay, getWidth() / 2, getHeight() / 2);
         
         countdownLabel = new Label(3, countdownSize);
         addObject(countdownLabel, getWidth() / 2, getHeight() / 2);
+    }
+    
+    public void updateLeftScore(){
+        leftScoreLabel.setValue(leftScore);
+    }
+    
+    public void updateRightScore(){
+        rightScoreLabel.setValue(rightScore);
     }
     
     public void updateCountdown(){
