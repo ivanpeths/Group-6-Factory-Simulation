@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class Product extends SuperSmoothMover  
 {
-    protected int owner;     // which player it belongs to
+    protected int owner; // which player it belongs to
     protected double speed = 1.5; // movement speed
 
     private int type;
