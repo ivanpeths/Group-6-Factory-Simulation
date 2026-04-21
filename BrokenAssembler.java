@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Machines here.
+ * Write a description of class BrokenAssembler here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Machines extends Actor
+public class BrokenAssembler extends Machines
 {
     /**
-     * Act - do whatever the Machines wants to do. This method is called whenever
+     * Act - do whatever the BrokenAssembler wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
