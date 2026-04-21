@@ -18,4 +18,6 @@ comment7.params=
 comment7.target=void\ removeCountdown()
 comment8.params=
 comment8.target=void\ act()
-numComments=9
+comment9.params=
+comment9.target=void\ startingScenario()
+numComments=10

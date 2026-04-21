@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=BlankActor
+comment0.text=\r\n\ Used\ for\ instantiating\ an\ Actor,\ which\ is\ abstract\r\n\ \r\n
+comment1.params=
+comment1.target=void\ act()
+numComments=2
