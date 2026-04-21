@@ -10,7 +10,7 @@ public class FactoryWorld extends World
 {
     private GreenfootImage background;
     
-    private boolean started = false;
+    private boolean gameStarted = false;
     
     // Score variables
     private Label leftScoreLabel;
@@ -26,11 +26,14 @@ public class FactoryWorld extends World
     private int barProgress = 180;
     private int barHeight = 40;
     
-    // Starting timer and countdown variables;
+    // Starting timer and countdown variables
     private int startingTimer = 180;
     private Label countdownLabel;
     private int countdownSize = 100;
     private Actor overlay; 
+    
+    // Starting beep
+    private GreenfootSound startingSound;
     
     /**
      * Factory World constructor. Add parameters if needed
@@ -40,9 +43,24 @@ public class FactoryWorld extends World
         super(1200, 800, 1); 
         
         setBackground();
-        drawLabels(1, 1);
+        drawLabels(0, 0);
         drawCountdown();
-        
+        playStartingBeep();
+    }
+    
+    public void playStartingBeep(){
+        startingSound = new GreenfootSound("starting_beep.mp3");
+        startingSound.play();
+    }
+    
+    public void started(){
+        if (!gameStarted){
+            startingSound.play();
+        }
+    }
+    
+    public void stopped(){
+        startingSound.pause();
     }
     
     public void setBackground(){
@@ -101,11 +119,11 @@ public class FactoryWorld extends World
     }
 
     public void act(){
-        if (!started){
+        if (!gameStarted){
             startingTimer--;
             countdownLabel.setValue(startingTimer / 60 + 1);
             if (startingTimer <= 0){
-                started = true;
+                gameStarted = true;
                 removeCountdown();
             }
             updateCountdown();
