@@ -1,3 +1,5 @@
+import greenfoot.*;
+
 public class Product extends SuperSmoothMover  
 {
     protected int owner;     // which player it belongs to
@@ -45,7 +47,7 @@ public class Product extends SuperSmoothMover
 
     public void moveDown()
     {
-        setLocation(getExactX(), getExactY() + speed);
+        setLocation(getExactX(), getPreciseY() + speed);
     }
 
     public int getOwner()
