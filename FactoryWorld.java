@@ -12,6 +12,9 @@ public class FactoryWorld extends World
     
     private boolean started = false;
     
+    private static int LEFT_MIDDLE = 300;
+    private static int RIGHT_MIDDLE = 900;
+    
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
@@ -42,7 +45,6 @@ public class FactoryWorld extends World
         setBackground();
         drawLabels(1, 1);
         drawCountdown();
-        
     }
     
     public void setBackground(){
@@ -51,11 +53,11 @@ public class FactoryWorld extends World
     }
     
     public void drawLabels(int leftStarting, int rightStarting){
-        leftScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
+        leftScoreLabel = new Label("" + leftStarting + "/$100", labelSize);
         leftScore = leftStarting;
         addObject(leftScoreLabel, getWidth() / 4, labelY);
         
-        rightScoreLabel = new Label("$" + rightStarting + "/$100", labelSize);
+        rightScoreLabel = new Label("" + rightStarting + "/$100", labelSize);
         rightScore = rightStarting;
         addObject(rightScoreLabel, getWidth() / 4 * 3, labelY);
     }
@@ -99,8 +101,14 @@ public class FactoryWorld extends World
             if (startingTimer <= 0){
                 started = true;
                 removeCountdown();
+                startingScenario();
             }
             updateCountdown();
         }
+    }
+    
+    public void startingScenario () {
+        addObject (new Assembler(), LEFT_MIDDLE, 300);
+        addObject (new Assembler(), RIGHT_MIDDLE, 300);
     }
 }
