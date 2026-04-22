@@ -34,6 +34,10 @@ public class FactoryWorld extends World
 
     // Right variables
     private Machines rightMach;
+    
+    // Game timer
+    private int timer = 0;
+    private Label timerLabel;
 
     /**
      * Factory World constructor. Add parameters if needed
@@ -127,7 +131,15 @@ public class FactoryWorld extends World
         removeObject(countdownLabel);
         removeObject(overlay);
     }
-
+    
+    public void updateTimer(){
+        timerLabel.setValue(timer / 60 + "s");
+    }
+    
+    public void drawTimer(){
+        timerLabel = new Label("0s", labelSize);
+        addObject(timerLabel, getWidth() / 2, labelY);
+    }
     public void act(){
         if (!gameStarted){
             startingTimer--;
@@ -135,9 +147,14 @@ public class FactoryWorld extends World
             if (startingTimer <= 0){
                 gameStarted = true;
                 removeCountdown();
-                
+                drawTimer();
             }
             updateCountdown();
+            return;
+        }
+        timer++;
+        if (timer % 60 == 0){
+            updateTimer();
         }
     }
 }
