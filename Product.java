@@ -18,6 +18,8 @@ public class Product extends SuperSmoothMover
     public void act()
     {
         moveDown();
+        checkMachine();
+        checkEnd();
     }
 
     public void updateImage() {
@@ -30,28 +32,69 @@ public class Product extends SuperSmoothMover
         setImage(img);
     }
 
-    public void setType(int newType) {
+    public void setType(int newType) 
+    {
         type = newType;
         updateImage();
     }
 
-    public void process(Product p) {
+    public void process(Product p) 
+    {
         int rand = Greenfoot.getRandomNumber(100);
 
         if (rand < 20) {
-            p.setType(2); // broken
+            setType(2); // broken
         } 
         else if (rand < 80) {
-            p.setType(1); // finished
+            setType(1); // finished
         } 
         else {
-            p.setType(3); // expensive
+            setType(3); // expensive
         }
     }
 
     public void moveDown()
     {
         setLocation(getExactX(), getPreciseY() + speed);
+    }
+
+    private void checkMachine()
+    {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+        
+        if (m != null && type == 0)
+        {
+            process(this);
+        }
+    }
+
+    private void checkEnd()
+    {
+        if (getY() > getWorld().getHeight() - 10)
+        {
+            giveMoney();
+            getWorld().removeObject(this);
+        }
+    }
+
+    private void giveMoney()
+    {
+        FactoryWorld world = (FactoryWorld)getWorld();
+    
+        if (type == 1) // finished
+        {
+            if (owner == 1)
+                world.addLeftScore(10);
+            else
+                world.addRightScore(10);
+        }
+        else if (type == 3) // expensive
+        {
+            if (owner == 1)
+                world.addLeftScore(25);
+            else
+                world.addRightScore(25);
+        }
     }
 
     public int getOwner()
