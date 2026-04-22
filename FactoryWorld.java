@@ -65,8 +65,8 @@ public class FactoryWorld extends World
     public void drawMachines(){
         leftMach = new Assembler();
         rightMach = new Assembler();
-        addObject(leftMach, getWidth() / 8, getHeight() / 2);
-        addObject(rightMach, getWidth() / 8 * 7, getHeight() / 2);
+        addObject(leftMach, getWidth() / 8 * 3, getHeight() / 2);
+        addObject(rightMach, getWidth() / 8 * 5, getHeight() / 2);
     }
     
     public void stopped(){
