@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class Product extends SuperSmoothMover  
+public class FactoryWorld extends World  
 {
     private GreenfootImage background;
     
@@ -29,55 +29,46 @@ public class Product extends SuperSmoothMover
     // Starting beep
     private GreenfootSound startingSound;
 
-    private int type;
-    GreenfootImage img;
+    // Left variables
+    private Machines leftMach;
 
-    public Product(int owner)
-    {
-        this.owner = owner;
-        type = 0;
-        updateImage();
-    }
+    // Right variables
+    private Machines rightMach;
 
-    public void act()
-    {
-        moveDown();
-    }
-
-    public void updateImage() {
-        if (type == 0) img = new GreenfootImage("material.png");
-        else if (type == 1) img = new GreenfootImage("finishedBox.png");
-        else if (type == 2) img = new GreenfootImage("brokenBox.png");
-        else if (type == 3) img = new GreenfootImage("expensiveBox.png");
+    /**
+     * Factory World constructor. Add parameters if needed
+     */
+    public FactoryWorld()
+    {    
+        super(1200, 800, 1); 
         
-        img.scale(50, 50);
-        setImage(img);
+        setBackground();
+        drawLabels(0, 0);
+        drawMachines();
+
+        // Countdown above everything
+        drawCountdown();
+        playStartingBeep();
     }
-
-    public void setType(int newType) {
-        type = newType;
-        updateImage();
+    
+    public void playStartingBeep(){
+        startingSound = new GreenfootSound("starting_beep.mp3");
+        startingSound.play();
     }
-
-    public void process(Product p) {
-        int rand = Greenfoot.getRandomNumber(100);
-
-        if (rand < 20) {
-            p.setType(2); // broken
-        } 
-        else if (rand < 80) {
-            p.setType(1); // finished
-        } 
-        else {
-            p.setType(3); // expensive
+    
+    public void started(){
+        if (!gameStarted){
+            startingSound.play();
         }
     }
-
-    public void moveDown()
-    {
-        setLocation(getExactX(), getPreciseY() + speed);
+    
+    public void drawMachines(){
+        leftMach = new Assembler();
+        rightMach = new Assembler();
+        addObject(leftMach, getWidth() / 8, getHeight() / 2);
+        addObject(rightMach, getWidth() / 8 * 7, getHeight() / 2);
     }
-
+    
     public void stopped(){
         startingSound.pause();
     }
@@ -144,14 +135,9 @@ public class Product extends SuperSmoothMover
             if (startingTimer <= 0){
                 gameStarted = true;
                 removeCountdown();
-                startingScenario();
+                
             }
             updateCountdown();
         }
-    }
-    
-    public void startingScenario () {
-        addObject (new Assembler(), getWidth() / 4, getHeight() / 2);
-        addObject (new Assembler(), getWidth() / 4 * 3, getHeight() / 2);
     }
 }

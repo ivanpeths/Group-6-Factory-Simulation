@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=FactoryWorld
-comment0.text=\r\n\ Main\ game\ world\r\n\ \r\n\ @author\ Kolby\ Ng\r\n\ @version\ 0.1\r\n
 comment1.params=
 comment1.target=FactoryWorld()
 comment1.text=\r\n\ Factory\ World\ constructor.\ Add\ parameters\ if\ needed\r\n
