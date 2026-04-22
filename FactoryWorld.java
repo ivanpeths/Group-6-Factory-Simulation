@@ -12,9 +12,6 @@ public class FactoryWorld extends World
     
     private boolean gameStarted = false;
     
-    private static int LEFT_MIDDLE = 300;
-    private static int RIGHT_MIDDLE = 900;
-    
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
@@ -81,7 +78,6 @@ public class FactoryWorld extends World
 
     public void stopped(){
         startingSound.pause();
-
     }
     
     public void setBackground(){
@@ -153,7 +149,7 @@ public class FactoryWorld extends World
     }
     
     public void startingScenario () {
-        addObject (new Assembler(), LEFT_MIDDLE, 300);
-        addObject (new Assembler(), RIGHT_MIDDLE, 300);
+        addObject (new Assembler(), getWidth() / 4, getHeight() / 2);
+        addObject (new Assembler(), getWidth() / 4 * 3, getHeight() / 2);
     }
 }

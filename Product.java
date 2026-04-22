@@ -6,6 +6,7 @@ public class Product extends SuperSmoothMover
     protected double speed = 1.5; // movement speed
 
     private int type;
+    GreenfootImage img;
 
     public Product(int owner)
     {
@@ -20,10 +21,13 @@ public class Product extends SuperSmoothMover
     }
 
     public void updateImage() {
-        if (type == 0) setImage("matrial.png");
-        else if (type == 1) setImage("finishedBox.png");
-        else if (type == 2) setImage("brokenBox.png");
-        else if (type == 3) setImage("expensiveBox.png");
+        if (type == 0) img = new GreenfootImage("material.png");
+        else if (type == 1) img = new GreenfootImage("finishedBox.png");
+        else if (type == 2) img = new GreenfootImage("brokenBox.png");
+        else if (type == 3) img = new GreenfootImage("expensiveBox.png");
+        
+        img.scale(50, 50);
+        setImage(img);
     }
 
     public void setType(int newType) {
