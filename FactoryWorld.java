@@ -1,16 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MyWorld here.
+ * Main game world
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Kolby Ng
+ * @version 0.1
  */
 public class FactoryWorld extends World
 {
     private GreenfootImage background;
     
-    private boolean started = false;
+    private boolean gameStarted = false;
     
     private static int LEFT_MIDDLE = 300;
     private static int RIGHT_MIDDLE = 900;
@@ -29,11 +29,21 @@ public class FactoryWorld extends World
     private int barProgress = 180;
     private int barHeight = 40;
     
-    // Starting timer and countdown variables;
+    // Starting timer and countdown variables
     private int startingTimer = 180;
     private Label countdownLabel;
     private int countdownSize = 100;
     private Actor overlay; 
+    
+    // Starting beep
+    private GreenfootSound startingSound;
+
+    // Left variables
+    private Machines leftMach;
+
+    // Right variables
+    private Machines rightMach;
+
     
     /**
      * Factory World constructor. Add parameters if needed
@@ -43,8 +53,35 @@ public class FactoryWorld extends World
         super(1200, 800, 1); 
         
         setBackground();
-        drawLabels(1, 1);
+        drawLabels(0, 0);
+        drawMachines();
+
+        // Countdown above everything
         drawCountdown();
+        playStartingBeep();
+    }
+    
+    public void playStartingBeep(){
+        startingSound = new GreenfootSound("starting_beep.mp3");
+        startingSound.play();
+    }
+    
+    public void started(){
+        if (!gameStarted){
+            startingSound.play();
+        }
+    }
+    
+    public void drawMachines(){
+        leftMach = new Machines();
+        rightMach = new Machines();
+        addObject(leftMach, getWidth() / 8, getHeight() / 2);
+        addObject(rightMach, getWidth() / 8 * 7, getHeight() / 2);
+    }
+
+    public void stopped(){
+        startingSound.pause();
+
     }
     
     public void setBackground(){
@@ -73,12 +110,20 @@ public class FactoryWorld extends World
         overlayColour.setColor(new Color(0, 0, 0, 150));
         overlayColour.fill();
         
-        overlay = new Actor() { public void act(){} };
+        overlay = new BlankActor();
         overlay.setImage(overlayColour);
         addObject(overlay, getWidth() / 2, getHeight() / 2);
         
         countdownLabel = new Label(3, countdownSize);
         addObject(countdownLabel, getWidth() / 2, getHeight() / 2);
+    }
+    
+    public void updateLeftScore(){
+        leftScoreLabel.setValue(leftScore);
+    }
+    
+    public void updateRightScore(){
+        rightScoreLabel.setValue(rightScore);
     }
     
     public void updateCountdown(){
@@ -95,11 +140,11 @@ public class FactoryWorld extends World
     }
 
     public void act(){
-        if (!started){
+        if (!gameStarted){
             startingTimer--;
             countdownLabel.setValue(startingTimer / 60 + 1);
             if (startingTimer <= 0){
-                started = true;
+                gameStarted = true;
                 removeCountdown();
                 startingScenario();
             }
