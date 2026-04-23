@@ -18,6 +18,7 @@ public class Product extends SuperSmoothMover
     public void act()
     {
         moveDown();
+        checkMachineZone();
         checkMachine();
         checkEnd();
     }
@@ -94,6 +95,14 @@ public class Product extends SuperSmoothMover
                 world.addLeftScore(25);
             else
                 world.addRightScore(25);
+        }
+    }
+
+    private void checkMachineZone()
+    {
+        if (getExactY() > 300 && type == 0)
+        {
+            process();
         }
     }
 
