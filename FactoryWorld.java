@@ -38,6 +38,9 @@ public class FactoryWorld extends World
     // Game timer
     private int timer = 0;
     private Label timerLabel;
+    
+    // Sound Manager
+    private SoundManager soundMan = new SoundManager();
 
     /**
      * Factory World constructor. Add parameters if needed
@@ -52,18 +55,10 @@ public class FactoryWorld extends World
 
         // Countdown above everything
         drawCountdown();
-        playStartingBeep();
     }
-    
-    public void playStartingBeep(){
-        startingSound = new GreenfootSound("starting_beep.mp3");
-        startingSound.play();
-    }
-    
-    public void started(){
-        if (!gameStarted){
-            startingSound.play();
-        }
+        
+    public boolean getStarted(){
+        return gameStarted;
     }
     
     public void drawMachines(){
@@ -77,21 +72,17 @@ public class FactoryWorld extends World
         addObject(rightMach, getWidth() / 4 * 3, getHeight() / 2);
     }
     
-    public void stopped(){
-        startingSound.pause();
-    }
-    
     public void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground (background);
     }
     
     public void drawLabels(int leftStarting, int rightStarting){
-        leftScoreLabel = new Label("" + leftStarting + "/$100", labelSize);
+        leftScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
         leftScore = leftStarting;
         addObject(leftScoreLabel, 75, labelY);
         
-        rightScoreLabel = new Label("" + rightStarting + "/$100", labelSize);
+        rightScoreLabel = new Label("$" + rightStarting + "/$100", labelSize);
         rightScore = rightStarting;
         addObject(rightScoreLabel, 1125, labelY);
     }
@@ -154,6 +145,7 @@ public class FactoryWorld extends World
         timerLabel = new Label("0s", labelSize);
         addObject(timerLabel, getWidth() / 2, labelY);
     }
+    
     public void act(){
         if (!gameStarted){
             startingTimer--;
@@ -169,6 +161,8 @@ public class FactoryWorld extends World
         timer++;
         if (timer % 60 == 0){
             updateTimer();
+            soundMan.playLeftCoin();
         }
+        
     }
 }
