@@ -11,7 +11,7 @@ public class FactoryWorld extends World
     private Label rightScoreLabel;
     private int leftScore;
     private int rightScore;
-    private int labelY = 25;
+    private int labelY = 50;
     private int labelSize = 50;
     
     // Bar variables
@@ -80,11 +80,11 @@ public class FactoryWorld extends World
     public void drawLabels(int leftStarting, int rightStarting){
         leftScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
         leftScore = leftStarting;
-        addObject(leftScoreLabel, 75, labelY);
+        addObject(leftScoreLabel, getWidth() / 32 * 3, labelY);
         
         rightScoreLabel = new Label("$" + rightStarting + "/$100", labelSize);
         rightScore = rightStarting;
-        addObject(rightScoreLabel, 1125, labelY);
+        addObject(rightScoreLabel, getWidth() / 32 * 29, labelY);
     }
     
     public void drawCountdown(){
@@ -107,11 +107,11 @@ public class FactoryWorld extends World
     }
     
     public void updateLeftScore(){
-        leftScoreLabel.setValue(leftScore);
+        leftScoreLabel.setValue("$" + leftScore + "/$100");
     }
     
     public void updateRightScore(){
-        rightScoreLabel.setValue(rightScore);
+        rightScoreLabel.setValue("$" + rightScore + "/$100");
     }
     
     public void addLeftScore(int score){
@@ -161,7 +161,8 @@ public class FactoryWorld extends World
         timer++;
         if (timer % 60 == 0){
             updateTimer();
-            soundMan.playLeftCoin();
+            addLeftScore(100);
+            addRightScore(100);
         }
         
     }
