@@ -100,7 +100,7 @@ public class Product extends SuperSmoothMover
 
     private void checkMachineZone()
     {
-        if (getExactY() > 300 && type == 0)
+        if (getPreciseY() > 00 && type == 0)
         {
             process();
         }
@@ -109,6 +109,11 @@ public class Product extends SuperSmoothMover
     public int getOwner()
     {
         return owner;
+    }
+    
+    public void process() //temporary process method to allow compiling
+    {
+        
     }
 
     public int getType()

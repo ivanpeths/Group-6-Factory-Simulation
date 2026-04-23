@@ -11,7 +11,7 @@ public class FactoryWorld extends World
     private Label rightScoreLabel;
     private int leftScore;
     private int rightScore;
-    private int labelY = 75;
+    private int labelY = 25;
     private int labelSize = 50;
     
     // Bar variables
@@ -67,10 +67,14 @@ public class FactoryWorld extends World
     }
     
     public void drawMachines(){
+        if (Greenfoot.getRandomNumber(5) == 0) {
+            leftMach = new BrokenAssembler();
+            rightMach = new BrokenAssembler();
+        }
         leftMach = new Assembler();
         rightMach = new Assembler();
-        addObject(leftMach, getWidth() / 8 * 3, getHeight() / 2);
-        addObject(rightMach, getWidth() / 8 * 5, getHeight() / 2);
+        addObject(leftMach, getWidth() / 4, getHeight() / 2);
+        addObject(rightMach, getWidth() / 4 * 3, getHeight() / 2);
     }
     
     public void stopped(){
@@ -85,11 +89,11 @@ public class FactoryWorld extends World
     public void drawLabels(int leftStarting, int rightStarting){
         leftScoreLabel = new Label("" + leftStarting + "/$100", labelSize);
         leftScore = leftStarting;
-        addObject(leftScoreLabel, getWidth() / 4, labelY);
+        addObject(leftScoreLabel, 75, labelY);
         
         rightScoreLabel = new Label("" + rightStarting + "/$100", labelSize);
         rightScore = rightStarting;
-        addObject(rightScoreLabel, getWidth() / 4 * 3, labelY);
+        addObject(rightScoreLabel, 1125, labelY);
     }
     
     public void drawCountdown(){
