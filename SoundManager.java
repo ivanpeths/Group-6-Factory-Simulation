@@ -29,17 +29,6 @@ public class SoundManager extends Actor
         }
     }
     
-    public void started(){
-        FactoryWorld fw = (FactoryWorld) getWorld();
-        if (!fw.getStarted()){
-            startingSound.play();
-        }
-    }
-    
-    public void stopped(){
-        startingSound.pause();
-    }
-    
     public void playLeftCoin(){
         leftCoinSounds[leftCoinIndex].play();
         leftCoinIndex = (leftCoinIndex + 1) % coinLength;
@@ -48,5 +37,13 @@ public class SoundManager extends Actor
     public void playRightCoin(){
         rightCoinSounds[rightCoinIndex].play();
         rightCoinIndex = (rightCoinIndex + 1) % coinLength;
+    }
+    
+    public void playStarting(){
+        startingSound.play();
+    }
+    
+    public void pauseStarting(){
+        startingSound.pause();
     }
 }

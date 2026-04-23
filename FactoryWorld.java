@@ -52,13 +52,23 @@ public class FactoryWorld extends World
         setBackground();
         drawLabels(0, 0);
         drawMachines();
-
         // Countdown above everything
         drawCountdown();
+        addObject(soundMan, 0, 0);
     }
         
     public boolean getStarted(){
         return gameStarted;
+    }
+    
+    public void started(){
+        if(!gameStarted){
+            soundMan.playStarting();
+        }
+    }
+    
+    public void stopped(){
+        soundMan.pauseStarting();
     }
     
     public void drawMachines(){
@@ -161,8 +171,6 @@ public class FactoryWorld extends World
         timer++;
         if (timer % 60 == 0){
             updateTimer();
-            addLeftScore(100);
-            addRightScore(100);
         }
         
     }
