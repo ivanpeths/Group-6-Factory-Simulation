@@ -119,6 +119,16 @@ public class FactoryWorld extends World
         rightScoreLabel.setValue(rightScore);
     }
     
+    public void addLeftScore(int score){
+        leftScore = leftScore + score;
+        updateLeftScore();
+    }
+    
+    public void addRightScore(int score){
+        rightScore = rightScore + score;
+        updateRightScore();
+    }
+    
     public void updateCountdown(){
         barProgress--;
         leftBar.update(barProgress);

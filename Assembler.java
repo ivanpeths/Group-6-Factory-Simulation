@@ -9,9 +9,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Assembler extends Machines
 {
     private double valueMultiplier;
+    private GreenfootImage image;
     
     public Assembler () {
         valueMultiplier = 1.5;
+        image = new GreenfootImage("machine.png");
+        setImage(image);
     }
     
     public void act()
