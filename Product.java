@@ -1,9 +1,12 @@
+import greenfoot.*;
+
 public class Product extends SuperSmoothMover  
 {
-    protected int owner;     // which player it belongs to
+    protected int owner; // which player it belongs to
     protected double speed = 1.5; // movement speed
 
     private int type;
+    GreenfootImage img;
 
     public Product(int owner)
     {
@@ -16,37 +19,83 @@ public class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachineZone();
+        checkMachine();
+        checkEnd();
     }
 
     public void updateImage() {
-        if (type == 0) setImage("matrial.png");
-        else if (type == 1) setImage("finishedBox.png");
-        else if (type == 2) setImage("brokenBox.png");
-        else if (type == 3) setImage("expensiveBox.png");
+        if (type == 0) img = new GreenfootImage("material.png");
+        else if (type == 1) img = new GreenfootImage("finishedBox.png");
+        else if (type == 2) img = new GreenfootImage("brokenBox.png");
+        else if (type == 3) img = new GreenfootImage("expensiveBox.png");
+        
+        img.scale(50, 50);
+        setImage(img);
     }
 
-    public void setType(int newType) {
+    public void setType(int newType) 
+    {
         type = newType;
         updateImage();
     }
 
-    public void process() {
+    public void process(Product p) 
+    {
         int rand = Greenfoot.getRandomNumber(100);
 
         if (rand < 20) {
-            p.setType(2); // broken
+            setType(2); // broken
         } 
         else if (rand < 80) {
-            p.setType(1); // finished
+            setType(1); // finished
         } 
         else {
-            p.setType(3); // expensive
+            setType(3); // expensive
         }
     }
 
     public void moveDown()
     {
-        setLocation(getExactX(), getExactY() + speed);
+        setLocation(getExactX(), getPreciseY() + speed);
+    }
+
+    private void checkMachine()
+    {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+        
+        if (m != null && type == 0)
+        {
+            process(this);
+        }
+    }
+
+    private void checkEnd()
+    {
+        if (getY() > getWorld().getHeight() - 10)
+        {
+            giveMoney();
+            getWorld().removeObject(this);
+        }
+    }
+
+    private void giveMoney()
+    {
+        FactoryWorld world = (FactoryWorld)getWorld();
+    
+        if (type == 1) // finished
+        {
+            if (owner == 1)
+                world.addLeftScore(10);
+            else
+                world.addRightScore(10);
+        }
+        else if (type == 3) // expensive
+        {
+            if (owner == 1)
+                world.addLeftScore(25);
+            else
+                world.addRightScore(25);
+        }
     }
 
     private void checkMachineZone()
