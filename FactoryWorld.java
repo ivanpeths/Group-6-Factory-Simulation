@@ -74,11 +74,11 @@ public class FactoryWorld extends World
     }
     
     public void drawLabels(int leftStarting, int rightStarting){
-        leftScoreLabel = new Label("" + leftStarting + "/$100", labelSize);
+        leftScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
         leftScore = leftStarting;
         addObject(leftScoreLabel, getWidth() / 4, labelY);
         
-        rightScoreLabel = new Label("" + rightStarting + "/$100", labelSize);
+        rightScoreLabel = new Label("$" + rightStarting + "/$100", labelSize);
         rightScore = rightStarting;
         addObject(rightScoreLabel, getWidth() / 4 * 3, labelY);
     }
@@ -131,6 +131,7 @@ public class FactoryWorld extends World
         timerLabel = new Label("0s", labelSize);
         addObject(timerLabel, getWidth() / 2, labelY);
     }
+    
     public void act(){
         if (!gameStarted){
             startingTimer--;
