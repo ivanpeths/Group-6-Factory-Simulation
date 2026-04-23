@@ -56,7 +56,7 @@ public class Product extends SuperSmoothMover
 
     public void moveDown()
     {
-        setLocation(getExactX(), getPreciseY() + speed);
+        setLocation(getExactX(), getPreciseY() + speed); // getExactX(), getPreciseY()
     }
 
     private void checkMachine()
