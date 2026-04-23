@@ -7,6 +7,7 @@ public class Product extends SuperSmoothMover
 
     private int type;
     GreenfootImage img;
+    private SimpleTimer spawnTimer = new SimpleTimer();
 
     public Product(int owner)
     {
@@ -63,9 +64,9 @@ public class Product extends SuperSmoothMover
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        if (m != null && type == 0)
+        if (m != null && type == 0 && spawnTimer.millisElapsed() > 300)
         {
-            process(this);
+            process();
         }
     }
 
