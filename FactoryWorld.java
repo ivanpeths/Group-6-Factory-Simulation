@@ -168,6 +168,14 @@ public class FactoryWorld extends World
             updateCountdown();
             return;
         }
+
+        // Need to add this so that Product can spawn
+        if (Greenfoot.getRandomNumber(60) == 0)
+        {
+            addObject(new Product(1), getWidth()/4, 50);
+            addObject(new Product(2), getWidth()/4*3, 50);
+        }
+        
         timer++;
         if (timer % 60 == 0){
             updateTimer();
