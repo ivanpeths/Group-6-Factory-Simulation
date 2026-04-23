@@ -40,7 +40,7 @@ public class FactoryWorld extends World
     private Label timerLabel;
     
     // Sound Manager
-    private SoundManager soundMan;
+    private SoundManager soundMan = new SoundManager();
 
     /**
      * Factory World constructor. Add parameters if needed
@@ -157,6 +157,8 @@ public class FactoryWorld extends World
         timer++;
         if (timer % 60 == 0){
             updateTimer();
+            soundMan.playLeftCoin();
         }
+        
     }
 }
