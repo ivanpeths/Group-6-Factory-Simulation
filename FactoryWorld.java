@@ -38,6 +38,9 @@ public class FactoryWorld extends World
     // Game timer
     private int timer = 0;
     private Label timerLabel;
+    
+    // Sound Manager
+    private SoundManager soundMan;
 
     /**
      * Factory World constructor. Add parameters if needed
@@ -52,18 +55,10 @@ public class FactoryWorld extends World
 
         // Countdown above everything
         drawCountdown();
-        playStartingBeep();
     }
-    
-    public void playStartingBeep(){
-        startingSound = new GreenfootSound("starting_beep.mp3");
-        startingSound.play();
-    }
-    
-    public void started(){
-        if (!gameStarted){
-            startingSound.play();
-        }
+        
+    public boolean getStarted(){
+        return gameStarted;
     }
     
     public void drawMachines(){
@@ -71,10 +66,6 @@ public class FactoryWorld extends World
         rightMach = new Assembler();
         addObject(leftMach, getWidth() / 8 * 3, getHeight() / 2);
         addObject(rightMach, getWidth() / 8 * 5, getHeight() / 2);
-    }
-    
-    public void stopped(){
-        startingSound.pause();
     }
     
     public void setBackground(){
