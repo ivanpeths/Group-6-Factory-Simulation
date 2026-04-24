@@ -35,11 +35,11 @@ public class FactoryWorld extends World
 
     // Left variables
     private Machines leftMach;
-    private int lastLeft = 0;
+    private int lastLeft = 120;
 
     // Right variables
     private Machines rightMach;
-    private int lastRight = 0;
+    private int lastRight = 120;
     
     // Game timer
     private int timer = 0;
@@ -124,11 +124,11 @@ public class FactoryWorld extends World
     }
     
     public void updateLeftScore(){
-        leftScoreLabel.setValue("$" + leftScore + "/$100");
+        leftScoreLabel.setValue("$" + leftScore + "/$1000");
     }
     
     public void updateRightScore(){
-        rightScoreLabel.setValue("$" + rightScore + "/$100");
+        rightScoreLabel.setValue("$" + rightScore + "/$1000");
     }
     
     public void addLeftScore(int score){
@@ -180,10 +180,12 @@ public class FactoryWorld extends World
         // Product spawning
         if (Greenfoot.getRandomNumber(60) == 0 && lastLeft >= spawnDelay){
             addObject(new Product(1), leftSpawn, 0);
+            lastLeft = 0;
         }
         
         if (Greenfoot.getRandomNumber(60) == 0 && lastRight >= spawnDelay){
             addObject(new Product(2), rightSpawn, 0);
+            lastRight = 0;
         }
         lastLeft++;
         lastRight++;
