@@ -172,13 +172,16 @@ public class FactoryWorld extends World
             return;
         }
 
-        // Need to add this so that Product can spawn
-        if (Greenfoot.getRandomNumber(60) == 0)
-        {
+        // Product spawning
+        if (Greenfoot.getRandomNumber(60) == 0){
             addObject(new Product(1), leftSpawn, 0);
+        }
+        
+        if (Greenfoot.getRandomNumber(60) == 0){
             addObject(new Product(2), rightSpawn, 0);
         }
         
+        // Timer tick
         timer++;
         if (timer % 60 == 0){
             updateTimer();
