@@ -8,7 +8,7 @@ public class SoundManager
     private int leftCoinIndex = 0;
     private int rightCoinIndex = 0;
     
-    private int coinLength = 10;
+    private int coinLength = 5;
     private int coinVolume = 100;
     
     public SoundManager(){
