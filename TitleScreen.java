@@ -35,6 +35,8 @@ public class TitleScreen extends World
     }
     
     public void act(){
-        
+        if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(title)){
+            Greenfoot.setWorld(new SettingsWorld());
+        }
     }
 }
