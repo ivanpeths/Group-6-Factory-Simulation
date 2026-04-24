@@ -58,7 +58,6 @@ public class FactoryWorld extends World
         drawMachines();
         // Countdown above everything
         drawCountdown();
-        addObject(soundMan, 0, 0);
     }
         
     public boolean getStarted(){
