@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Title screen
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Kolby Ng
+ * @version 20260424
  */
 public class TitleScreen extends World
 {
