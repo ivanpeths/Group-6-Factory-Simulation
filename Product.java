@@ -87,14 +87,12 @@ public class Product extends SuperSmoothMover
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
     
-        // store machine when touching it
         if (m != null)
         {
             lastMachine = m;
         }
     
-        // despawn when 
-        if (lastMachine != null)
+        if (lastMachine != null && lastMachine.getImage() != null)
         {
             int machineBottom = lastMachine.getY() + lastMachine.getImage().getHeight() / 2;
     
