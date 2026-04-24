@@ -15,7 +15,7 @@ public class FactoryWorld extends World
     private Label rightScoreLabel;
     private int leftScore;
     private int rightScore;
-    private int labelY = 30;
+    private int labelY = 50;
     private int labelSize = 50;
     
     // Bar variables
@@ -44,7 +44,8 @@ public class FactoryWorld extends World
     // Game timer
     private int timer = 0;
     private Label timerLabel;
-
+    
+    // Product variables
     private int spawnDelay = 120;
     
     // Sound Manager
@@ -103,11 +104,11 @@ public class FactoryWorld extends World
     public void drawLabels(int leftStarting, int rightStarting){
         leftScoreLabel = new Label("$" + leftStarting + "/$1000", labelSize);
         leftScore = leftStarting;
-        addObject(leftScoreLabel, getWidth() / 32 * 2, labelY);
+        addObject(leftScoreLabel, getWidth() / 32 * 3, labelY);
         
         rightScoreLabel = new Label("$" + rightStarting + "/$1000", labelSize);
         rightScore = rightStarting;
-        addObject(rightScoreLabel, getWidth() / 32 * 30, labelY);
+        addObject(rightScoreLabel, getWidth() / 32 * 29, labelY);
     }
     
     public void drawCountdown(){
