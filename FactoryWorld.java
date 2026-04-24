@@ -80,8 +80,8 @@ public class FactoryWorld extends World
     }
     
     public void drawConveyor () {
-        addObject(new ConveyorBelts(), leftSpawn, getHeight() / 2);
-        addObject(new ConveyorBelts(), rightSpawn, getHeight() / 2);
+        addObject(new Conveyor(), leftSpawn, getHeight() / 2);
+        addObject(new Conveyor(), rightSpawn, getHeight() / 2);
     }
     
     public void drawMachines(){
