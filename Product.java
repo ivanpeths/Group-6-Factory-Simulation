@@ -9,6 +9,7 @@ public class Product extends SuperSmoothMover
     private GreenfootImage img;
 
     private SimpleTimer spawnTimer = new SimpleTimer();
+    private Machines lastMachine = null;
 
     public Product(int owner)
     {
@@ -21,6 +22,7 @@ public class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachine();
+        checkBelowMachine();
         checkEnd();
     }
 
@@ -78,6 +80,29 @@ public class Product extends SuperSmoothMover
         {
             giveMoney();
             getWorld().removeObject(this);
+        }
+    }
+
+    private void checkBelowMachine()
+    {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+    
+        // store machine when touching it
+        if (m != null)
+        {
+            lastMachine = m;
+        }
+    
+        // despawn when 
+        if (lastMachine != null)
+        {
+            int machineBottom = lastMachine.getY() + lastMachine.getImage().getHeight() / 2;
+    
+            if (getY() > machineBottom)
+            {
+                giveMoney();
+                getWorld().removeObject(this);
+            }
         }
     }
 
