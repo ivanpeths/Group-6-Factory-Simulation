@@ -6,6 +6,10 @@ public class FactoryWorld extends World
     
     private boolean gameStarted = false;
     
+    //location variables
+    private int leftSpawn = 298;
+    private int rightSpawn = 898;
+    
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
@@ -31,13 +35,17 @@ public class FactoryWorld extends World
 
     // Left variables
     private Machines leftMach;
+    private int lastLeft = 120;
 
     // Right variables
     private Machines rightMach;
+    private int lastRight = 120;
     
     // Game timer
     private int timer = 0;
     private Label timerLabel;
+
+    private int spawnDelay = 120;
     
     // Sound Manager
     private SoundManager soundMan = new SoundManager();
@@ -54,7 +62,6 @@ public class FactoryWorld extends World
         drawMachines();
         // Countdown above everything
         drawCountdown();
-        addObject(soundMan, 0, 0);
     }
         
     public boolean getStarted(){
@@ -78,8 +85,8 @@ public class FactoryWorld extends World
         }
         leftMach = new Assembler();
         rightMach = new Assembler();
-        addObject(leftMach, getWidth() / 4, getHeight() / 2);
-        addObject(rightMach, getWidth() / 4 * 3, getHeight() / 2);
+        addObject(leftMach, leftSpawn, getHeight() / 2);
+        addObject(rightMach, rightSpawn, getHeight() / 2);
     }
     
     public void setBackground(){
@@ -88,11 +95,11 @@ public class FactoryWorld extends World
     }
     
     public void drawLabels(int leftStarting, int rightStarting){
-        leftScoreLabel = new Label("$" + leftStarting + "/$100", labelSize);
+        leftScoreLabel = new Label("$" + leftStarting + "/$1000", labelSize);
         leftScore = leftStarting;
         addObject(leftScoreLabel, getWidth() / 32 * 3, labelY);
         
-        rightScoreLabel = new Label("$" + rightStarting + "/$100", labelSize);
+        rightScoreLabel = new Label("$" + rightStarting + "/$1000", labelSize);
         rightScore = rightStarting;
         addObject(rightScoreLabel, getWidth() / 32 * 29, labelY);
     }
@@ -117,11 +124,11 @@ public class FactoryWorld extends World
     }
     
     public void updateLeftScore(){
-        leftScoreLabel.setValue("$" + leftScore + "/$100");
+        leftScoreLabel.setValue("$" + leftScore + "/$1000");
     }
     
     public void updateRightScore(){
-        rightScoreLabel.setValue("$" + rightScore + "/$100");
+        rightScoreLabel.setValue("$" + rightScore + "/$1000");
     }
     
     public void addLeftScore(int score){
@@ -157,6 +164,7 @@ public class FactoryWorld extends World
     }
     
     public void act(){
+        // Countdown logic
         if (!gameStarted){
             startingTimer--;
             countdownLabel.setValue(startingTimer / 60 + 1);
@@ -169,13 +177,20 @@ public class FactoryWorld extends World
             return;
         }
 
-        // Need to add this so that Product can spawn
-        if (Greenfoot.getRandomNumber(60) == 0)
-        {
-            addObject(new Product(1), leftMach.getX(), 0);
-            addObject(new Product(2), rightMach.getX(), 0);
+        // Product spawning
+        if (Greenfoot.getRandomNumber(60) == 0 && lastLeft >= spawnDelay){
+            addObject(new Product(1), leftSpawn, 0);
+            lastLeft = 0;
         }
         
+        if (Greenfoot.getRandomNumber(60) == 0 && lastRight >= spawnDelay){
+            addObject(new Product(2), rightSpawn, 0);
+            lastRight = 0;
+        }
+        lastLeft++;
+        lastRight++;
+        
+        // Timer tick
         timer++;
         if (timer % 60 == 0){
             updateTimer();
