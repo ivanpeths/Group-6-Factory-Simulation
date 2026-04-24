@@ -9,12 +9,12 @@ public class Product extends SuperSmoothMover
     private GreenfootImage img;
 
     private SimpleTimer spawnTimer = new SimpleTimer();
-    private Machines lastMachine = null;
+    private boolean processed = false;
 
     public Product(int owner)
     {
         this.owner = owner;
-        type = 0; // raw material
+        type = 0; // material
         updateImage();
     }
 
@@ -22,7 +22,6 @@ public class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachine();
-        checkBelowMachine();
         checkEnd();
     }
 
@@ -67,10 +66,10 @@ public class Product extends SuperSmoothMover
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        // small delay so it doesn't process instantly on spawn
-        if (m != null && type == 0 && spawnTimer.millisElapsed() > 300)
+        if (m != null && type == 0 && !processed && spawnTimer.millisElapsed() > 300)
         {
             process();
+            processed = true;
         }
     }
 
@@ -80,27 +79,6 @@ public class Product extends SuperSmoothMover
         {
             giveMoney();
             getWorld().removeObject(this);
-        }
-    }
-
-    private void checkBelowMachine()
-    {
-        Machines m = (Machines)getOneIntersectingObject(Machines.class);
-    
-        if (m != null)
-        {
-            lastMachine = m;
-        }
-    
-        if (lastMachine != null && lastMachine.getImage() != null)
-        {
-            int machineBottom = lastMachine.getY() + lastMachine.getImage().getHeight() / 2;
-    
-            if (getY() > machineBottom)
-            {
-                giveMoney();
-                getWorld().removeObject(this);
-            }
         }
     }
 
