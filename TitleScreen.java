@@ -1,23 +1,42 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TitleScreen here.
+ * Title screen
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Kolby Ng
+ * @version 20260424
  */
 public class TitleScreen extends World
 {
-
-    /**
-     * Constructor for objects of class TitleScreen.
-     * 
-     */
+    private Label title;
+    private GreenfootImage buttonImg;
+    private Actor buttonActor;
+    private Label buttonTitle;
     public TitleScreen()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
+        setupLabel();
+        setupButton();
         
-        
+    }
+    
+    public void setupLabel(){
+        title = new Label("Factory Simulation", 75);
+        addObject(title, getWidth() / 2, getHeight() / 4);
+    }
+    
+    public void setupButton(){
+        buttonImg = new GreenfootImage("button.png");
+        buttonActor = new BlankActor();
+        buttonActor.setImage(buttonImg);
+        title = new Label("Start", 75);
+        addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
+        addObject(title, getWidth() / 2, getHeight() / 4 * 3 - 10);
+    }
+    
+    public void act(){
+        if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(title)){
+            Greenfoot.setWorld(new SettingsWorld());
+        }
     }
 }

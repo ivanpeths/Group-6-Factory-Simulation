@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class SoundManager extends Actor
+public class SoundManager
 {
     private GreenfootSound startingSound;
     private GreenfootSound[] leftCoinSounds;
