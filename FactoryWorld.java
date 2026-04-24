@@ -6,6 +6,10 @@ public class FactoryWorld extends World
     
     private boolean gameStarted = false;
     
+    //location variables
+    private int leftSpawn = 298;
+    private int rightSpawn = 898;
+    
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
@@ -77,8 +81,8 @@ public class FactoryWorld extends World
         }
         leftMach = new Assembler();
         rightMach = new Assembler();
-        addObject(leftMach, getWidth() / 4, getHeight() / 2);
-        addObject(rightMach, getWidth() / 4 * 3, getHeight() / 2);
+        addObject(leftMach, leftSpawn, getHeight() / 2);
+        addObject(rightMach, rightSpawn, getHeight() / 2);
     }
     
     public void setBackground(){
@@ -167,6 +171,14 @@ public class FactoryWorld extends World
             updateCountdown();
             return;
         }
+
+        // Need to add this so that Product can spawn
+        if (Greenfoot.getRandomNumber(60) == 0)
+        {
+            addObject(new Product(1), leftSpawn, 0);
+            addObject(new Product(2), rightSpawn, 0);
+        }
+        
         timer++;
         if (timer % 60 == 0){
             updateTimer();

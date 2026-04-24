@@ -6,26 +6,28 @@ public class Product extends SuperSmoothMover
     protected double speed = 1.5; // movement speed
 
     private int type;
-    GreenfootImage img;
+    private GreenfootImage img;
+
+    private SimpleTimer spawnTimer = new SimpleTimer();
 
     public Product(int owner)
     {
         this.owner = owner;
-        type = 0;
+        type = 0; // raw material
         updateImage();
     }
 
     public void act()
     {
         moveDown();
-        checkMachineZone();
         checkMachine();
         checkEnd();
     }
 
-    public void updateImage() {
+    public void updateImage() 
+    {
         if (type == 0) img = new GreenfootImage("material.png");
-        else if (type == 1) img = new GreenfootImage("finishedBox.png");
+        else if (type == 1) img = new GreenfootImage("finishBox.png");
         else if (type == 2) img = new GreenfootImage("brokenBox.png");
         else if (type == 3) img = new GreenfootImage("expensiveBox.png");
         
@@ -39,7 +41,7 @@ public class Product extends SuperSmoothMover
         updateImage();
     }
 
-    public void process(Product p) 
+    public void process() 
     {
         int rand = Greenfoot.getRandomNumber(100);
 
@@ -56,16 +58,17 @@ public class Product extends SuperSmoothMover
 
     public void moveDown()
     {
-        setLocation(getExactX(), getPreciseY() + speed); // getExactX(), getPreciseY()
+        setLocation(getExactX(), getPreciseY() + speed);
     }
 
     private void checkMachine()
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        if (m != null && type == 0)
+        // small delay so it doesn't process instantly on spawn
+        if (m != null && type == 0 && spawnTimer.millisElapsed() > 300)
         {
-            process(this);
+            process();
         }
     }
 
@@ -98,22 +101,9 @@ public class Product extends SuperSmoothMover
         }
     }
 
-    private void checkMachineZone()
-    {
-        if (getPreciseY() > 00 && type == 0)
-        {
-            process();
-        }
-    }
-
     public int getOwner()
     {
         return owner;
-    }
-    
-    public void process() //temporary process method to allow compiling
-    {
-        
     }
 
     public int getType()
