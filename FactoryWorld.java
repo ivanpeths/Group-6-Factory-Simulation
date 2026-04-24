@@ -15,14 +15,14 @@ public class FactoryWorld extends World
     private Label rightScoreLabel;
     private int leftScore;
     private int rightScore;
-    private int labelY = 50;
+    private int labelY = 35;
     private int labelSize = 50;
     
     // Bar variables
     private SuperStatBar leftBar;
     private SuperStatBar rightBar;
     private int barProgress = 180;
-    private int barHeight = 40;
+    private int barHeight = 30;
     
     // Starting timer and countdown variables
     private int startingTimer = 180;
@@ -179,6 +179,7 @@ public class FactoryWorld extends World
                 gameStarted = true;
                 removeCountdown();
                 drawTimer();
+                soundMan.playBgm();
             }
             updateCountdown();
             return;

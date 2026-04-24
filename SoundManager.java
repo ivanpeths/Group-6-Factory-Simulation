@@ -2,14 +2,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class SoundManager
 {
+    // Sound variables
     private GreenfootSound startingSound;
+    private GreenfootSound bgm;
     private GreenfootSound[] leftCoinSounds;
     private GreenfootSound[] rightCoinSounds;
+    
+    // Coin variables
     private int leftCoinIndex = 0;
     private int rightCoinIndex = 0;
-    
     private int coinLength = 5;
+    
+    // Volumes
     private int coinVolume = 100;
+    private int bgmVolume = 75;
     
     public SoundManager(){
         setFiles();
@@ -17,11 +23,16 @@ public class SoundManager
     
     public void setFiles(){
         startingSound = new GreenfootSound("starting_beep.mp3");
+        
+        bgm = new GreenfootSound("bgm.mp3");
+        bgm.setVolume(bgmVolume);
+        
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
             leftCoinSounds[i] = new GreenfootSound("left_coin.mp3");
             leftCoinSounds[i].setVolume(coinVolume);
         }
+        
         rightCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
             rightCoinSounds[i] = new GreenfootSound("right_coin.mp3");
@@ -45,5 +56,13 @@ public class SoundManager
     
     public void pauseStarting(){
         startingSound.pause();
+    }
+    
+    public void playBgm(){
+        bgm.play();
+    }
+    
+    public void pauseBgm(){
+        bgm.pause();
     }
 }
