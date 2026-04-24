@@ -7,15 +7,15 @@ public class FactoryWorld extends World
     private boolean gameStarted = false;
     
     //location variables
-    private int leftSpawn = 298;
-    private int rightSpawn = 898;
+    private int leftSpawn = 400;
+    private int rightSpawn = 800;
     
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
     private int leftScore;
     private int rightScore;
-    private int labelY = 50;
+    private int labelY = 30;
     private int labelSize = 50;
     
     // Bar variables
@@ -58,6 +58,7 @@ public class FactoryWorld extends World
         super(1200, 800, 1); 
         
         setBackground();
+        drawConveyor();
         drawLabels(0, 0);
         drawMachines();
         // Countdown above everything
@@ -76,6 +77,11 @@ public class FactoryWorld extends World
     
     public void stopped(){
         soundMan.pauseStarting();
+    }
+    
+    public void drawConveyor () {
+        addObject(new ConveyorBelts(), leftSpawn, getHeight() / 2);
+        addObject(new ConveyorBelts(), rightSpawn, getHeight() / 2);
     }
     
     public void drawMachines(){
@@ -97,11 +103,11 @@ public class FactoryWorld extends World
     public void drawLabels(int leftStarting, int rightStarting){
         leftScoreLabel = new Label("$" + leftStarting + "/$1000", labelSize);
         leftScore = leftStarting;
-        addObject(leftScoreLabel, getWidth() / 32 * 3, labelY);
+        addObject(leftScoreLabel, getWidth() / 32 * 2, labelY);
         
         rightScoreLabel = new Label("$" + rightStarting + "/$1000", labelSize);
         rightScore = rightStarting;
-        addObject(rightScoreLabel, getWidth() / 32 * 29, labelY);
+        addObject(rightScoreLabel, getWidth() / 32 * 30, labelY);
     }
     
     public void drawCountdown(){
