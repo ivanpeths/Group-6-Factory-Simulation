@@ -172,8 +172,8 @@ public class FactoryWorld extends World
         // Need to add this so that Product can spawn
         if (Greenfoot.getRandomNumber(60) == 0)
         {
-            addObject(new Product(1), leftMach.getX(), leftMach.getY() - 100);
-            addObject(new Product(2), rightMach.getX(), rightMach.getY() - 100);
+            addObject(new Product(1), leftMach.getX(), 0);
+            addObject(new Product(2), rightMach.getX(), 0);
         }
         
         timer++;
