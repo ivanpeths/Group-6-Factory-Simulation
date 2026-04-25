@@ -86,10 +86,6 @@ public class FactoryWorld extends World
     }
     
     public void drawMachines(){
-        if (Greenfoot.getRandomNumber(5) == 0) {
-            leftMach = new BrokenAssembler();
-            rightMach = new BrokenAssembler();
-        }
         leftMach = new Assembler();
         rightMach = new Assembler();
         addObject(leftMach, leftSpawn, getHeight() / 2);

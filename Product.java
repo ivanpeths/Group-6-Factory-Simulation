@@ -23,6 +23,10 @@ public class Product extends SuperSmoothMover
         moveDown();
         checkMachine();
         checkEnd();
+        if (getWorld() == null) {
+            return;
+        }
+        checkLeavingMachine();
     }
 
     public void updateImage() 
@@ -68,8 +72,20 @@ public class Product extends SuperSmoothMover
         
         if (m != null && type == 0 && !processed && spawnTimer.millisElapsed() > 300)
         {
-            process();
-            processed = true;
+            if (!((Assembler)m).getBroken()) {
+                process();
+                processed = true;
+                ((Assembler)m).checkBreak();
+            }
+            getImage().setTransparency(0);
+        }
+    }
+    
+    private void checkLeavingMachine() {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+        
+        if (m == null) {
+            getImage().setTransparency(255);
         }
     }
 
