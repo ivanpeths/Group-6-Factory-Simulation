@@ -23,6 +23,7 @@ public class Product extends SuperSmoothMover
         moveDown();
         checkMachine();
         checkEnd();
+        checkLeavingMachine();
     }
 
     public void updateImage() 
@@ -70,6 +71,15 @@ public class Product extends SuperSmoothMover
         {
             process();
             processed = true;
+            getImage().setTransparency(0);
+        }
+    }
+    
+    private void checkLeavingMachine() {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+        
+        if (m == null) {
+            getImage().setTransparency(255);
         }
     }
 
