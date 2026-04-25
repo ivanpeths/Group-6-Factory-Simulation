@@ -1,3 +1,5 @@
+// Product made by Isaac
+
 import greenfoot.*;
 
 public class Product extends SuperSmoothMover  
@@ -50,10 +52,10 @@ public class Product extends SuperSmoothMover
     {
         int rand = Greenfoot.getRandomNumber(100);
 
-        if (rand < 20) {
+        if (rand < 25) {
             setType(2); // broken
         } 
-        else if (rand < 80) {
+        else if (rand < 95) {
             setType(1); // finished
         } 
         else {
