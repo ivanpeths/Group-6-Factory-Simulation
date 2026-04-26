@@ -60,6 +60,7 @@ public class FactoryWorld extends World
         
         setBackground();
         drawConveyor();
+        drawUpgrades();
         drawLabels(0, 0);
         drawMachines();
         // Countdown above everything
@@ -90,6 +91,16 @@ public class FactoryWorld extends World
         rightMach = new Assembler();
         addObject(leftMach, leftSpawn, getHeight() / 2);
         addObject(rightMach, rightSpawn, getHeight() / 2);
+    }
+    
+    public void drawUpgrades () {
+        for (int i = 50; i < 1200; i += 1100) {
+            addObject(new Break(), i, 750);
+            addObject(new Buy(), i, 663);
+            addObject(new Quality(), i, 576);
+            addObject(new Repair(), i, 489);
+            addObject(new Spawn(), i, 402);
+        }
     }
     
     public void setBackground(){

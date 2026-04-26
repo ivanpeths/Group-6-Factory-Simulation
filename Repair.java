@@ -1,16 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Powerups here.
+ * Write a description of class RepairMachine here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Upgrades extends Actor
+public class Repair extends Upgrades
 {
-    protected GreenfootImage image;
+    public Repair () {
+        image = new GreenfootImage("repair.png");
+        setImage(image);
+    }
+    
     /**
-     * Act - do whatever the Powerups wants to do. This method is called whenever
+     * Act - do whatever the RepairMachine wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()

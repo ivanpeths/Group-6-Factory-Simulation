@@ -1,16 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Powerups here.
+ * Write a description of class BreakMachine here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Upgrades extends Actor
+public class Break extends Upgrades
 {
-    protected GreenfootImage image;
+    public Break () {
+        image = new GreenfootImage("break.png");
+        setImage(image);
+    }
+    
     /**
-     * Act - do whatever the Powerups wants to do. This method is called whenever
+     * Act - do whatever the BreakMachine wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
