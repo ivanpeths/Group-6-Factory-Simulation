@@ -8,12 +8,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Machines extends Actor
 {
-    /**
-     * Act - do whatever the Machines wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    protected GreenfootImage image;
+    protected boolean broken;
+    public Machines () {
+        broken = false;
+        if (Greenfoot.getRandomNumber(5) == 0) {
+            breakMachine();
+        }
+    }
+    
+    public void checkBreak () {
+        if (Greenfoot.getRandomNumber(30) == 0) {
+            breakMachine();
+        }
+    }
+    
+    public abstract void breakMachine ();
+    
+    public boolean getBroken() {
+        return broken;
     }
 }

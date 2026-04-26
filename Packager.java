@@ -6,15 +6,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Assembler extends Machines
+public class Packager extends Machines
 {
-    public Assembler () {
-        image = new GreenfootImage("machine.png");
+    public Packager () {
+        image = new GreenfootImage("machine2.png");
         setImage(image);
     }
     
     public void breakMachine() {
-        image = new GreenfootImage("brokenmachine.png");
+        image = new GreenfootImage("brokenmachine2.png");
         setImage(image);
         broken = true;
     }

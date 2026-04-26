@@ -1,17 +1,17 @@
-// Product made by Isaac
+// Product made by Isaac, updated to an abstract superclass by Ivan
 
 import greenfoot.*;
 
-public class Product extends SuperSmoothMover  
+public abstract class Product extends SuperSmoothMover  
 {
     protected int owner; // which player it belongs to
     protected double speed = 1.5; // movement speed
 
-    private int type;
-    private GreenfootImage img;
+    protected int type;
+    protected GreenfootImage image;
 
-    private SimpleTimer spawnTimer = new SimpleTimer();
-    private boolean processed = false;
+    protected SimpleTimer spawnTimer = new SimpleTimer();
+    protected boolean processed = false;
 
     public Product(int owner)
     {
@@ -33,13 +33,13 @@ public class Product extends SuperSmoothMover
 
     public void updateImage() 
     {
-        if (type == 0) img = new GreenfootImage("material.png");
-        else if (type == 1) img = new GreenfootImage("finishBox.png");
-        else if (type == 2) img = new GreenfootImage("brokenBox.png");
-        else if (type == 3) img = new GreenfootImage("expensiveBox.png");
+        if (type == 0) image = new GreenfootImage("material.png");
+        else if (type == 1) image = new GreenfootImage("finishBox.png");
+        else if (type == 2) image = new GreenfootImage("brokenBox.png");
+        else if (type == 3) image = new GreenfootImage("expensiveBox.png");
         
-        img.scale(50, 50);
-        setImage(img);
+        image.scale(50, 50);
+        setImage(image);
     }
 
     public void setType(int newType) 
@@ -95,30 +95,12 @@ public class Product extends SuperSmoothMover
     {
         if (getY() > getWorld().getHeight() - 10)
         {
-            giveMoney();
+            sell();
             getWorld().removeObject(this);
         }
     }
-
-    private void giveMoney()
-    {
-        FactoryWorld world = (FactoryWorld)getWorld();
     
-        if (type == 1) // finished
-        {
-            if (owner == 1)
-                world.addLeftScore(10);
-            else
-                world.addRightScore(10);
-        }
-        else if (type == 3) // expensive
-        {
-            if (owner == 1)
-                world.addLeftScore(25);
-            else
-                world.addRightScore(25);
-        }
-    }
+    public abstract void sell ();
 
     public int getOwner()
     {
