@@ -10,6 +10,8 @@ public class FactoryWorld extends World
     private int leftSpawn = 400;
     private int rightSpawn = 800;
     
+    private int productSpawn = 50;
+    
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
@@ -103,6 +105,10 @@ public class FactoryWorld extends World
         }
     }
     
+    public void updateSpawnRate () {
+        productSpawn -= 5;
+    }
+    
     public void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground (background);
@@ -193,12 +199,12 @@ public class FactoryWorld extends World
         }
 
         // Product spawning
-        if (Greenfoot.getRandomNumber(60) == 0 && lastLeft >= spawnDelay){
+        if (Greenfoot.getRandomNumber(productSpawn) == 0 && lastLeft >= spawnDelay){
             addObject(new Cardboard(1), leftSpawn, 0);
             lastLeft = 0;
         }
         
-        if (Greenfoot.getRandomNumber(60) == 0 && lastRight >= spawnDelay){
+        if (Greenfoot.getRandomNumber(productSpawn) == 0 && lastRight >= spawnDelay){
             addObject(new Cardboard(2), rightSpawn, 0);
             lastRight = 0;
         }

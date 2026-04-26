@@ -32,13 +32,12 @@ public abstract class Upgrades extends Actor
     }
     
     public void activate () {
-        FactoryWorld world = (FactoryWorld)getWorld();
         getImage().setTransparency(50);
         activated = true;
         if (side == 1) {
-            world.changeLeftScore(-200);
+            ((FactoryWorld)getWorld()).changeLeftScore(-200);
         } else {
-            world.changeRightScore(-200);
+            ((FactoryWorld)getWorld()).changeRightScore(-200);
         }
     }
     
