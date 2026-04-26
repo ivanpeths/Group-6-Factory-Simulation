@@ -8,17 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Break extends Upgrades
 {
-    public Break () {
+    public Break (int side) {
+        super(side);
         image = new GreenfootImage("break.png");
         setImage(image);
     }
     
-    /**
-     * Act - do whatever the BreakMachine wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    public void activate () {
+        super.activate();
     }
 }

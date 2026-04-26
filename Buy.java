@@ -8,17 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Buy extends Upgrades
 {
-    public Buy () {
+    public Buy (int side) {
+        super(side);
         image = new GreenfootImage("buy.png");
         setImage(image);
     }
     
-    /**
-     * Act - do whatever the Buy wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    public void activate () {
+        super.activate();
     }
 }

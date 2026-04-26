@@ -18,16 +18,16 @@ public class Cardboard extends Product
         if (type == 1) // finished
         {
             if (owner == 1)
-                world.addLeftScore(10);
+                world.changeLeftScore(10);
             else
-                world.addRightScore(10);
+                world.changeRightScore(10);
         }
         else if (type == 3) // expensive
         {
             if (owner == 1)
-                world.addLeftScore(25);
+                world.changeLeftScore(25);
             else
-                world.addRightScore(25);
+                world.changeRightScore(25);
         }
     }
 }

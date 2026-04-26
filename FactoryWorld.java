@@ -95,11 +95,11 @@ public class FactoryWorld extends World
     
     public void drawUpgrades () {
         for (int i = 50; i < 1200; i += 1100) {
-            addObject(new Break(), i, 750);
-            addObject(new Buy(), i, 663);
-            addObject(new Quality(), i, 576);
-            addObject(new Repair(), i, 489);
-            addObject(new Spawn(), i, 402);
+            addObject(new Break(i), i, 750);
+            addObject(new Buy(i), i, 663);
+            addObject(new Quality(i), i, 576);
+            addObject(new Repair(i), i, 489);
+            addObject(new Spawn(i), i, 402);
         }
     }
     
@@ -145,12 +145,12 @@ public class FactoryWorld extends World
         rightScoreLabel.setValue("$" + rightScore + "/$1000");
     }
     
-    public void addLeftScore(int score){
+    public void changeLeftScore(int score){
         leftScore = leftScore + score;
         updateLeftScore();
     }
     
-    public void addRightScore(int score){
+    public void changeRightScore(int score){
         rightScore = rightScore + score;
         updateRightScore();
     }

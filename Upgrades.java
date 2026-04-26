@@ -9,12 +9,40 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Upgrades extends Actor
 {
     protected GreenfootImage image;
-    /**
-     * Act - do whatever the Powerups wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    protected int rechargeTimer;
+    protected boolean activated;
+    protected int side;
+    
+    public Upgrades (int side) {
+        if (side == 50) {
+            this.side = 1;
+        } else if (side == 1150) {
+            this.side = 2;
+        }
+    }
+    
+    public void act () {
+        if (!activated) {
+            rechargeTimer++;
+        }
+        if (rechargeTimer == 900) {
+            activated = false;
+            getImage().setTransparency(255);
+        }
+    }
+    
+    public void activate () {
+        FactoryWorld world = (FactoryWorld)getWorld();
+        getImage().setTransparency(50);
+        activated = true;
+        if (side == 1) {
+            world.changeLeftScore(-200);
+        } else {
+            world.changeRightScore(-200);
+        }
+    }
+    
+    public boolean getActivated () {
+        return activated;
     }
 }

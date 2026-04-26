@@ -8,17 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Quality extends Upgrades
 {
-    public Quality () {
+    public Quality (int side) {
+        super(side);
         image = new GreenfootImage("quality.png");
         setImage(image);
     }
     
-    /**
-     * Act - do whatever the ProductQuality wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    public void activate () {
+        super.activate();
     }
 }
