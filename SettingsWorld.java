@@ -27,12 +27,30 @@ public class SettingsWorld extends World
     private int rightScoreAmt = 0;
     private Actor rightScoreRight;
     
+    // Left position
+    private Label leftPosLabel;
+    private Actor leftPosLeft;
+    private Label leftPosAmtLabel;
+    private int leftPosAmt = 0;
+    private Actor leftPosRight;
+    
+    // Right position
+    private Label rightPosLabel;
+    private Actor rightPosLeft;
+    private Label rightPosAmtLabel;
+    private int rightPosAmt = 0;
+    private Actor rightPosRight;
+    
     // Label constants
     private int labelSize = 50;
     private int leftScoreY = 100;
-    private int rightScoreY = 250;
+    private int rightScoreY = 200;
+    private int leftPosY = 300;
+    private int rightPosY = 400;
     private int scoreIncrements = 10;
     private int scoreShiftIncrements = 20;
+    private int posIncrements = 10;
+    private int posShiftIncrements = 20;
     
     // Arrow images
     private GreenfootImage leftImg;
@@ -40,6 +58,7 @@ public class SettingsWorld extends World
     private int imgSize = 75;
     
     private GreenfootImage background;
+    
     public SettingsWorld()
     {    
         super(1200, 800, 1); 
@@ -47,6 +66,8 @@ public class SettingsWorld extends World
         setupImages();
         setupLeftScore();
         setupRightScore();
+        setupLeftPos();
+        setupRightPos();
         setBackground();
         
     }
@@ -97,6 +118,48 @@ public class SettingsWorld extends World
     public void changeRightScore(int amt){
         rightScoreAmt = rightScoreAmt + amt;
         rightScoreAmtLabel.setValue(Math.min(500, rightScoreAmt));
+    }
+    
+    public void setupLeftPos(){
+        leftPosLabel = new Label("Left Starting Position", labelSize);
+        leftPosAmtLabel = new Label(leftPosAmt, labelSize);
+        leftPosLeft = new BlankActor();
+        leftPosRight = new BlankActor();
+        leftPosLeft.setImage(leftImg);
+        leftPosRight.setImage(rightImg);
+        
+        addObject(leftPosLabel, getWidth() / 4, leftPosY);
+        addObject(leftPosLeft, getWidth() / 8 * 5, leftPosY);
+        addObject(leftPosAmtLabel, getWidth() / 8 * 6, leftPosY);
+        addObject(leftPosRight, getWidth() / 8 * 7, leftPosY);
+        
+    }
+    
+    // Clamp max
+    public void changeLeftPos(int amt){
+        leftPosAmt = leftPosAmt + amt;
+        leftPosAmtLabel.setValue(leftPosAmt);
+    }
+    
+    public void setupRightPos(){
+        rightPosLabel = new Label("Right Starting Position", labelSize);
+        rightPosAmtLabel = new Label(rightPosAmt, labelSize);
+        rightPosLeft = new BlankActor();
+        rightPosRight = new BlankActor();
+        rightPosLeft.setImage(leftImg);
+        rightPosRight.setImage(rightImg);
+        
+        addObject(rightPosLabel, getWidth() / 4, rightPosY);
+        addObject(rightPosLeft, getWidth() / 8 * 5, rightPosY);
+        addObject(rightPosAmtLabel, getWidth() / 8 * 6, rightPosY);
+        addObject(rightPosRight, getWidth() / 8 * 7, rightPosY);
+        
+    }
+    
+    // Clamp max
+    public void changeRightPos(int amt){
+        rightPosAmt = rightPosAmt + amt;
+        rightPosAmtLabel.setValue(rightPosAmt);
     }
     
     public void setupButton(){
@@ -157,6 +220,48 @@ public class SettingsWorld extends World
         
         if (Greenfoot.mouseClicked(rightScoreRight)){
             changeRightScore(scoreIncrements);
+            return;
+        }
+        
+        // Position increments while holding Shift
+        if (Greenfoot.mouseClicked(leftPosLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftPos(posShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftPosRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftPos(posShiftIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightPos(posShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosRight) && Greenfoot.isKeyDown("shift")){
+            changeRightPos(posShiftIncrements);
+            return;
+        }
+        
+        // Score increments
+        if (Greenfoot.mouseClicked(leftPosLeft)){
+            changeLeftPos(posIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftPosRight)){
+            changeLeftPos(posIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosLeft)){
+            changeRightPos(posIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosRight)){
+            changeRightPos(posIncrements);
             return;
         }
     }
