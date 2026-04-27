@@ -5,6 +5,7 @@ public class SoundManager
     // Sound variables
     private GreenfootSound startingSound;
     private GreenfootSound bgm;
+    private GreenfootSound ambience;
     private GreenfootSound[] leftCoinSounds;
     private GreenfootSound[] rightCoinSounds;
     
@@ -16,6 +17,7 @@ public class SoundManager
     // Volumes
     private int coinVolume = 100;
     private int bgmVolume = 50;
+    private int ambienceVolume = 20;
     
     // Error variables
     private GreenfootSound[] errorSounds;
@@ -32,6 +34,9 @@ public class SoundManager
         
         bgm = new GreenfootSound("bgm.mp3");
         bgm.setVolume(bgmVolume);
+        
+        ambience = new GreenfootSound("ambience.mp3");
+        ambience.setVolume(ambienceVolume);
         
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
@@ -82,4 +87,12 @@ public class SoundManager
         errorSounds[errorIndex].play();
         errorIndex = (errorIndex + 1) % errorLength;
     }
+    
+    public void playAmbience(){
+        ambience.playLoop();
+    }
+    
+    public void pauseAmbience(){
+        ambience.pause();
+    }    
 }

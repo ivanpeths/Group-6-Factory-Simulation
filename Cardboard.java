@@ -1,33 +1,29 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class Cardboard here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Cardboard extends Product
 {
     public Cardboard (int owner, double speed) {
         super(owner, speed);
     }
-    
-    public void sell () {
-        FactoryWorld world = (FactoryWorld)getWorld();
-    
-        if (type == 1) // finished
-        {
-            if (owner == 1)
-                world.changeLeftScore(10);
-            else
-                world.changeRightScore(10);
-        }
-        else if (type == 3) // expensive
-        {
-            if (owner == 1)
-                world.changeLeftScore(25);
-            else
-                world.changeRightScore(25);
-        }
+
+    @Override
+    public void updateImage() 
+    {
+        if (type == 0) image = new GreenfootImage("broken_cardboard.png");
+        else if (type == 1) image = new GreenfootImage("material_cardboard.png");
+        else if (type == 2) image = new GreenfootImage("finish_cardboard.png");
+        else image = new GreenfootImage("expensive_cardboard.png");
+
+        image.scale(50, 50);
+        setImage(image);
+        getImage().setTransparency(transparency);
+    }
+
+    @Override
+    public void sell() 
+    {
+        if (type == 0) addScore(0);      // broken = no money (fix this)
+        else if (type == 2) addScore(10);
+        else if (type == 3) addScore(25);
     }
 }

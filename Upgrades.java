@@ -35,9 +35,9 @@ public abstract class Upgrades extends Actor
         getImage().setTransparency(50);
         activated = true;
         if (side == 1) {
-            ((FactoryWorld)getWorld()).changeLeftScore(-200);
+            ((FactoryWorld)getWorld()).changeLeftScore(-100);
         } else {
-            ((FactoryWorld)getWorld()).changeRightScore(-200);
+            ((FactoryWorld)getWorld()).changeRightScore(-100);
         }
     }
     

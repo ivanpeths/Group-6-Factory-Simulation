@@ -1,5 +1,3 @@
-// Product made by Isaac, updated to an abstract superclass by Ivan
-
 import greenfoot.*;
 
 public abstract class Product extends SuperSmoothMover  
@@ -9,9 +7,9 @@ public abstract class Product extends SuperSmoothMover
 
     protected int type;
     protected GreenfootImage image;
-
-    protected SimpleTimer spawnTimer = new SimpleTimer();
-    protected boolean processed = false;
+    protected int transparency;
+    
+    protected boolean inMachine;
 
     public Product(int owner, double speed)
     {
@@ -19,6 +17,8 @@ public abstract class Product extends SuperSmoothMover
         type = 0; // material
         this.speed = speed;
         updateImage();
+        inMachine = false;
+        transparency = 255;
     }
 
     public void act()
@@ -32,36 +32,16 @@ public abstract class Product extends SuperSmoothMover
         }
     }
 
-    public void updateImage() 
+    public abstract void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("material.png");
-        else if (type == 1) image = new GreenfootImage("finishBox.png");
-        else if (type == 2) image = new GreenfootImage("brokenBox.png");
-        else if (type == 3) image = new GreenfootImage("expensiveBox.png");
+        if (type == 0) image = new GreenfootImage("broken_cardboard.png");
+        else if (type == 1) image = new GreenfootImage("material_cardboard.png");
+        else if (type == 2) image = new GreenfootImage("finish_cardboard.png");
+        else image = new GreenfootImage("expensive_cardboard.png");
         
         image.scale(50, 50);
         setImage(image);
-    }
-
-    public void setType(int newType) 
-    {
-        type = newType;
-        updateImage();
-    }
-
-    public void process() 
-    {
-        int rand = Greenfoot.getRandomNumber(100);
-
-        if (rand < 25) {
-            setType(2); // broken
-        } 
-        else if (rand < 95) {
-            setType(1); // finished
-        } 
-        else {
-            setType(3); // expensive
-        }
+        getImage().setTransparency(transparency);
     }
 
     public void moveDown()
@@ -73,14 +53,10 @@ public abstract class Product extends SuperSmoothMover
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        if (m != null && type == 0 && !processed && spawnTimer.millisElapsed() > 300)
-        {
-            if (!((Assembler)m).getBroken()) {
-                process();
-                processed = true;
-                ((Assembler)m).checkBreak();
-            }
-            // getImage().setTransparency(0);
+        if (m instanceof Assembler && !((Assembler)m).getBroken() && !inMachine) {
+            inMachine = true;
+            transparency = 0;
+            updateImage();
         }
     }
     
@@ -88,8 +64,29 @@ public abstract class Product extends SuperSmoothMover
     private void checkLeavingMachine() {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        if (m == null) {
-            getImage().setTransparency(255);
+        if (m == null && inMachine) {
+            int random = Greenfoot.getRandomNumber(100);
+            if (random < 25) {
+                type = 0; // broken
+            }
+            else if (random < 95) {
+                type = 2; // finished
+            }
+            else {
+                type = 3; // expensive
+            }
+            transparency = 255;
+            inMachine = false;
+            updateImage();
+        }
+    }
+    
+    public void addScore (int score) {
+        FactoryWorld world = (FactoryWorld)getWorld();
+        if (owner == 1) {
+            world.changeLeftScore(score);
+        } else {
+            world.changeRightScore(score);
         }
     }
     */
