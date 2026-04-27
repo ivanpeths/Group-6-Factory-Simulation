@@ -6,7 +6,7 @@ public class FactoryWorld extends World
     
     private boolean gameStarted = false;
     
-    //Location variables
+    // Location variables
     private int leftSpawn = 400;
     private int rightSpawn = 800;
     
