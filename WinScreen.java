@@ -13,16 +13,16 @@ public class WinScreen extends World
     private GreenfootImage buttonImg;
     private Actor buttonActor;
     private Label buttonTitle;
-    public WinScreen()
+    public WinScreen(String winner)
     {    
         super(1200, 800, 1); 
-        setupLabel();
+        setupLabel(winner);
         setupButton();
         
     }
     
-    public void setupLabel(){
-        titleLabel = new Label("You win!", 75);
+    public void setupLabel(String winner){
+        titleLabel = new Label(winner + " wins!", 75);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
     }
     
