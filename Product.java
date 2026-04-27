@@ -31,7 +31,6 @@ public abstract class Product extends SuperSmoothMover
             return;
         }
         checkLeavingMachine();
-        updateImage();
     }
 
     public void updateImage() 
@@ -55,11 +54,9 @@ public abstract class Product extends SuperSmoothMover
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        if (m != null) {
-            if (m instanceof Assembler && !((Assembler)m).getBroken()) {
-                inMachine = true;
-                transparency = 0;
-            }
+        if (m instanceof Assembler && !((Assembler)m).getBroken()) {
+            inMachine = true;
+            transparency = 0;
         }
     }
     
