@@ -36,10 +36,10 @@ public abstract class Product extends SuperSmoothMover
 
     public void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("brokenBox.png");
-        else if (type == 1) image = new GreenfootImage("material.png");
-        else if (type == 2) image = new GreenfootImage("finishBox.png");
-        else if (type >= 3) image = new GreenfootImage("expensiveBox.png");
+        if (type == 0) image = new GreenfootImage("broken_cardboard.png");
+        else if (type == 1) image = new GreenfootImage("material_cardboard.png");
+        else if (type == 2) image = new GreenfootImage("finish_cardboard.png");
+        else if (type >= 3) image = new GreenfootImage("expensive_cardboard.png");
         
         image.scale(50, 50);
         setImage(image);
