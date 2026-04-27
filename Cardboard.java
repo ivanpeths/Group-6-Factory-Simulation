@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Cardboard extends Product
 {
-    public Cardboard (int owner) {
-        super(owner);
+    public Cardboard (int owner, double speed) {
+        super(owner, speed);
     }
     
     public void sell () {

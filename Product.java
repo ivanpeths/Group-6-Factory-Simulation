@@ -5,7 +5,7 @@ import greenfoot.*;
 public abstract class Product extends SuperSmoothMover  
 {
     protected int owner; // which player it belongs to
-    protected double speed = 1.5; // movement speed
+    protected double speed; // movement speed
 
     protected int type;
     protected GreenfootImage image;
@@ -13,10 +13,11 @@ public abstract class Product extends SuperSmoothMover
     protected SimpleTimer spawnTimer = new SimpleTimer();
     protected boolean processed = false;
 
-    public Product(int owner)
+    public Product(int owner, double speed)
     {
         this.owner = owner;
         type = 0; // material
+        this.speed = speed;
         updateImage();
     }
 
