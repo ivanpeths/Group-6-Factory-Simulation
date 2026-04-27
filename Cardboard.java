@@ -15,19 +15,23 @@ public class Cardboard extends Product
     public void sell () {
         FactoryWorld world = (FactoryWorld)getWorld();
     
-        if (type == 1) // finished
-        {
-            if (owner == 1)
-                world.changeLeftScore(10);
-            else
-                world.changeRightScore(10);
+        if (type == 0) {
+            addScore(10);
+        } else if (type == 1) {
+            addScore(20);
+        } else if (type == 2) {
+            addScore(5);
+        } else if (type == 3) {
+            addScore(40);
         }
-        else if (type == 3) // expensive
-        {
-            if (owner == 1)
-                world.changeLeftScore(25);
-            else
-                world.changeRightScore(25);
+    }
+    
+    public void addScore (int score) {
+        FactoryWorld world = (FactoryWorld)getWorld();
+        if (owner == 1) {
+            world.changeLeftScore(score);
+        } else {
+            world.changeRightScore(score);
         }
     }
 }
