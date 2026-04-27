@@ -11,8 +11,6 @@ public abstract class Product extends SuperSmoothMover
     
     protected boolean inMachine;
 
-    protected SimpleTimer spawnTimer = new SimpleTimer();
-
     public Product(int owner)
     {
         this.owner = owner;
