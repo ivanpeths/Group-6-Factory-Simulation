@@ -13,7 +13,7 @@ public abstract class Product extends SuperSmoothMover
     public Product(int owner, double speed)
     {
         this.owner = owner;
-        type = 0; // material
+        type = 1; // material
         this.speed = speed;
         updateImage();
         inMachine = false;
@@ -23,6 +23,7 @@ public abstract class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachine();
+        checkLeavingMachine();
         checkEnd();
         if (getWorld() == null) {
             return;
@@ -55,6 +56,24 @@ public abstract class Product extends SuperSmoothMover
         }
     }
     
+    private void checkLeavingMachine() {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+        
+        if (m == null && inMachine) {
+            int random = Greenfoot.getRandomNumber(100);
+            if (random < 25) {
+                type = 0; // broken
+            }
+            else if (random < 95) {
+                type = 2; // finished
+            }
+            else {
+                type = 3; // expensive
+            }
+            inMachine = false;
+            updateImage();
+        }
+    }
 
     private void checkEnd()
     {
