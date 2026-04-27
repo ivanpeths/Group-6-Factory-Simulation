@@ -14,13 +14,13 @@ public class Wood extends Product
     
     public void sell () {
         if (type == 0) {
-            addScore(10);
+            addScore(5);
         } else if (type == 1) {
-            addScore(20);
+            addScore(10);
         } else if (type == 2) {
             addScore(0);
         } else if (type == 3) {
-            addScore(40);
+            addScore(15);
         }
     }
 }
