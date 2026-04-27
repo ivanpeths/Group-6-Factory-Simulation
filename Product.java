@@ -3,7 +3,7 @@ import greenfoot.*;
 public abstract class Product extends SuperSmoothMover  
 {
     protected int owner; // which player it belongs to
-    protected double speed = 1.5; // movement speed
+    protected double speed; // movement speed
 
     protected int type;
     protected GreenfootImage image;
@@ -11,10 +11,11 @@ public abstract class Product extends SuperSmoothMover
     
     protected boolean inMachine;
 
-    public Product(int owner)
+    public Product(int owner, double speed)
     {
         this.owner = owner;
-        type = 1; // material
+        type = 0; // material
+        this.speed = speed;
         updateImage();
         inMachine = false;
         transparency = 255;
@@ -24,11 +25,11 @@ public abstract class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachine();
+        // checkLeavingMachine();
         checkEnd();
         if (getWorld() == null) {
             return;
         }
-        checkLeavingMachine();
     }
 
     public abstract void updateImage() 
@@ -59,6 +60,7 @@ public abstract class Product extends SuperSmoothMover
         }
     }
     
+    /*
     private void checkLeavingMachine() {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
@@ -87,6 +89,7 @@ public abstract class Product extends SuperSmoothMover
             world.changeRightScore(score);
         }
     }
+    */
 
     private void checkEnd()
     {

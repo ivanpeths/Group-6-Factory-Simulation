@@ -41,16 +41,34 @@ public class SettingsWorld extends World
     private int rightPosAmt = 800;
     private Actor rightPosRight;
     
+    // Left speed
+    private Label leftSpeedLabel;
+    private Actor leftSpeedLeft;
+    private Label leftSpeedAmtLabel;
+    private double leftSpeedAmt = 1.5;
+    private Actor leftSpeedRight;
+    
+    // Right speed
+    private Label rightSpeedLabel;
+    private Actor rightSpeedLeft;
+    private Label rightSpeedAmtLabel;
+    private double rightSpeedAmt = 1.5;
+    private Actor rightSpeedRight;
+    
     // Label constants
     private int labelSize = 50;
     private int leftScoreY = 100;
-    private int rightScoreY = 200;
-    private int leftPosY = 300;
-    private int rightPosY = 400;
+    private int rightScoreY = 190;
+    private int leftPosY = 280;
+    private int rightPosY = 370;
+    private int leftSpeedY = 460;
+    private int rightSpeedY = 550;
     private int scoreIncrements = 10;
     private int scoreShiftIncrements = 20;
     private int posIncrements = 10;
     private int posShiftIncrements = 20;
+    private double speedIncrements = 0.5;
+    private double speedShiftIncrements = 1.0;
     
     // Arrow images
     private GreenfootImage leftImg;
@@ -69,6 +87,8 @@ public class SettingsWorld extends World
         setupRightScore();
         setupLeftPos();
         setupRightPos();
+        setupLeftSpeed();
+        setupRightSpeed();
         setBackground();
         
     }
@@ -144,7 +164,7 @@ public class SettingsWorld extends World
         
     }
     
-    // Clamp max
+    // Clamp min and max
     public void changeLeftPos(int amt){
         int oldAmt = leftPosAmt;
         leftPosAmt = (Math.max(Math.min(530, leftPosAmt + amt), 170));
@@ -169,7 +189,7 @@ public class SettingsWorld extends World
         
     }
     
-    // Clamp max
+    // Clamp min and max
     public void changeRightPos(int amt){
         int oldAmt = rightPosAmt;
         rightPosAmt = (Math.max(Math.min(1040, rightPosAmt + amt), 680));
@@ -179,13 +199,63 @@ public class SettingsWorld extends World
         }
     }
     
+        public void setupLeftSpeed(){
+        leftSpeedLabel = new Label("Left Starting Speed", labelSize);
+        leftSpeedAmtLabel = new Label(Double.toString(leftSpeedAmt), labelSize);
+        leftSpeedLeft = new BlankActor();
+        leftSpeedRight = new BlankActor();
+        leftSpeedLeft.setImage(leftImg);
+        leftSpeedRight.setImage(rightImg);
+        
+        addObject(leftSpeedLabel, getWidth() / 4, leftSpeedY);
+        addObject(leftSpeedLeft, getWidth() / 8 * 5, leftSpeedY);
+        addObject(leftSpeedAmtLabel, getWidth() / 8 * 6, leftSpeedY);
+        addObject(leftSpeedRight, getWidth() / 8 * 7, leftSpeedY);
+        
+    }
+    
+    // Clamp min and max
+    public void changeLeftSpeed(double amt){
+        double oldAmt = leftSpeedAmt;
+        leftSpeedAmt = (Math.max(Math.min(5, leftSpeedAmt + amt), 0.5));
+        leftSpeedAmtLabel.setValue(Double.toString(leftSpeedAmt));
+        if (oldAmt == leftSpeedAmt){
+            soundMan.playError();
+        }
+    }
+    
+    public void setupRightSpeed(){
+        rightSpeedLabel = new Label("Right Starting Speed", labelSize);
+        rightSpeedAmtLabel = new Label(Double.toString(rightSpeedAmt), labelSize);
+        rightSpeedLeft = new BlankActor();
+        rightSpeedRight = new BlankActor();
+        rightSpeedLeft.setImage(leftImg);
+        rightSpeedRight.setImage(rightImg);
+        
+        addObject(rightSpeedLabel, getWidth() / 4, rightSpeedY);
+        addObject(rightSpeedLeft, getWidth() / 8 * 5, rightSpeedY);
+        addObject(rightSpeedAmtLabel, getWidth() / 8 * 6, rightSpeedY);
+        addObject(rightSpeedRight, getWidth() / 8 * 7, rightSpeedY);
+        
+    }
+    
+    // Clamp min and max
+    public void changeRightSpeed(double amt){
+        double oldAmt = rightSpeedAmt;
+        rightSpeedAmt = (Math.max(Math.min(5, rightSpeedAmt + amt), 0.5));
+        rightSpeedAmtLabel.setValue(Double.toString(rightSpeedAmt));
+        if (oldAmt == rightSpeedAmt){
+            soundMan.playError();
+        }
+    }
+    
     public void setupButton(){
         buttonImg = new GreenfootImage("button.png");
         buttonActor = new BlankActor();
         buttonActor.setImage(buttonImg);
         buttonTitle = new Label("Start", 75);
-        addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
-        addObject(buttonTitle, getWidth() / 2, getHeight() / 4 * 3 - 10);
+        addObject(buttonActor, getWidth() / 2, getHeight() / 8 * 7);
+        addObject(buttonTitle, getWidth() / 2, getHeight() / 8 * 7 - 10);
     }
     
     public void setBackground(){
@@ -195,7 +265,7 @@ public class SettingsWorld extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
-            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt));
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt, leftSpeedAmt, rightSpeedAmt));
         }
         
         // Score increments while holding Shift
@@ -279,6 +349,48 @@ public class SettingsWorld extends World
         
         if (Greenfoot.mouseClicked(rightPosRight)){
             changeRightPos(posIncrements);
+            return;
+        }
+        
+        // Speed increments while holding Shift
+        if (Greenfoot.mouseClicked(leftSpeedLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftSpeed(speedShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftSpeedRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftSpeed(speedShiftIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightSpeedLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightSpeed(speedShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightSpeedRight) && Greenfoot.isKeyDown("shift")){
+            changeRightSpeed(speedShiftIncrements);
+            return;
+        }
+        
+        // Speed increments
+        if (Greenfoot.mouseClicked(leftSpeedLeft)){
+            changeLeftSpeed(speedIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftSpeedRight)){
+            changeLeftSpeed(speedIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightSpeedLeft)){
+            changeRightSpeed(speedIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightSpeedRight)){
+            changeRightSpeed(speedIncrements);
             return;
         }
     }

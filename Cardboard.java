@@ -2,8 +2,8 @@ import greenfoot.*;
 
 public class Cardboard extends Product
 {
-    public Cardboard(int owner) {
-        super(owner);
+    public Cardboard (int owner, double speed) {
+        super(owner, speed);
     }
 
     @Override

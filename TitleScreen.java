@@ -34,8 +34,8 @@ public class TitleScreen extends World
         buttonActor = new BlankActor();
         buttonActor.setImage(buttonImg);
         startLabel = new Label("Start", 75);
-        addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
-        addObject(startLabel, getWidth() / 2, getHeight() / 4 * 3 - 10);
+        addObject(buttonActor, getWidth() / 2, getHeight() / 8 * 7);
+        addObject(startLabel, getWidth() / 2, getHeight() / 8 * 7 - 10);
     }
     
     public void setBackground(){

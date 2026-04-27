@@ -51,19 +51,25 @@ public class FactoryWorld extends World
     // Product variables
     private int spawnDelay = 120;
     
+    //Speed variables
+    private double leftSpeed;
+    private double rightSpeed;
+    
     // Sound Manager
     private SoundManager soundMan = new SoundManager();
 
     /**
      * Factory World constructor. Add parameters if needed
      */
-    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos)
+    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed)
     {    
         super(1200, 800, 1); 
         
+        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setXPos(leftPos, rightPos);
+        setProdSpeed(leftSpeed, rightSpeed);
         drawUpgrades();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
@@ -93,6 +99,11 @@ public class FactoryWorld extends World
     public void setXPos(int leftPos, int rightPos){
         leftSpawn = leftPos;
         rightSpawn = rightPos;
+    }
+    
+    public void setProdSpeed(double leftSpeed, double rightSpeed){
+        this.leftSpeed = leftSpeed;
+        this.rightSpeed = rightSpeed;
     }
     
     public void drawConveyor (int leftSpawn, int rightSpawn) {
@@ -222,12 +233,12 @@ public class FactoryWorld extends World
 
         // Product spawning
         if (Greenfoot.getRandomNumber(productSpawn) == 0 && lastLeft >= spawnDelay){
-            addObject(new Cardboard(1), leftSpawn, 0);
+            addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
             lastLeft = 0;
         }
         
         if (Greenfoot.getRandomNumber(productSpawn) == 0 && lastRight >= spawnDelay){
-            addObject(new Cardboard(2), rightSpawn, 0);
+            addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
             lastRight = 0;
         }
         lastLeft++;
