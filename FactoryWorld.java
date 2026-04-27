@@ -80,12 +80,14 @@ public class FactoryWorld extends World
             soundMan.playStarting();
         } else {
             soundMan.playBgm();
+            soundMan.playAmbience();
         }
     }
     
     public void stopped(){
         soundMan.pauseStarting();
         soundMan.pauseBgm();
+        soundMan.pauseAmbience();
     }
     
     public void setXPos(int leftPos, int rightPos){
@@ -212,6 +214,7 @@ public class FactoryWorld extends World
                 removeCountdown();
                 drawTimer();
                 soundMan.playBgm();
+                soundMan.playAmbience();
             }
             updateCountdown();
             return;
