@@ -31,7 +31,7 @@ public abstract class Product extends SuperSmoothMover
         checkLeavingMachine();
     }
 
-    public void updateImage() 
+    public abstract void updateImage() 
     {
         if (type == 0) image = new GreenfootImage("broken_cardboard.png");
         else if (type == 1) image = new GreenfootImage("material_cardboard.png");
