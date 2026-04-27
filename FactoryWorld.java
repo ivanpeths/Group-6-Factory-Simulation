@@ -61,6 +61,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
+        setPaintOrder(Label.class, BlankActor.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setXPos(leftPos, rightPos);

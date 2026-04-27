@@ -24,11 +24,11 @@ public abstract class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachine();
+        checkLeavingMachine();
         checkEnd();
         if (getWorld() == null) {
             return;
         }
-        checkLeavingMachine();
     }
 
     public void updateImage() 
