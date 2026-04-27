@@ -31,10 +31,12 @@ public class SettingsWorld extends World
     private int labelSize = 50;
     private int leftScoreY = 100;
     private int rightScoreY = 250;
+    private int scoreIncrements = 10;
     
     // Arrow images
     private GreenfootImage leftImg;
     private GreenfootImage rightImg;
+    private int imgSize = 75;
 
     public SettingsWorld()
     {    
@@ -48,9 +50,9 @@ public class SettingsWorld extends World
     
     public void setupImages(){
         leftImg = new GreenfootImage("left_arrow.png");
-        leftImg.scale(50, 50);
+        leftImg.scale(imgSize, imgSize);
         rightImg = new GreenfootImage("right_arrow.png");
-        rightImg.scale(50, 50);
+        rightImg.scale(imgSize, imgSize);
     }
     
     public void setupLeftScore(){
@@ -68,6 +70,12 @@ public class SettingsWorld extends World
         
     }
     
+    // No clamping so negative values are allowed
+    public void changeLeftScore(int amt){
+        leftScoreAmt = leftScoreAmt + amt;
+        leftScoreAmtLabel.setValue(leftScoreAmt);
+    }
+    
     public void setupRightScore(){
         rightScoreLabel = new Label("Right Starting Score", labelSize);
         rightScoreAmtLabel = new Label(rightScoreAmt, labelSize);
@@ -82,6 +90,12 @@ public class SettingsWorld extends World
         addObject(rightScoreRight, getWidth() / 8 * 7, rightScoreY);
     }
     
+    // No clamping so negative values are allowed
+    public void changeRightScore(int amt){
+        rightScoreAmt = rightScoreAmt + amt;
+        rightScoreAmtLabel.setValue(rightScoreAmt);
+    }
+    
     public void setupButton(){
         buttonImg = new GreenfootImage("button.png");
         buttonActor = new BlankActor();
@@ -93,7 +107,23 @@ public class SettingsWorld extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
-            Greenfoot.setWorld(new FactoryWorld());
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt));
+        }
+        
+        if (Greenfoot.mouseClicked(leftScoreLeft)){
+            changeLeftScore(scoreIncrements * -1);
+        }
+        
+        if (Greenfoot.mouseClicked(leftScoreRight)){
+            changeLeftScore(scoreIncrements);
+        }
+        
+        if (Greenfoot.mouseClicked(rightScoreLeft)){
+            changeRightScore(scoreIncrements * -1);
+        }
+        
+        if (Greenfoot.mouseClicked(rightScoreRight)){
+            changeRightScore(scoreIncrements);
         }
     }
 }

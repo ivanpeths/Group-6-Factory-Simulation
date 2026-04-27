@@ -57,14 +57,14 @@ public class FactoryWorld extends World
     /**
      * Factory World constructor. Add parameters if needed
      */
-    public FactoryWorld()
+    public FactoryWorld(int leftStarting, int rightStarting)
     {    
         super(1200, 800, 1); 
         
         setBackground();
         drawConveyor();
         drawUpgrades();
-        drawLabels(0, 0);
+        drawLabels(leftStarting, rightStarting);
         drawMachines();
         // Countdown above everything
         drawCountdown();
