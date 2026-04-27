@@ -101,8 +101,8 @@ public class SettingsWorld extends World
         buttonActor = new BlankActor();
         buttonActor.setImage(buttonImg);
         buttonTitle = new Label("Start", 75);
-        addObject(buttonActor, getWidth() / 2, getHeight() / 8 * 7);
-        addObject(buttonTitle, getWidth() / 2, getHeight() / 8 * 7 - 10);
+        addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
+        addObject(buttonTitle, getWidth() / 2, getHeight() / 4 * 3 - 10);
     }
     
     public void act(){

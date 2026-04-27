@@ -15,7 +15,7 @@ public class SoundManager
     
     // Volumes
     private int coinVolume = 100;
-    private int bgmVolume = 75;
+    private int bgmVolume = 50;
     
     public SoundManager(){
         setFiles();

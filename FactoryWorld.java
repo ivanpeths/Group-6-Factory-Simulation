@@ -77,11 +77,14 @@ public class FactoryWorld extends World
     public void started(){
         if(!gameStarted){
             soundMan.playStarting();
+        } else {
+            soundMan.playBgm();
         }
     }
     
     public void stopped(){
         soundMan.pauseStarting();
+        soundMan.pauseBgm();
     }
     
     public void drawConveyor () {
