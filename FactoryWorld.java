@@ -195,10 +195,10 @@ public class FactoryWorld extends World
     
     public void checkWin(){
         if (leftScore >= winCond){
-            Greenfoot.setWorld(new WinScreen("Left"));
+            Greenfoot.setWorld(new WinScreen("Left", rightScore));
         }
         else if (rightScore >= winCond){
-            Greenfoot.setWorld(new WinScreen("Right"));
+            Greenfoot.setWorld(new WinScreen("Right", leftScore));
         }
     }
     
