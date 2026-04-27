@@ -51,16 +51,13 @@ public class FactoryWorld extends World
     // Product variables
     private int spawnDelay = 120;
     
-    //Speed variables
+    // Speed variables
     private double leftSpeed;
     private double rightSpeed;
     
     // Sound Manager
     private SoundManager soundMan = new SoundManager();
 
-    /**
-     * Factory World constructor. Add parameters if needed
-     */
     public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed)
     {    
         super(1200, 800, 1); 
@@ -73,7 +70,6 @@ public class FactoryWorld extends World
         drawUpgrades();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
-        // Countdown above everything
         drawCountdown();
     }
         
@@ -216,7 +212,6 @@ public class FactoryWorld extends World
     }
     
     public void act(){
-        // Countdown logic
         if (!gameStarted){
             startingTimer--;
             countdownLabel.setValue(startingTimer / 60 + 1);
@@ -231,27 +226,28 @@ public class FactoryWorld extends World
             return;
         }
 
-        // Product spawning
-        if (Greenfoot.getRandomNumber(productSpawn) == 0 && lastLeft >= spawnDelay){
-            addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
-            lastLeft = 0;
+        if (lastLeft >= spawnDelay) {
+            if (Greenfoot.getRandomNumber(productSpawn) == 0) {
+                addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
+                lastLeft = 0;
+            }
         }
-        
-        if (Greenfoot.getRandomNumber(productSpawn) == 0 && lastRight >= spawnDelay){
-            addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
-            lastRight = 0;
+
+        if (lastRight >= spawnDelay) {
+            if (Greenfoot.getRandomNumber(productSpawn) == 0) {
+                addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
+                lastRight = 0;
+            }
         }
+
         lastLeft++;
         lastRight++;
         
-        // Timer tick
         timer++;
         if (timer % 60 == 0){
             updateTimer();
         }
         
-        // Check win
         checkWin();
-        
     }
 }
