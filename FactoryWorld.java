@@ -6,9 +6,9 @@ public class FactoryWorld extends World
     
     private boolean gameStarted = false;
     
-    //Location variables
-    private int leftSpawn = 400;
-    private int rightSpawn = 800;
+    // Location variables
+    private int leftSpawn;
+    private int rightSpawn;
     
     private int productSpawn = 50;
     
@@ -57,15 +57,16 @@ public class FactoryWorld extends World
     /**
      * Factory World constructor. Add parameters if needed
      */
-    public FactoryWorld(int leftStarting, int rightStarting)
+    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos)
     {    
         super(1200, 800, 1); 
         
         setBackground();
-        drawConveyor();
+        drawConveyor(leftPos, rightPos);
+        setXPos(leftPos, rightPos);
         drawUpgrades();
         drawLabels(leftStarting, rightStarting);
-        drawMachines();
+        drawMachines(leftPos, rightPos);
         // Countdown above everything
         drawCountdown();
     }
@@ -77,19 +78,27 @@ public class FactoryWorld extends World
     public void started(){
         if(!gameStarted){
             soundMan.playStarting();
+        } else {
+            soundMan.playBgm();
         }
     }
     
     public void stopped(){
         soundMan.pauseStarting();
+        soundMan.pauseBgm();
     }
     
-    public void drawConveyor () {
+    public void setXPos(int leftPos, int rightPos){
+        leftSpawn = leftPos;
+        rightSpawn = rightPos;
+    }
+    
+    public void drawConveyor (int leftSpawn, int rightSpawn) {
         addObject(new Conveyor(), leftSpawn, getHeight() / 2);
         addObject(new Conveyor(), rightSpawn, getHeight() / 2);
     }
     
-    public void drawMachines(){
+    public void drawMachines(int leftSpawn, int rightSpawn){
         leftMach = new Assembler();
         rightMach = new Assembler();
         addObject(leftMach, leftSpawn, getHeight() / 2);

@@ -27,17 +27,39 @@ public class SettingsWorld extends World
     private int rightScoreAmt = 0;
     private Actor rightScoreRight;
     
+    // Left position
+    private Label leftPosLabel;
+    private Actor leftPosLeft;
+    private Label leftPosAmtLabel;
+    private int leftPosAmt = 400;
+    private Actor leftPosRight;
+    
+    // Right position
+    private Label rightPosLabel;
+    private Actor rightPosLeft;
+    private Label rightPosAmtLabel;
+    private int rightPosAmt = 800;
+    private Actor rightPosRight;
+    
     // Label constants
     private int labelSize = 50;
     private int leftScoreY = 100;
-    private int rightScoreY = 250;
+    private int rightScoreY = 200;
+    private int leftPosY = 300;
+    private int rightPosY = 400;
     private int scoreIncrements = 10;
+    private int scoreShiftIncrements = 20;
+    private int posIncrements = 10;
+    private int posShiftIncrements = 20;
     
     // Arrow images
     private GreenfootImage leftImg;
     private GreenfootImage rightImg;
     private int imgSize = 75;
-
+    
+    private GreenfootImage background;
+    private SoundManager soundMan = new SoundManager();
+    
     public SettingsWorld()
     {    
         super(1200, 800, 1); 
@@ -45,6 +67,9 @@ public class SettingsWorld extends World
         setupImages();
         setupLeftScore();
         setupRightScore();
+        setupLeftPos();
+        setupRightPos();
+        setBackground();
         
     }
     
@@ -70,10 +95,14 @@ public class SettingsWorld extends World
         
     }
     
-    // No clamping so negative values are allowed
+    // Clamp max
     public void changeLeftScore(int amt){
-        leftScoreAmt = leftScoreAmt + amt;
+        int oldAmt = leftScoreAmt;
+        leftScoreAmt = Math.min(500, leftScoreAmt + amt);
         leftScoreAmtLabel.setValue(leftScoreAmt);
+        if (oldAmt == leftScoreAmt){
+            soundMan.playError();
+        }
     }
     
     public void setupRightScore(){
@@ -90,10 +119,64 @@ public class SettingsWorld extends World
         addObject(rightScoreRight, getWidth() / 8 * 7, rightScoreY);
     }
     
-    // No clamping so negative values are allowed
+    // Clamp max
     public void changeRightScore(int amt){
-        rightScoreAmt = rightScoreAmt + amt;
+        int oldAmt = rightScoreAmt;
+        rightScoreAmt = Math.min(500, rightScoreAmt + amt);
         rightScoreAmtLabel.setValue(rightScoreAmt);
+        if (oldAmt == rightScoreAmt){
+            soundMan.playError();
+        }
+    }
+    
+    public void setupLeftPos(){
+        leftPosLabel = new Label("Left Starting Position", labelSize);
+        leftPosAmtLabel = new Label(leftPosAmt, labelSize);
+        leftPosLeft = new BlankActor();
+        leftPosRight = new BlankActor();
+        leftPosLeft.setImage(leftImg);
+        leftPosRight.setImage(rightImg);
+        
+        addObject(leftPosLabel, getWidth() / 4, leftPosY);
+        addObject(leftPosLeft, getWidth() / 8 * 5, leftPosY);
+        addObject(leftPosAmtLabel, getWidth() / 8 * 6, leftPosY);
+        addObject(leftPosRight, getWidth() / 8 * 7, leftPosY);
+        
+    }
+    
+    // Clamp max
+    public void changeLeftPos(int amt){
+        int oldAmt = leftPosAmt;
+        leftPosAmt = (Math.max(Math.min(530, leftPosAmt + amt), 170));
+        leftPosAmtLabel.setValue(leftPosAmt);
+        if (oldAmt == leftPosAmt){
+            soundMan.playError();
+        }
+    }
+    
+    public void setupRightPos(){
+        rightPosLabel = new Label("Right Starting Position", labelSize);
+        rightPosAmtLabel = new Label(rightPosAmt, labelSize);
+        rightPosLeft = new BlankActor();
+        rightPosRight = new BlankActor();
+        rightPosLeft.setImage(leftImg);
+        rightPosRight.setImage(rightImg);
+        
+        addObject(rightPosLabel, getWidth() / 4, rightPosY);
+        addObject(rightPosLeft, getWidth() / 8 * 5, rightPosY);
+        addObject(rightPosAmtLabel, getWidth() / 8 * 6, rightPosY);
+        addObject(rightPosRight, getWidth() / 8 * 7, rightPosY);
+        
+    }
+    
+    // Clamp max
+    public void changeRightPos(int amt){
+        int oldAmt = rightPosAmt;
+        rightPosAmt = (Math.max(Math.min(1040, rightPosAmt + amt), 680));
+        rightPosAmtLabel.setValue(rightPosAmt);
+        if (oldAmt == rightPosAmt){
+            soundMan.playError();
+        }
     }
     
     public void setupButton(){
@@ -101,29 +184,102 @@ public class SettingsWorld extends World
         buttonActor = new BlankActor();
         buttonActor.setImage(buttonImg);
         buttonTitle = new Label("Start", 75);
-        addObject(buttonActor, getWidth() / 2, getHeight() / 8 * 7);
-        addObject(buttonTitle, getWidth() / 2, getHeight() / 8 * 7 - 10);
+        addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
+        addObject(buttonTitle, getWidth() / 2, getHeight() / 4 * 3 - 10);
+    }
+    
+    public void setBackground(){
+        background = new GreenfootImage ("background.png");
+        setBackground (background);
     }
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
-            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt));
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt));
         }
         
+        // Score increments while holding Shift
+        if (Greenfoot.mouseClicked(leftScoreLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftScore(scoreShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftScoreRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftScore(scoreShiftIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightScoreLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightScore(scoreShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightScoreRight) && Greenfoot.isKeyDown("shift")){
+            changeRightScore(scoreShiftIncrements);
+            return;
+        }
+        
+        // Score increments
         if (Greenfoot.mouseClicked(leftScoreLeft)){
             changeLeftScore(scoreIncrements * -1);
+            return;
         }
         
         if (Greenfoot.mouseClicked(leftScoreRight)){
             changeLeftScore(scoreIncrements);
+            return;
         }
         
         if (Greenfoot.mouseClicked(rightScoreLeft)){
             changeRightScore(scoreIncrements * -1);
+            return;
         }
         
         if (Greenfoot.mouseClicked(rightScoreRight)){
             changeRightScore(scoreIncrements);
+            return;
+        }
+        
+        // Position increments while holding Shift
+        if (Greenfoot.mouseClicked(leftPosLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftPos(posShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftPosRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftPos(posShiftIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightPos(posShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosRight) && Greenfoot.isKeyDown("shift")){
+            changeRightPos(posShiftIncrements);
+            return;
+        }
+        
+        // Position increments
+        if (Greenfoot.mouseClicked(leftPosLeft)){
+            changeLeftPos(posIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftPosRight)){
+            changeLeftPos(posIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosLeft)){
+            changeRightPos(posIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightPosRight)){
+            changeRightPos(posIncrements);
+            return;
         }
     }
 }
