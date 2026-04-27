@@ -31,14 +31,14 @@ public class SettingsWorld extends World
     private Label leftPosLabel;
     private Actor leftPosLeft;
     private Label leftPosAmtLabel;
-    private int leftPosAmt = 0;
+    private int leftPosAmt = 400;
     private Actor leftPosRight;
     
     // Right position
     private Label rightPosLabel;
     private Actor rightPosLeft;
     private Label rightPosAmtLabel;
-    private int rightPosAmt = 0;
+    private int rightPosAmt = 800;
     private Actor rightPosRight;
     
     // Label constants
@@ -96,8 +96,8 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeLeftScore(int amt){
-        leftScoreAmt = leftScoreAmt + amt;
-        leftScoreAmtLabel.setValue(Math.min(500, leftScoreAmt));
+        leftScoreAmt = Math.min(500, leftScoreAmt + amt);
+        leftScoreAmtLabel.setValue(leftScoreAmt);
     }
     
     public void setupRightScore(){
@@ -116,8 +116,8 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeRightScore(int amt){
-        rightScoreAmt = rightScoreAmt + amt;
-        rightScoreAmtLabel.setValue(Math.min(500, rightScoreAmt));
+        rightScoreAmt = Math.min(500, rightScoreAmt + amt);
+        rightScoreAmtLabel.setValue(rightScoreAmt);
     }
     
     public void setupLeftPos(){
@@ -137,7 +137,7 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeLeftPos(int amt){
-        leftPosAmt = leftPosAmt + amt;
+        leftPosAmt = (Math.max(Math.min(530, leftPosAmt + amt), 170));
         leftPosAmtLabel.setValue(leftPosAmt);
     }
     
@@ -158,7 +158,7 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeRightPos(int amt){
-        rightPosAmt = rightPosAmt + amt;
+        rightPosAmt = (Math.max(Math.min(1040, rightPosAmt + amt), 680));
         rightPosAmtLabel.setValue(rightPosAmt);
     }
     
@@ -178,7 +178,7 @@ public class SettingsWorld extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
-            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt));
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt));
         }
         
         // Score increments while holding Shift
@@ -244,7 +244,7 @@ public class SettingsWorld extends World
             return;
         }
         
-        // Score increments
+        // Position increments
         if (Greenfoot.mouseClicked(leftPosLeft)){
             changeLeftPos(posIncrements * -1);
             return;
