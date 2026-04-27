@@ -13,11 +13,14 @@ public class WinScreen extends World
     private GreenfootImage buttonImg;
     private Actor buttonActor;
     private Label buttonTitle;
+    private GreenfootImage background;
+    
     public WinScreen(String winner)
     {    
         super(1200, 800, 1); 
         setupLabel(winner);
         setupButton();
+        setBackground();
         
     }
     
@@ -33,6 +36,11 @@ public class WinScreen extends World
         startLabel = new Label("Restart", 75);
         addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
         addObject(startLabel, getWidth() / 2, getHeight() / 4 * 3 - 10);
+    }
+    
+    public void setBackground(){
+        background = new GreenfootImage ("background.png");
+        setBackground (background);
     }
     
     public void act(){

@@ -32,12 +32,14 @@ public class SettingsWorld extends World
     private int leftScoreY = 100;
     private int rightScoreY = 250;
     private int scoreIncrements = 10;
+    private int scoreShiftIncrements = 20;
     
     // Arrow images
     private GreenfootImage leftImg;
     private GreenfootImage rightImg;
     private int imgSize = 75;
-
+    
+    private GreenfootImage background;
     public SettingsWorld()
     {    
         super(1200, 800, 1); 
@@ -45,6 +47,7 @@ public class SettingsWorld extends World
         setupImages();
         setupLeftScore();
         setupRightScore();
+        setBackground();
         
     }
     
@@ -105,25 +108,56 @@ public class SettingsWorld extends World
         addObject(buttonTitle, getWidth() / 2, getHeight() / 4 * 3 - 10);
     }
     
+    public void setBackground(){
+        background = new GreenfootImage ("background.png");
+        setBackground (background);
+    }
+    
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
             Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt));
         }
         
+        // Score increments
         if (Greenfoot.mouseClicked(leftScoreLeft)){
             changeLeftScore(scoreIncrements * -1);
+            return;
         }
         
         if (Greenfoot.mouseClicked(leftScoreRight)){
             changeLeftScore(scoreIncrements);
+            return;
         }
         
         if (Greenfoot.mouseClicked(rightScoreLeft)){
             changeRightScore(scoreIncrements * -1);
+            return;
         }
         
         if (Greenfoot.mouseClicked(rightScoreRight)){
             changeRightScore(scoreIncrements);
+            return;
+        }
+        
+        // Score increments while holding Shift
+        if (Greenfoot.mouseClicked(leftScoreLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftScore(scoreShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(leftScoreRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftScore(scoreShiftIncrements);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightScoreLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightScore(scoreShiftIncrements * -1);
+            return;
+        }
+        
+        if (Greenfoot.mouseClicked(rightScoreRight) && Greenfoot.isKeyDown("shift")){
+            changeRightScore(scoreShiftIncrements);
+            return;
         }
     }
 }
