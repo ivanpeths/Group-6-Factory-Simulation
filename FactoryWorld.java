@@ -19,6 +19,7 @@ public class FactoryWorld extends World
     private int rightScore;
     private int labelY = 35;
     private int labelSize = 50;
+    private int winCond = 500;
     
     // Bar variables
     private SuperStatBar leftBar;
@@ -115,11 +116,11 @@ public class FactoryWorld extends World
     }
     
     public void drawLabels(int leftStarting, int rightStarting){
-        leftScoreLabel = new Label("$" + leftStarting + "/$1000", labelSize);
+        leftScoreLabel = new Label("$" + leftStarting + "/$" + winCond, labelSize);
         leftScore = leftStarting;
         addObject(leftScoreLabel, getWidth() / 32 * 3, labelY);
         
-        rightScoreLabel = new Label("$" + rightStarting + "/$1000", labelSize);
+        rightScoreLabel = new Label("$" + rightStarting + "/$" + winCond, labelSize);
         rightScore = rightStarting;
         addObject(rightScoreLabel, getWidth() / 32 * 29, labelY);
     }
@@ -144,11 +145,11 @@ public class FactoryWorld extends World
     }
     
     public void updateLeftScore(){
-        leftScoreLabel.setValue("$" + leftScore + "/$1000");
+        leftScoreLabel.setValue("$" + leftScore + "/$" + winCond);
     }
     
     public void updateRightScore(){
-        rightScoreLabel.setValue("$" + rightScore + "/$1000");
+        rightScoreLabel.setValue("$" + rightScore + "/$" + winCond);
     }
     
     public void changeLeftScore(int score){
@@ -181,6 +182,15 @@ public class FactoryWorld extends World
     public void drawTimer(){
         timerLabel = new Label("0s", labelSize);
         addObject(timerLabel, getWidth() / 2, labelY);
+    }
+    
+    public void checkWin(){
+        if (leftScore >= winCond){
+            Greenfoot.setWorld(new WinScreen("Left"));
+        }
+        else if (rightScore >= winCond){
+            Greenfoot.setWorld(new WinScreen("Right"));
+        }
     }
     
     public void act(){
@@ -216,6 +226,9 @@ public class FactoryWorld extends World
         if (timer % 60 == 0){
             updateTimer();
         }
+        
+        // Check win
+        checkWin();
         
     }
 }
