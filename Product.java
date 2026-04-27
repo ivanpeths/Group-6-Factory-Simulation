@@ -39,7 +39,7 @@ public abstract class Product extends SuperSmoothMover
         if (type == 0) image = new GreenfootImage("broken_cardboard.png");
         else if (type == 1) image = new GreenfootImage("material_cardboard.png");
         else if (type == 2) image = new GreenfootImage("finish_cardboard.png");
-        else if (type >= 3) image = new GreenfootImage("expensive_cardboard.png");
+        else image = new GreenfootImage("expensive_cardboard.png");
         
         image.scale(50, 50);
         setImage(image);
@@ -56,7 +56,7 @@ public abstract class Product extends SuperSmoothMover
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
         if (m != null) {
-            if (!((Assembler)m).getBroken() && type != 0) {
+            if (m instanceof Assembler && !((Assembler)m).getBroken()) {
                 inMachine = true;
                 transparency = 0;
             }
@@ -67,9 +67,15 @@ public abstract class Product extends SuperSmoothMover
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
         if (m == null && inMachine == true) {
-            type++;
-            if (Greenfoot.getRandomNumber(10) == 0) {
-                type = 0;
+            int random = Greenfoot.getRandomNumber(100);
+            if (random < 25) {
+                type = 0; // broken
+            }
+            else if (random < 95) {
+                type = 2; // finished
+            }
+            else {
+                type = 3; // expensive
             }
             transparency = 255;
             inMachine = false;
