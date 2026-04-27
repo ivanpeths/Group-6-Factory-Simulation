@@ -58,6 +58,7 @@ public class SettingsWorld extends World
     private int imgSize = 75;
     
     private GreenfootImage background;
+    private SoundManager soundMan = new SoundManager();
     
     public SettingsWorld()
     {    
@@ -96,8 +97,12 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeLeftScore(int amt){
+        int oldAmt = leftScoreAmt;
         leftScoreAmt = Math.min(500, leftScoreAmt + amt);
         leftScoreAmtLabel.setValue(leftScoreAmt);
+        if (oldAmt == leftScoreAmt){
+            soundMan.playError();
+        }
     }
     
     public void setupRightScore(){
@@ -116,8 +121,12 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeRightScore(int amt){
+        int oldAmt = rightScoreAmt;
         rightScoreAmt = Math.min(500, rightScoreAmt + amt);
         rightScoreAmtLabel.setValue(rightScoreAmt);
+        if (oldAmt == rightScoreAmt){
+            soundMan.playError();
+        }
     }
     
     public void setupLeftPos(){
@@ -137,8 +146,12 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeLeftPos(int amt){
+        int oldAmt = leftPosAmt;
         leftPosAmt = (Math.max(Math.min(530, leftPosAmt + amt), 170));
         leftPosAmtLabel.setValue(leftPosAmt);
+        if (oldAmt == leftPosAmt){
+            soundMan.playError();
+        }
     }
     
     public void setupRightPos(){
@@ -158,8 +171,12 @@ public class SettingsWorld extends World
     
     // Clamp max
     public void changeRightPos(int amt){
+        int oldAmt = rightPosAmt;
         rightPosAmt = (Math.max(Math.min(1040, rightPosAmt + amt), 680));
         rightPosAmtLabel.setValue(rightPosAmt);
+        if (oldAmt == rightPosAmt){
+            soundMan.playError();
+        }
     }
     
     public void setupButton(){

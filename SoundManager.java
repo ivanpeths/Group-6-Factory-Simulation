@@ -17,6 +17,12 @@ public class SoundManager
     private int coinVolume = 100;
     private int bgmVolume = 50;
     
+    // Error variables
+    private GreenfootSound[] errorSounds;
+    private int errorIndex = 0;
+    private int errorVolume = 50;
+    private int errorLength = 5;
+    
     public SoundManager(){
         setFiles();
     }
@@ -37,6 +43,12 @@ public class SoundManager
         for (int i = 0; i < coinLength; i++){
             rightCoinSounds[i] = new GreenfootSound("right_coin.mp3");
             rightCoinSounds[i].setVolume(coinVolume);
+        }
+        
+        errorSounds = new GreenfootSound[errorLength];
+        for (int i = 0; i < errorLength; i++){
+            errorSounds[i] = new GreenfootSound("error.mp3");
+            errorSounds[i].setVolume(errorVolume);
         }
     }
     
@@ -64,5 +76,10 @@ public class SoundManager
     
     public void pauseBgm(){
         bgm.pause();
+    }
+    
+    public void playError(){
+        errorSounds[errorIndex].play();
+        errorIndex = (errorIndex + 1) % errorLength;
     }
 }
