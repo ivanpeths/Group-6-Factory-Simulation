@@ -1,26 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Cardboard here.
+ * Write a description of class Metal here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Cardboard extends Product
+public class Metal extends Product
 {
-    public Cardboard (int owner) {
+    public Metal (int owner) {
         super(owner);
     }
     
     public void sell () {
         if (type == 0) {
-            addScore(10);
-        } else if (type == 1) {
             addScore(20);
-        } else if (type == 2) {
-            addScore(0);
-        } else if (type == 3) {
+        } else if (type == 1) {
             addScore(40);
+        } else if (type == 2) {
+            addScore(5);
+        } else if (type == 3) {
+            addScore(60);
         }
     }
 }

@@ -90,6 +90,15 @@ public abstract class Product extends SuperSmoothMover
             getImage().setTransparency(255);
         }
     }
+    
+    public void addScore (int score) {
+        FactoryWorld world = (FactoryWorld)getWorld();
+        if (owner == 1) {
+            world.changeLeftScore(score);
+        } else {
+            world.changeRightScore(score);
+        }
+    }
 
     private void checkEnd()
     {
