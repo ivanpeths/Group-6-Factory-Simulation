@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Pointer extends SuperSmoothMover
 {
-    private int xSize = 50;
-    private int ySize = 75;
+    private int xSize = 30;
+    private int ySize = 50;
     
     public Pointer(){
         GreenfootImage img = new GreenfootImage("pointer.png");
