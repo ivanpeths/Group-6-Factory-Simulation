@@ -32,17 +32,7 @@ public abstract class Product extends SuperSmoothMover
         }
     }
 
-    public abstract void updateImage() 
-    {
-        if (type == 0) image = new GreenfootImage("broken_cardboard.png");
-        else if (type == 1) image = new GreenfootImage("material_cardboard.png");
-        else if (type == 2) image = new GreenfootImage("finish_cardboard.png");
-        else image = new GreenfootImage("expensive_cardboard.png");
-        
-        image.scale(50, 50);
-        setImage(image);
-        getImage().setTransparency(transparency);
-    }
+    public abstract void updateImage();
 
     public void moveDown()
     {
@@ -80,7 +70,8 @@ public abstract class Product extends SuperSmoothMover
             updateImage();
         }
     }
-    
+    */
+   
     public void addScore (int score) {
         FactoryWorld world = (FactoryWorld)getWorld();
         if (owner == 1) {
@@ -89,7 +80,7 @@ public abstract class Product extends SuperSmoothMover
             world.changeRightScore(score);
         }
     }
-    */
+    
 
     private void checkEnd()
     {

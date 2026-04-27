@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Metal extends Product
 {
-    public Metal (int owner) {
-        super(owner);
+    public Metal (int owner, double speed) {
+        super(owner, speed);
     }
     
     public void sell () {
@@ -23,4 +23,7 @@ public class Metal extends Product
             addScore(60);
         }
     }
+    
+    @Override
+    public void updateImage() {return;}
 }
