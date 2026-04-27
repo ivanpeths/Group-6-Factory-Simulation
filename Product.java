@@ -24,7 +24,7 @@ public abstract class Product extends SuperSmoothMover
     {
         moveDown();
         checkMachine();
-        checkLeavingMachine();
+        // checkLeavingMachine();
         checkEnd();
         if (getWorld() == null) {
             return;
@@ -79,10 +79,11 @@ public abstract class Product extends SuperSmoothMover
                 processed = true;
                 ((Assembler)m).checkBreak();
             }
-            getImage().setTransparency(0);
+            // getImage().setTransparency(0);
         }
     }
     
+    /*
     private void checkLeavingMachine() {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
@@ -90,6 +91,7 @@ public abstract class Product extends SuperSmoothMover
             getImage().setTransparency(255);
         }
     }
+    */
 
     private void checkEnd()
     {
