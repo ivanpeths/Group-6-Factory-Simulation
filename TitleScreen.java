@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TitleScreen extends World
 {
-    private Label title;
+    private Label titleLabel;
+    private Label startLabel;
     private GreenfootImage buttonImg;
     private Actor buttonActor;
     private Label buttonTitle;
@@ -21,21 +22,21 @@ public class TitleScreen extends World
     }
     
     public void setupLabel(){
-        title = new Label("Factory Simulation", 75);
-        addObject(title, getWidth() / 2, getHeight() / 4);
+        titleLabel = new Label("Factory Simulation", 75);
+        addObject(titleLabel, getWidth() / 2, getHeight() / 4);
     }
     
     public void setupButton(){
         buttonImg = new GreenfootImage("button.png");
         buttonActor = new BlankActor();
         buttonActor.setImage(buttonImg);
-        title = new Label("Start", 75);
+        startLabel = new Label("Start", 75);
         addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
-        addObject(title, getWidth() / 2, getHeight() / 4 * 3 - 10);
+        addObject(titleLabel, getWidth() / 2, getHeight() / 4 * 3 - 10);
     }
     
     public void act(){
-        if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(title)){
+        if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(titleLabel)){
             Greenfoot.setWorld(new SettingsWorld());
         }
     }
