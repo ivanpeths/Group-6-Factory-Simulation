@@ -44,9 +44,9 @@ public class SettingsWorld extends World
     // Label constants
     private int labelSize = 50;
     private int leftScoreY = 100;
-    private int rightScoreY = 200;
-    private int leftPosY = 300;
-    private int rightPosY = 400;
+    private int rightScoreY = 190;
+    private int leftPosY = 280;
+    private int rightPosY = 370;
     private int scoreIncrements = 10;
     private int scoreShiftIncrements = 20;
     private int posIncrements = 10;
