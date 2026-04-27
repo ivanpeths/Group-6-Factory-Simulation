@@ -7,7 +7,6 @@ public abstract class Product extends SuperSmoothMover
 
     protected int type;
     protected GreenfootImage image;
-    protected int transparency;
     
     protected boolean inMachine;
 
@@ -18,14 +17,12 @@ public abstract class Product extends SuperSmoothMover
         this.speed = speed;
         updateImage();
         inMachine = false;
-        transparency = 255;
     }
 
     public void act()
     {
         moveDown();
         checkMachine();
-        // checkLeavingMachine();
         checkEnd();
         if (getWorld() == null) {
             return;
@@ -45,32 +42,9 @@ public abstract class Product extends SuperSmoothMover
         
         if (m instanceof Assembler && !((Assembler)m).getBroken() && !inMachine) {
             inMachine = true;
-            transparency = 0;
             updateImage();
         }
     }
-    
-    /*
-    private void checkLeavingMachine() {
-        Machines m = (Machines)getOneIntersectingObject(Machines.class);
-        
-        if (m == null && inMachine) {
-            int random = Greenfoot.getRandomNumber(100);
-            if (random < 25) {
-                type = 0; // broken
-            }
-            else if (random < 95) {
-                type = 2; // finished
-            }
-            else {
-                type = 3; // expensive
-            }
-            transparency = 255;
-            inMachine = false;
-            updateImage();
-        }
-    }
-    */
    
     public void addScore (int score) {
         FactoryWorld world = (FactoryWorld)getWorld();

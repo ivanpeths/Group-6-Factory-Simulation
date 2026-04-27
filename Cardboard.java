@@ -16,7 +16,6 @@ public class Cardboard extends Product
 
         image.scale(50, 50);
         setImage(image);
-        getImage().setTransparency(transparency);
     }
 
     @Override
