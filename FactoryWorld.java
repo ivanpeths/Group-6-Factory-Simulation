@@ -54,11 +54,13 @@ public class FactoryWorld extends World
     
     // Left variables
     private Machines leftMach;
+    private Hitbox leftHit;
     private int lastLeft = spawnDelay;
     private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
+    private Hitbox rightHit;
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
@@ -108,6 +110,7 @@ public class FactoryWorld extends World
         drawUpgrades();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
+        drawHitboxes(leftPos, rightPos);
         drawCountdown();
         
         this.soundMan = soundMan;
@@ -160,6 +163,13 @@ public class FactoryWorld extends World
         rightMach = new Assembler();
         addObject(leftMach, leftPos, getHeight() / 2);
         addObject(rightMach, rightPos, getHeight() / 2);
+    }
+    
+    public void drawHitboxes(int leftPos, int rightPos){
+        leftHit = new Hitbox();
+        rightHit = new Hitbox();
+        addObject(leftHit, leftPos, getHeight() / 2);
+        addObject(rightHit, rightPos, getHeight() / 2);
     }
     
     public void drawUpgrades () {
