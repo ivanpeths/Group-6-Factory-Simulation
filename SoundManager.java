@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Coins and Error sound effects uses arrays to allow simultatneous playing of the same sound
  * 
  * Credits
- * Left coin: 
- * Right coin: 
+ * Left coin: https://pixabay.com/sound-effects/film-special-effects-drop-coin-384921/ but tuned down
+ * Right coin: https://pixabay.com/sound-effects/film-special-effects-drop-coin-384921/
  * Error: 
  * Click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/
  * Starting beep: 
