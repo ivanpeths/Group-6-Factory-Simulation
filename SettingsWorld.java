@@ -1,10 +1,17 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SettingsWorld here.
+ * Second screen of the game, can tweak the following
+ * - Starting scores
+ * - Starting positions
+ * - Product speed
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Click on arrows to adjust value
+ * Hold Shift while clicking on arrows to adjust with a larger increment
+ * 
+ * Makes a sound when the minimum or maximum value is reached
+ * 
+ * @author Kolby Ng
  */
 public class SettingsWorld extends World
 {

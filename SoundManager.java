@@ -1,11 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * Sound Manager for entire game
+ * 
+ * Manages creating, playing and pausing of all game sounds
+ * 
+ * Coins and Error sound effects uses arrays to allow simultatneous playing of the same sound
+ * 
+ * @author Kolby Ng
+ */
+
 public class SoundManager
 {
     // Sound variables
     private GreenfootSound startingSound;
     private GreenfootSound bgm;
     private GreenfootSound ambience;
+    private GreenfootSound menu;
     private GreenfootSound[] leftCoinSounds;
     private GreenfootSound[] rightCoinSounds;
     
@@ -18,6 +29,7 @@ public class SoundManager
     private int coinVolume = 100;
     private int bgmVolume = 50;
     private int ambienceVolume = 20;
+    private int menuVolume = 50;
     
     // Error variables
     private GreenfootSound[] errorSounds;
@@ -37,6 +49,10 @@ public class SoundManager
         
         ambience = new GreenfootSound("ambience.mp3");
         ambience.setVolume(ambienceVolume);
+        
+        // Placeholder for menu.mp3
+        menu = new GreenfootSound("ambience.mp3");
+        menu.setVolume(menuVolume);
         
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
@@ -94,5 +110,13 @@ public class SoundManager
     
     public void pauseAmbience(){
         ambience.pause();
-    }    
+    }  
+    
+    public void playMenu(){
+        menu.playLoop();
+    }
+    
+    public void pauseMenu(){
+        menu.pause();
+    }
 }
