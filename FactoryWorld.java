@@ -1,5 +1,17 @@
 import greenfoot.*;
 
+/**
+ * Main game world
+ * 
+ * Features
+ * - Countdown with overlay and bars
+ * - Score management
+ * - Timer management
+ * - Product spawning
+ * 
+ * @author Kolby Ng
+ */
+
 public class FactoryWorld extends World  
 {
     private GreenfootImage background;
@@ -35,21 +47,21 @@ public class FactoryWorld extends World
     
     // Starting beep
     private GreenfootSound startingSound;
-
+    
+    // Product variables
+    private int spawnDelay = 120;
+    
     // Left variables
     private Machines leftMach;
-    private int lastLeft = 120;
+    private int lastLeft = spawnDelay;
 
     // Right variables
     private Machines rightMach;
-    private int lastRight = 120;
+    private int lastRight = spawnDelay;
     
     // Game timer
     private int timer = 0;
     private Label timerLabel;
-    
-    // Product variables
-    private int spawnDelay = 120;
     
     // Speed variables
     private double leftSpeed;
@@ -229,12 +241,14 @@ public class FactoryWorld extends World
         if (lastLeft >= spawnDelay) {
             if (Greenfoot.getRandomNumber(productSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(2); // 0 or 1
+                int rand = Greenfoot.getRandomNumber(3); // 0 or 1
                 
                 if (rand == 0) {
                     addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
-                } else {
+                } else if (rand == 1) {
                     addObject(new Metal(1, leftSpeed), leftSpawn, 0);
+                } else{
+                    addObject(new Wood(1, leftSpeed), leftSpawn, 0);
                 }
                 
                 lastLeft = 0;
@@ -248,8 +262,10 @@ public class FactoryWorld extends World
                 
                 if (rand == 0) {
                     addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
-                } else {
+                } else if (rand == 1) {
                     addObject(new Metal(2, rightSpeed), rightSpawn, 0);
+                } else{
+                    addObject(new Wood(2, rightSpeed), rightSpawn, 0);
                 }
                 
                 lastRight = 0;

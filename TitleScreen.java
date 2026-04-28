@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Title screen
+ * First screen of the game
+ * Navigates to SettingsWorld
  * 
  * @author Kolby Ng
- * @version 20260424
  */
 public class TitleScreen extends World
 {

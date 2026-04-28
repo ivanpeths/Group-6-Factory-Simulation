@@ -1,7 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Title screen
+ * Win screen
+ * 
+ * Takes in the parameter of who won and the losing score to display
+ * Button to return to SettingsWorld and replay
  * 
  * @author Kolby Ng
  * @version 20260424
