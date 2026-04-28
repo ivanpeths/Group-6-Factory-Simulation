@@ -79,7 +79,7 @@ public class FactoryWorld extends World
     private int leftBrokeRight = -1;
     private int leftUpgradeCooldown = 0;
     
-    private int rightUpgradeX = 50;
+    private int rightUpgradeX = 1150;
     private Break rightBreak;
     private Buy rightBuy;
     private Quality rightQuality;
@@ -110,6 +110,8 @@ public class FactoryWorld extends World
         
         this.soundMan = soundMan;
         this.pointer = new Pointer(soundMan);
+        
+        soundMan.playStarting();
     }
         
     public boolean getStarted(){
@@ -117,9 +119,7 @@ public class FactoryWorld extends World
     }
     
     public void started(){
-        if(!gameStarted){
-            soundMan.playStarting();
-        } else {
+        if (gameStarted) {
             soundMan.playBgm();
             soundMan.playAmbience();
         }

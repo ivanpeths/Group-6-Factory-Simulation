@@ -7,6 +7,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * Coins and Error sound effects uses arrays to allow simultatneous playing of the same sound
  * 
+ * Credits
+ * Left coin: 
+ * Right coin: 
+ * Error: 
+ * Click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/
+ * Starting beep: 
+ * BGM: 
+ * Ambience: 
+ * Menu: https://pixabay.com/music/main-title-dramatic-436882/
+ * 
  * @author Kolby Ng
  */
 
@@ -56,8 +66,7 @@ public class SoundManager
         ambience = new GreenfootSound("ambience.mp3");
         ambience.setVolume(ambienceVolume);
         
-        // Placeholder for menu.mp3
-        menu = new GreenfootSound("ambience.mp3");
+        menu = new GreenfootSound("menu.mp3");
         menu.setVolume(menuVolume);
 
         leftCoinSounds = new GreenfootSound[coinLength];
@@ -77,11 +86,10 @@ public class SoundManager
             errorSounds[i] = new GreenfootSound("error.mp3");
             errorSounds[i].setVolume(errorVolume);
         }
-        
-        // Placeholder for click.mp3
+
         clickSounds = new GreenfootSound[clickLength];
         for (int i = 0; i < clickLength; i++){
-            clickSounds[i] = new GreenfootSound("error.mp3");
+            clickSounds[i] = new GreenfootSound("click.mp3");
             clickSounds[i].setVolume(clickVolume);
         }
     }
