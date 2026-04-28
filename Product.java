@@ -41,9 +41,11 @@ public abstract class Product extends SuperSmoothMover
     {
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
-        if (m instanceof Assembler && !((Assembler)m).getBroken() && !inMachine) {
-            inMachine = true;
-            updateImage();
+        if (m != null) {
+            if (!(m.getBroken()) && type != 0) {
+                inMachine = true;
+                updateImage();
+            }
         }
     }
    
@@ -60,15 +62,9 @@ public abstract class Product extends SuperSmoothMover
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
         
         if (m == null && inMachine) {
-            int random = Greenfoot.getRandomNumber(100);
-            if (random < 25) {
-                type = 0; // broken
-            }
-            else if (random < 95) {
-                type = 2; // finished
-            }
-            else {
-                type = 3; // expensive
+            type++;
+            if (Greenfoot.getRandomNumber(10) == 0) {
+                type = 0;
             }
             inMachine = false;
             updateImage();

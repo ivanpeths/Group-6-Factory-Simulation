@@ -22,7 +22,7 @@ public class Cardboard extends Product
     public void sell() 
     {
         if (type == 1) addScore(10);
-        else if (type == 2) addScore(20);
-        else if (type == 3) addScore(40);
+        else if (type == 2) addScore(15);
+        else if (type == 3) addScore(25);
     }
 }
