@@ -1,3 +1,4 @@
+// Metal by Isaac
 import greenfoot.*;
 
 public class Metal extends Product
@@ -9,10 +10,10 @@ public class Metal extends Product
     @Override
     public void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("placeholder.png");
-        else if (type == 1) image = new GreenfootImage("placeholder.png");
-        else if (type == 2) image = new GreenfootImage("placeholder.png");
-        else image = new GreenfootImage("placeholder.png");
+        if (type == 0) image = new GreenfootImage("brokeniron.png");
+        else if (type == 1) image = new GreenfootImage("materialiron.png");
+        else if (type == 2) image = new GreenfootImage("cheapiron.png");
+        else image = new GreenfootImage("expensiveiron.png");
 
         image.scale(50, 50);
         setImage(image);
@@ -21,9 +22,9 @@ public class Metal extends Product
     @Override
     public void sell() 
     {
-        if (type == 0) addScore(5);
-        else if (type == 1) addScore(10);
-        else if (type == 2) addScore(20);
-        else if (type == 3) addScore(40);
+        if (type == 0) addScore(10);
+        else if (type == 1) addScore(20);
+        else if (type == 2) addScore(30);
+        else if (type == 3) addScore(50);
     }
 }

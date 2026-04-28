@@ -16,6 +16,10 @@ public class Spawn extends Upgrades
     
     public void activate () {
         super.activate();
-        ((FactoryWorld)getWorld()).updateSpawnRate();
+        if (side == 1) {
+            ((FactoryWorld)getWorld()).updateLeftSpawn();
+        } else {
+            ((FactoryWorld)getWorld()).updateRightSpawn();
+        }
     }
 }

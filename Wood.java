@@ -1,3 +1,4 @@
+// Wood by Isaac
 import greenfoot.*;
 
 public class Wood extends Product
@@ -9,10 +10,10 @@ public class Wood extends Product
     @Override
     public void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("placeholder.png");
-        else if (type == 1) image = new GreenfootImage("placeholder.png");
-        else if (type == 2) image = new GreenfootImage("placeholder.png");
-        else image = new GreenfootImage("placeholder.png");
+        if (type == 0) image = new GreenfootImage("brokenwood.png");
+        else if (type == 1) image = new GreenfootImage("materialwood.png");
+        else if (type == 2) image = new GreenfootImage("cheapwood.png");
+        else image = new GreenfootImage("expensivewood.png");
 
         image.scale(50, 50);
         setImage(image);
@@ -23,7 +24,7 @@ public class Wood extends Product
     {
         if (type == 0) addScore(5);
         else if (type == 1) addScore(10);
-        else if (type == 2) addScore(20);
-        else if (type == 3) addScore(40);
+        else if (type == 2) addScore(15);
+        else if (type == 3) addScore(30);
     }
 }
