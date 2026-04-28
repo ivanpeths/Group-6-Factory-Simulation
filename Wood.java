@@ -1,3 +1,4 @@
+// Wood by Isaac
 import greenfoot.*;
 
 public class Wood extends Product
