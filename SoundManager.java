@@ -1,29 +1,47 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * Sound Manager for entire game
+ * 
+ * Manages creating, playing and pausing of all game sounds
+ * 
+ * Coins and Error sound effects uses arrays to allow simultatneous playing of the same sound
+ * 
+ * @author Kolby Ng
+ */
+
 public class SoundManager
 {
     // Sound variables
     private GreenfootSound startingSound;
     private GreenfootSound bgm;
     private GreenfootSound ambience;
+    private GreenfootSound menu;
+    
     private GreenfootSound[] leftCoinSounds;
     private GreenfootSound[] rightCoinSounds;
+    private GreenfootSound[] errorSounds;
+    private GreenfootSound[] clickSounds;
     
-    // Coin variables
+    // Indexes
     private int leftCoinIndex = 0;
     private int rightCoinIndex = 0;
-    private int coinLength = 5;
+    private int errorIndex = 0;
+    private int clickIndex = 0;
     
     // Volumes
     private int coinVolume = 100;
     private int bgmVolume = 50;
     private int ambienceVolume = 20;
-    
-    // Error variables
-    private GreenfootSound[] errorSounds;
-    private int errorIndex = 0;
+    private int menuVolume = 50;
+    private int clickVolume = 50;
     private int errorVolume = 50;
+    
+    // Lengths
+    private int coinLength = 5;
     private int errorLength = 5;
+    private int clickLength = 3;
+    
     
     public SoundManager(){
         setFiles();
@@ -38,6 +56,10 @@ public class SoundManager
         ambience = new GreenfootSound("ambience.mp3");
         ambience.setVolume(ambienceVolume);
         
+        // Placeholder for menu.mp3
+        menu = new GreenfootSound("ambience.mp3");
+        menu.setVolume(menuVolume);
+
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
             leftCoinSounds[i] = new GreenfootSound("left_coin.mp3");
@@ -54,6 +76,13 @@ public class SoundManager
         for (int i = 0; i < errorLength; i++){
             errorSounds[i] = new GreenfootSound("error.mp3");
             errorSounds[i].setVolume(errorVolume);
+        }
+        
+        // Placeholder for click.mp3
+        clickSounds = new GreenfootSound[clickLength];
+        for (int i = 0; i < clickLength; i++){
+            clickSounds[i] = new GreenfootSound("error.mp3");
+            clickSounds[i].setVolume(clickVolume);
         }
     }
     
@@ -76,7 +105,7 @@ public class SoundManager
     }
     
     public void playBgm(){
-        bgm.play();
+        bgm.playLoop();
     }
     
     public void pauseBgm(){
@@ -94,5 +123,22 @@ public class SoundManager
     
     public void pauseAmbience(){
         ambience.pause();
-    }    
+    }  
+    
+    public void playMenu(){
+        menu.playLoop();
+    }
+    
+    public void pauseMenu(){
+        menu.pause();
+    }
+    
+    public boolean menuPlaying(){
+        return menu.isPlaying();
+    }
+    
+    public void playClick(){
+        clickSounds[clickIndex].play();
+        clickIndex = (clickIndex + 1) % clickLength;
+    }
 }

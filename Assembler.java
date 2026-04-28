@@ -18,4 +18,10 @@ public class Assembler extends Machines
         setImage(image);
         broken = true;
     }
+    
+    public void unbreakMachine(){
+        image = new GreenfootImage("machine.png");
+        setImage(image);
+        broken = false;
+    }
 }

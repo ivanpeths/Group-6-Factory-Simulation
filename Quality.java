@@ -16,5 +16,10 @@ public class Quality extends Upgrades
     
     public void activate () {
         super.activate();
+        if (side == 1) {
+            ((FactoryWorld)getWorld()).updateLeftQuality();
+        } else {
+            ((FactoryWorld)getWorld()).updateRightQuality();
+        }
     }
 }

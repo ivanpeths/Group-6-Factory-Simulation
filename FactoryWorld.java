@@ -1,16 +1,28 @@
 import greenfoot.*;
 
+/**
+ * Main game world
+ * 
+ * Features
+ * - Countdown with overlay and bars
+ * - Score management
+ * - Timer management
+ * - Product spawning
+ * 
+ * @author Kolby Ng
+ */
+
 public class FactoryWorld extends World  
 {
     private GreenfootImage background;
     
     private boolean gameStarted = false;
     
-    // Location variables
-    private int leftSpawn;
-    private int rightSpawn;
+    private int rightProductSpawn = 50;
+    private int leftProductSpawn = 50;
     
-    private int productSpawn = 50;
+    private int rightProductQuality = 6;
+    private int leftProductQuality = 6;
     
     // Score variables
     private Label leftScoreLabel;
@@ -35,42 +47,63 @@ public class FactoryWorld extends World
     
     // Starting beep
     private GreenfootSound startingSound;
-
+    
+    // Product variables
+    private int spawnDelay = 120;
+    
     // Left variables
     private Machines leftMach;
-    private int lastLeft = 120;
+    private int lastLeft = spawnDelay;
+    private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
-    private int lastRight = 120;
+    private int lastRight = spawnDelay;
+    private int rightPos = 900;
     
     // Game timer
     private int timer = 0;
     private Label timerLabel;
     
-    // Product variables
-    private int spawnDelay = 120;
-    
     // Speed variables
-    private double leftSpeed;
-    private double rightSpeed;
+    private double leftSpeed = 1.5;
+    private double rightSpeed = 1.5;
     
-    // Sound Manager
-    private SoundManager soundMan = new SoundManager();
+    // Upgrade variables
+    private int leftUpgradeX = 50;
+    private Break leftBreak;
+    private Buy leftBuy;
+    private Quality leftQuality;
+    private Repair leftRepair;
+    private Spawn leftSpawnUpgrade;
+    
+    private int rightUpgradeX = 50;
+    private Break rightBreak;
+    private Buy rightBuy;
+    private Quality rightQuality;
+    private Repair rightRepair;
+    private Spawn rightSpawnUpgrade;
+    
+    // Pointer variables
+    private Pointer pointer;
 
-    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed)
+    private SoundManager soundMan;
+    public FactoryWorld(int leftStarting, int rightStarting, int leftQual, int rightQual, int leftRate, int rightRate, SoundManager soundMan)
     {    
         super(1200, 800, 1); 
         
         setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
-        setXPos(leftPos, rightPos);
-        setProdSpeed(leftSpeed, rightSpeed);
+        setProdQual(leftQual, rightQual);
+        setSpawnRate(leftRate, rightRate);
         drawUpgrades();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
         drawCountdown();
+        
+        this.soundMan = soundMan;
+        this.pointer = new Pointer(soundMan);
     }
         
     public boolean getStarted(){
@@ -92,40 +125,68 @@ public class FactoryWorld extends World
         soundMan.pauseAmbience();
     }
     
-    public void setXPos(int leftPos, int rightPos){
-        leftSpawn = leftPos;
-        rightSpawn = rightPos;
+    public void setSpawnRate(int leftRate, int rightRate){
+        this.leftProductSpawn = leftRate;
+        this.rightProductSpawn = rightRate;
     }
     
-    public void setProdSpeed(double leftSpeed, double rightSpeed){
-        this.leftSpeed = leftSpeed;
-        this.rightSpeed = rightSpeed;
+    public void setProdQual(int leftQual, int rightQual){
+        this.leftProductQuality = leftQual;
+        this.rightProductQuality = rightQual;
     }
     
-    public void drawConveyor (int leftSpawn, int rightSpawn) {
-        addObject(new Conveyor(), leftSpawn, getHeight() / 2);
-        addObject(new Conveyor(), rightSpawn, getHeight() / 2);
+    public void drawConveyor (int leftPos, int rightPos){
+        addObject(new Conveyor(), leftPos, getHeight() / 2);
+        addObject(new Conveyor(), rightPos, getHeight() / 2);
     }
     
-    public void drawMachines(int leftSpawn, int rightSpawn){
+    public void drawMachines(int leftPos, int rightPos){
         leftMach = new Assembler();
         rightMach = new Assembler();
-        addObject(leftMach, leftSpawn, getHeight() / 2);
-        addObject(rightMach, rightSpawn, getHeight() / 2);
+        addObject(leftMach, leftPos, getHeight() / 2);
+        addObject(rightMach, rightPos, getHeight() / 2);
     }
     
     public void drawUpgrades () {
-        for (int i = 50; i < 1200; i += 1100) {
-            addObject(new Break(i), i, 750);
-            addObject(new Buy(i), i, 663);
-            addObject(new Quality(i), i, 576);
-            addObject(new Repair(i), i, 489);
-            addObject(new Spawn(i), i, 402);
-        }
+        leftBreak = new Break(leftUpgradeX);
+        leftBuy = new Buy(leftUpgradeX);
+        leftQuality = new Quality(leftUpgradeX);
+        leftRepair = new Repair(leftUpgradeX);
+        leftSpawnUpgrade = new Spawn(leftUpgradeX);
+        
+        addObject(leftBreak, leftUpgradeX, 750);
+        addObject(leftBuy, leftUpgradeX, 663);
+        addObject(leftQuality, leftUpgradeX, 576);
+        addObject(leftRepair, leftUpgradeX, 489);
+        addObject(leftSpawnUpgrade, leftUpgradeX, 402);
+        
+        rightBreak = new Break(rightUpgradeX);
+        rightBuy = new Buy(rightUpgradeX);
+        rightQuality = new Quality(rightUpgradeX);
+        rightRepair = new Repair(rightUpgradeX);
+        rightSpawnUpgrade = new Spawn(rightUpgradeX);
+        
+        addObject(rightBreak, rightUpgradeX, 750);
+        addObject(rightBuy, rightUpgradeX, 663);
+        addObject(rightQuality, rightUpgradeX, 576);
+        addObject(rightRepair, rightUpgradeX, 489);
+        addObject(rightSpawnUpgrade, rightUpgradeX, 402);
     }
     
-    public void updateSpawnRate () {
-        productSpawn -= 5;
+    public void updateRightSpawn () {
+        rightProductSpawn -= 5;
+    }
+    
+    public void updateLeftSpawn () {
+        leftProductSpawn -= 5;
+    }
+    
+    public void updateLeftQuality () {
+        leftProductQuality--;
+    }
+    
+    public void updateRightQuality () {
+        rightProductQuality--;
     }
     
     public void setBackground(){
@@ -204,11 +265,40 @@ public class FactoryWorld extends World
     
     public void checkWin(){
         if (leftScore >= winCond){
-            Greenfoot.setWorld(new WinScreen("Left", rightScore));
+            Greenfoot.setWorld(new WinScreen("Left", rightScore, soundMan));
         }
         else if (rightScore >= winCond){
-            Greenfoot.setWorld(new WinScreen("Right", leftScore));
+            Greenfoot.setWorld(new WinScreen("Right", leftScore, soundMan));
         }
+    }
+    
+    public void canUpgradeLeft(){
+        if (leftScore > 250){
+            if (leftMach.getBroken()){
+                leftRepair.activate();
+                return;
+            }
+        }
+    }
+    
+    public void canUpgradeRight(){
+        if (rightScore > 250){
+            if (rightMach.getBroken()){
+                rightRepair.activate();
+            }
+        }
+    }
+    
+    public Machines getLeftMachine(){
+        return leftMach;
+    }
+    
+    public Machines getRightMachine(){
+        return rightMach;
+    }
+    
+    public SoundManager getSoundMan(){
+        return soundMan;
     }
     
     public void act(){
@@ -227,14 +317,16 @@ public class FactoryWorld extends World
         }
 
         if (lastLeft >= spawnDelay) {
-            if (Greenfoot.getRandomNumber(productSpawn) == 0) {
+            if (Greenfoot.getRandomNumber(leftProductSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(2); // 0 or 1
+                int rand = Greenfoot.getRandomNumber(leftProductQuality);
                 
                 if (rand == 0) {
-                    addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
+                    addObject(new Metal(1, leftSpeed), leftPos, 0);
+                } else if (rand == 1 || rand == 2) {
+                    addObject(new Wood(1, leftSpeed), leftPos, 0);
                 } else {
-                    addObject(new Metal(1, leftSpeed), leftSpawn, 0);
+                    addObject(new Cardboard(1, leftSpeed), leftPos, 0);
                 }
                 
                 lastLeft = 0;
@@ -242,14 +334,16 @@ public class FactoryWorld extends World
         }
 
         if (lastRight >= spawnDelay) {
-            if (Greenfoot.getRandomNumber(productSpawn) == 0) {
+            if (Greenfoot.getRandomNumber(rightProductSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(2);
+                int rand = Greenfoot.getRandomNumber(rightProductQuality);
                 
                 if (rand == 0) {
-                    addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
+                    addObject(new Metal(2, rightSpeed), rightPos, 0);
+                } else if (rand == 1 || rand == 2) {
+                    addObject(new Wood(2, rightSpeed), rightPos, 0);
                 } else {
-                    addObject(new Metal(2, rightSpeed), rightSpawn, 0);
+                    addObject(new Cardboard(2, rightSpeed), rightPos, 0);
                 }
                 
                 lastRight = 0;
@@ -263,7 +357,8 @@ public class FactoryWorld extends World
         if (timer % 60 == 0){
             updateTimer();
         }
-        
+        canUpgradeLeft();
+        canUpgradeRight();
         checkWin();
     }
 }

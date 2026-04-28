@@ -15,6 +15,12 @@ public class Repair extends Upgrades
     }
     
     public void activate () {
+        FactoryWorld w = (FactoryWorld) getWorld();
         super.activate();
+        if (side == 1){
+            w.getLeftMachine().unbreakMachine();
+        } else {
+            w.getRightMachine().unbreakMachine();
+        }
     }
 }
