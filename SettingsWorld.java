@@ -38,44 +38,44 @@ public class SettingsWorld extends World
     private Label leftQualityLabel;
     private Actor leftQualityLeft;
     private Label leftQualityAmtLabel;
-    private int leftQualityAmt = 400;
+    private int leftQualityAmt = 6;
     private Actor leftQualityRight;
     
     // Right quality
     private Label rightQualityLabel;
     private Actor rightQualityLeft;
     private Label rightQualityAmtLabel;
-    private int rightQualityAmt = 800;
+    private int rightQualityAmt = 6;
     private Actor rightQualityRight;
     
     // Left spawn rate
     private Label leftRateLabel;
     private Actor leftRateLeft;
     private Label leftRateAmtLabel;
-    private double leftRateAmt = 1.5;
+    private int leftRateAmt = 50;
     private Actor leftRateRight;
     
     // Right spawn rate
     private Label rightRateLabel;
     private Actor rightRateLeft;
     private Label rightRateAmtLabel;
-    private double rightRateAmt = 1.5;
+    private int rightRateAmt = 50;
     private Actor rightRateRight;
     
     // Label constants
     private int labelSize = 50;
     private int leftScoreY = 100;
     private int rightScoreY = 190;
-    private int leftQualityY = 6;
-    private int rightQualityY = 6;
-    private int leftRateY = 50;
-    private int rightRateY = 50;
+    private int leftQualityY = 280;
+    private int rightQualityY = 370;
+    private int leftRateY = 460;
+    private int rightRateY = 550;
     private int scoreIncrements = 10;
     private int scoreShiftIncrements = 20;
     private int qualityIncrements = 1;
     private int qualityShiftIncrements = 2;
-    private double rateIncrements = 1.0;
-    private double rateShiftIncrements = 2.0;
+    private int rateIncrements = 5;
+    private int rateShiftIncrements = 10;
     
     // Arrow images
     private GreenfootImage leftImg;
@@ -169,7 +169,7 @@ public class SettingsWorld extends World
     }
     
     public void setupLeftQuality(){
-        leftQualityLabel = new Label("Left Starting Qualityition", labelSize);
+        leftQualityLabel = new Label("Left Starting Quality", labelSize);
         leftQualityAmtLabel = new Label(leftQualityAmt, labelSize);
         leftQualityLeft = new BlankActor();
         leftQualityRight = new BlankActor();
@@ -194,7 +194,7 @@ public class SettingsWorld extends World
     }
     
     public void setupRightQuality(){
-        rightQualityLabel = new Label("Right Starting Qualityition", labelSize);
+        rightQualityLabel = new Label("Right Starting Quality", labelSize);
         rightQualityAmtLabel = new Label(rightQualityAmt, labelSize);
         rightQualityLeft = new BlankActor();
         rightQualityRight = new BlankActor();
@@ -218,9 +218,9 @@ public class SettingsWorld extends World
         }
     }
     
-        public void setupLeftRate(){
+    public void setupLeftRate(){
         leftRateLabel = new Label("Left Starting Rate", labelSize);
-        leftRateAmtLabel = new Label(Double.toString(leftRateAmt), labelSize);
+        leftRateAmtLabel = new Label(leftRateAmt, labelSize);
         leftRateLeft = new BlankActor();
         leftRateRight = new BlankActor();
         leftRateLeft.setImage(leftImg);
@@ -234,10 +234,10 @@ public class SettingsWorld extends World
     }
     
     // Clamp min and max
-    public void changeLeftRate(double amt){
-        double oldAmt = leftRateAmt;
+    public void changeLeftRate(int amt){
+        int oldAmt = leftRateAmt;
         leftRateAmt = (Math.max(Math.min(100, leftRateAmt + amt), 1));
-        leftRateAmtLabel.setValue(Double.toString(leftRateAmt));
+        leftRateAmtLabel.setValue(leftRateAmt);
         if (oldAmt == leftRateAmt){
             soundMan.playError();
         }
@@ -245,7 +245,7 @@ public class SettingsWorld extends World
     
     public void setupRightRate(){
         rightRateLabel = new Label("Right Starting Rate", labelSize);
-        rightRateAmtLabel = new Label(Double.toString(rightRateAmt), labelSize);
+        rightRateAmtLabel = new Label(rightRateAmt, labelSize);
         rightRateLeft = new BlankActor();
         rightRateRight = new BlankActor();
         rightRateLeft.setImage(leftImg);
@@ -259,10 +259,10 @@ public class SettingsWorld extends World
     }
     
     // Clamp min and max
-    public void changeRightRate(double amt){
-        double oldAmt = rightRateAmt;
+    public void changeRightRate(int amt){
+        int oldAmt = rightRateAmt;
         rightRateAmt = (Math.max(Math.min(100, rightRateAmt + amt), 1));
-        rightRateAmtLabel.setValue(Double.toString(rightRateAmt));
+        rightRateAmtLabel.setValue(rightRateAmt);
         if (oldAmt == rightRateAmt){
             soundMan.playError();
         }
@@ -414,3 +414,4 @@ public class SettingsWorld extends World
         }
     }
 }
+

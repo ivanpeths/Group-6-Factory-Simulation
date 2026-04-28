@@ -18,10 +18,6 @@ public class FactoryWorld extends World
     
     private boolean gameStarted = false;
     
-    // Location variables
-    private int leftSpawn;
-    private int rightSpawn;
-    
     private int rightProductSpawn = 50;
     private int leftProductSpawn = 50;
     
@@ -58,18 +54,20 @@ public class FactoryWorld extends World
     // Left variables
     private Machines leftMach;
     private int lastLeft = spawnDelay;
+    private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
     private int lastRight = spawnDelay;
+    private int rightPos = 900;
     
     // Game timer
     private int timer = 0;
     private Label timerLabel;
     
     // Speed variables
-    private double leftSpeed;
-    private double rightSpeed;
+    private double leftSpeed = 1.5;
+    private double rightSpeed = 1.5;
     
     // Upgrade variables
     private int leftUpgradeX = 50;
@@ -85,23 +83,27 @@ public class FactoryWorld extends World
     private Quality rightQuality;
     private Repair rightRepair;
     private Spawn rightSpawnUpgrade;
+    
+    // Pointer variables
+    private Pointer pointer;
 
     private SoundManager soundMan;
-    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed, SoundManager soundMan)
+    public FactoryWorld(int leftStarting, int rightStarting, int leftQual, int rightQual, int leftRate, int rightRate, SoundManager soundMan)
     {    
         super(1200, 800, 1); 
         
         setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
-        setXPos(leftPos, rightPos);
-        setProdSpeed(leftSpeed, rightSpeed);
+        setProdQual(leftQual, rightQual);
+        setSpawnRate(leftRate, rightRate);
         drawUpgrades();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
         drawCountdown();
         
         this.soundMan = soundMan;
+        this.pointer = new Pointer(soundMan);
     }
         
     public boolean getStarted(){
@@ -123,26 +125,26 @@ public class FactoryWorld extends World
         soundMan.pauseAmbience();
     }
     
-    public void setXPos(int leftPos, int rightPos){
-        leftSpawn = leftPos;
-        rightSpawn = rightPos;
+    public void setSpawnRate(int leftRate, int rightRate){
+        this.leftProductSpawn = leftRate;
+        this.rightProductSpawn = rightRate;
     }
     
-    public void setProdSpeed(double leftSpeed, double rightSpeed){
-        this.leftSpeed = leftSpeed;
-        this.rightSpeed = rightSpeed;
+    public void setProdQual(int leftQual, int rightQual){
+        this.leftProductQuality = leftQual;
+        this.rightProductQuality = rightQual;
     }
     
-    public void drawConveyor (int leftSpawn, int rightSpawn) {
-        addObject(new Conveyor(), leftSpawn, getHeight() / 2);
-        addObject(new Conveyor(), rightSpawn, getHeight() / 2);
+    public void drawConveyor (int leftPos, int rightPos){
+        addObject(new Conveyor(), leftPos, getHeight() / 2);
+        addObject(new Conveyor(), rightPos, getHeight() / 2);
     }
     
-    public void drawMachines(int leftSpawn, int rightSpawn){
+    public void drawMachines(int leftPos, int rightPos){
         leftMach = new Assembler();
         rightMach = new Assembler();
-        addObject(leftMach, leftSpawn, getHeight() / 2);
-        addObject(rightMach, rightSpawn, getHeight() / 2);
+        addObject(leftMach, leftPos, getHeight() / 2);
+        addObject(rightMach, rightPos, getHeight() / 2);
     }
     
     public void drawUpgrades () {
@@ -270,13 +272,16 @@ public class FactoryWorld extends World
         }
     }
     
-    public void canUpgrade(){
+    public void canUpgradeLeft(){
         if (leftScore > 250){
             if (leftMach.getBroken()){
                 leftRepair.activate();
+                return;
             }
         }
-        
+    }
+    
+    public void canUpgradeRight(){
         if (rightScore > 250){
             if (rightMach.getBroken()){
                 rightRepair.activate();
@@ -290,6 +295,10 @@ public class FactoryWorld extends World
     
     public Machines getRightMachine(){
         return rightMach;
+    }
+    
+    public SoundManager getSoundMan(){
+        return soundMan;
     }
     
     public void act(){
@@ -313,11 +322,11 @@ public class FactoryWorld extends World
                 int rand = Greenfoot.getRandomNumber(leftProductQuality);
                 
                 if (rand == 0) {
-                    addObject(new Metal(1, leftSpeed), leftSpawn, 0);
+                    addObject(new Metal(1, leftSpeed), leftPos, 0);
                 } else if (rand == 1 || rand == 2) {
-                    addObject(new Wood(1, leftSpeed), leftSpawn, 0);
+                    addObject(new Wood(1, leftSpeed), leftPos, 0);
                 } else {
-                    addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
+                    addObject(new Cardboard(1, leftSpeed), leftPos, 0);
                 }
                 
                 lastLeft = 0;
@@ -330,11 +339,11 @@ public class FactoryWorld extends World
                 int rand = Greenfoot.getRandomNumber(rightProductQuality);
                 
                 if (rand == 0) {
-                    addObject(new Metal(2, rightSpeed), rightSpawn, 0);
+                    addObject(new Metal(2, rightSpeed), rightPos, 0);
                 } else if (rand == 1 || rand == 2) {
-                    addObject(new Wood(2, rightSpeed), rightSpawn, 0);
+                    addObject(new Wood(2, rightSpeed), rightPos, 0);
                 } else {
-                    addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
+                    addObject(new Cardboard(2, rightSpeed), rightPos, 0);
                 }
                 
                 lastRight = 0;
@@ -348,7 +357,8 @@ public class FactoryWorld extends World
         if (timer % 60 == 0){
             updateTimer();
         }
-        canUpgrade();
+        canUpgradeLeft();
+        canUpgradeRight();
         checkWin();
     }
 }
