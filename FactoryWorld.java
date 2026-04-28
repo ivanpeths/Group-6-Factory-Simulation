@@ -76,6 +76,8 @@ public class FactoryWorld extends World
     private Quality leftQuality;
     private Repair leftRepair;
     private Spawn leftSpawnUpgrade;
+    private int leftBrokeRight = -1;
+    private int leftUpgradeCooldown = 0;
     
     private int rightUpgradeX = 50;
     private Break rightBreak;
@@ -83,6 +85,10 @@ public class FactoryWorld extends World
     private Quality rightQuality;
     private Repair rightRepair;
     private Spawn rightSpawnUpgrade;
+    private int rightBrokeLeft = -1;
+    private int rightUpgradeCooldown = 0;
+    
+    private int upgradeCooldown = 300;
     
     // Pointer variables
     private Pointer pointer;
@@ -273,18 +279,78 @@ public class FactoryWorld extends World
     }
     
     public void canUpgradeLeft(){
+        if (leftUpgradeCooldown > 0) {
+            leftUpgradeCooldown--;
+            return;
+        }
+        
         if (leftScore > 250){
-            if (leftMach.getBroken()){
-                leftRepair.activate();
-                return;
+            if (Greenfoot.getRandomNumber(600) == 0){
+                if (leftMach.getBroken()){
+                    leftRepair.activate();
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                }
+                if (rightBrokeLeft >= 0){
+                    leftBreak.activate();
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                }
+                int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
+                if (rand == 0){
+                    leftBreak.activate();
+                    leftBrokeRight = 900;
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                } else if (rand == 1){
+                    leftBuy.activate();
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                } else if (rand == 2){
+                    leftQuality.activate();
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                } else {
+                    leftSpawnUpgrade.activate();
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                }
             }
         }
     }
     
     public void canUpgradeRight(){
+        if (rightUpgradeCooldown > 0) {
+            rightUpgradeCooldown--;
+            return;
+        }
+        
         if (rightScore > 250){
-            if (rightMach.getBroken()){
-                rightRepair.activate();
+            if (Greenfoot.getRandomNumber(600) == 0){
+                if (rightMach.getBroken()){
+                    rightRepair.activate();
+                    rightUpgradeCooldown = upgradeCooldown;
+                    return;
+                }
+                int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
+                if (rand == 0){
+                    rightBreak.activate();
+                    rightBrokeLeft = 900;
+                    rightUpgradeCooldown = upgradeCooldown;
+                    return;
+                } else if (rand == 1){
+                    rightBuy.activate();
+                    rightUpgradeCooldown = upgradeCooldown;
+                    return;
+                } else if (rand == 2){
+                    rightQuality.activate();
+                    rightUpgradeCooldown = upgradeCooldown;
+                    return;
+                } else {
+                    rightSpawnUpgrade.activate();
+                    rightUpgradeCooldown = upgradeCooldown;
+                    return;
+                }
             }
         }
     }
@@ -352,6 +418,8 @@ public class FactoryWorld extends World
 
         lastLeft++;
         lastRight++;
+        leftBrokeRight--;
+        rightBrokeLeft--;
         
         timer++;
         if (timer % 60 == 0){
