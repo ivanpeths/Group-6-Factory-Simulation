@@ -3,8 +3,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Second screen of the game, can tweak the following
  * - Starting scores
+<<<<<<< Updated upstream
  * - Starting positions
  * - Product speed
+=======
+ * - Starting quality
+ * - Product spawn rate
+>>>>>>> Stashed changes
  * 
  * Click on arrows to adjust value
  * Hold Shift while clicking on arrows to adjust with a larger increment
@@ -66,10 +71,17 @@ public class SettingsWorld extends World
     private int labelSize = 50;
     private int leftScoreY = 100;
     private int rightScoreY = 190;
+<<<<<<< Updated upstream
     private int leftPosY = 280;
     private int rightPosY = 370;
     private int leftSpeedY = 460;
     private int rightSpeedY = 550;
+=======
+    private int leftQualityY = 280;
+    private int rightQualityY = 370;
+    private int leftRateY = 460;
+    private int rightRateY = 550;
+>>>>>>> Stashed changes
     private int scoreIncrements = 10;
     private int scoreShiftIncrements = 20;
     private int posIncrements = 10;
@@ -168,6 +180,7 @@ public class SettingsWorld extends World
         }
     }
     
+<<<<<<< Updated upstream
     public void setupLeftPos(){
         leftPosLabel = new Label("Left Starting Position", labelSize);
         leftPosAmtLabel = new Label(leftPosAmt, labelSize);
@@ -175,6 +188,15 @@ public class SettingsWorld extends World
         leftPosRight = new BlankActor();
         leftPosLeft.setImage(leftImg);
         leftPosRight.setImage(rightImg);
+=======
+    public void setupLeftQuality(){
+        leftQualityLabel = new Label("Left Starting Quality", labelSize);
+        leftQualityAmtLabel = new Label(leftQualityAmt, labelSize);
+        leftQualityLeft = new BlankActor();
+        leftQualityRight = new BlankActor();
+        leftQualityLeft.setImage(leftImg);
+        leftQualityRight.setImage(rightImg);
+>>>>>>> Stashed changes
         
         addObject(leftPosLabel, getWidth() / 4, leftPosY);
         addObject(leftPosLeft, getWidth() / 8 * 5, leftPosY);
@@ -193,6 +215,7 @@ public class SettingsWorld extends World
         }
     }
     
+<<<<<<< Updated upstream
     public void setupRightPos(){
         rightPosLabel = new Label("Right Starting Position", labelSize);
         rightPosAmtLabel = new Label(rightPosAmt, labelSize);
@@ -200,6 +223,15 @@ public class SettingsWorld extends World
         rightPosRight = new BlankActor();
         rightPosLeft.setImage(leftImg);
         rightPosRight.setImage(rightImg);
+=======
+    public void setupRightQuality(){
+        rightQualityLabel = new Label("Right Starting Quality", labelSize);
+        rightQualityAmtLabel = new Label(rightQualityAmt, labelSize);
+        rightQualityLeft = new BlankActor();
+        rightQualityRight = new BlankActor();
+        rightQualityLeft.setImage(leftImg);
+        rightQualityRight.setImage(rightImg);
+>>>>>>> Stashed changes
         
         addObject(rightPosLabel, getWidth() / 4, rightPosY);
         addObject(rightPosLeft, getWidth() / 8 * 5, rightPosY);
