@@ -16,5 +16,12 @@ public class Break extends Upgrades
     
     public void activate () {
         super.activate();
+
+    FactoryWorld world = (FactoryWorld)getWorld();
+        if (side == 1) {
+            world.getRightMachine().breakMachine();
+        } else {
+            world.getLeftMachine().breakMachine();
+        }
     }
 }
