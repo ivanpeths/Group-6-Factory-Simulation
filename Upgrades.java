@@ -29,6 +29,10 @@ public abstract class Upgrades extends Actor
             activated = false;
             getImage().setTransparency(255);
         }
+
+        if (Greenfoot.mouseClicked(this) && !activated) { // Remove after pointer works
+            activate();
+        }
     }
     
     public void activate () {
