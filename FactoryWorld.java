@@ -66,6 +66,21 @@ public class FactoryWorld extends World
     // Speed variables
     private double leftSpeed;
     private double rightSpeed;
+    
+    // Upgrade variables
+    private int leftUpgradeX = 50;
+    private Break leftBreak;
+    private Buy leftBuy;
+    private Quality leftQuality;
+    private Repair leftRepair;
+    private Spawn leftSpawnUpgrade;
+    
+    private int rightUpgradeX = 50;
+    private Break rightBreak;
+    private Buy rightBuy;
+    private Quality rightQuality;
+    private Repair rightRepair;
+    private Spawn rightSpawnUpgrade;
 
     private SoundManager soundMan;
     public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed, SoundManager soundMan)
@@ -127,13 +142,29 @@ public class FactoryWorld extends World
     }
     
     public void drawUpgrades () {
-        for (int i = 50; i < 1200; i += 1100) {
-            addObject(new Break(i), i, 750);
-            addObject(new Buy(i), i, 663);
-            addObject(new Quality(i), i, 576);
-            addObject(new Repair(i), i, 489);
-            addObject(new Spawn(i), i, 402);
-        }
+        leftBreak = new Break(leftUpgradeX);
+        leftBuy = new Buy(leftUpgradeX);
+        leftQuality = new Quality(leftUpgradeX);
+        leftRepair = new Repair(leftUpgradeX);
+        leftSpawnUpgrade = new Spawn(leftUpgradeX);
+        
+        addObject(leftBreak, leftUpgradeX, 750);
+        addObject(leftBuy, leftUpgradeX, 663);
+        addObject(leftQuality, leftUpgradeX, 576);
+        addObject(leftRepair, leftUpgradeX, 489);
+        addObject(leftSpawnUpgrade, leftUpgradeX, 402);
+        
+        rightBreak = new Break(rightUpgradeX);
+        rightBuy = new Buy(rightUpgradeX);
+        rightQuality = new Quality(rightUpgradeX);
+        rightRepair = new Repair(rightUpgradeX);
+        rightSpawnUpgrade = new Spawn(rightUpgradeX);
+        
+        addObject(rightBreak, rightUpgradeX, 750);
+        addObject(rightBuy, rightUpgradeX, 663);
+        addObject(rightQuality, rightUpgradeX, 576);
+        addObject(rightRepair, rightUpgradeX, 489);
+        addObject(rightSpawnUpgrade, rightUpgradeX, 402);
     }
     
     public void updateSpawnRate () {
@@ -224,7 +255,17 @@ public class FactoryWorld extends World
     }
     
     public void canUpgrade(){
+        if (leftScore > 250){
+            if (leftMach.getBroken()){
+                leftRepair.activate();
+            }
+        }
         
+        if (rightScore > 250){
+            if (rightMach.getBroken()){
+                rightRepair.activate();
+            }
+        }
     }
     
     public Machines getLeftMachine(){
@@ -253,7 +294,7 @@ public class FactoryWorld extends World
         if (lastLeft >= spawnDelay) {
             if (Greenfoot.getRandomNumber(productSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(3); // 0 or 1
+                int rand = Greenfoot.getRandomNumber(3);
                 
                 if (rand == 0) {
                     addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
@@ -270,7 +311,7 @@ public class FactoryWorld extends World
         if (lastRight >= spawnDelay) {
             if (Greenfoot.getRandomNumber(productSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(2);
+                int rand = Greenfoot.getRandomNumber(3);
                 
                 if (rand == 0) {
                     addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
