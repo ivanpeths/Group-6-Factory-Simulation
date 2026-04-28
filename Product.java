@@ -9,7 +9,7 @@ public abstract class Product extends SuperSmoothMover
     protected GreenfootImage image;
     
     protected boolean inMachine;
-
+    protected boolean upgraded;
     public Product(int owner, double speed)
     {
         this.owner = owner;
@@ -17,13 +17,14 @@ public abstract class Product extends SuperSmoothMover
         this.speed = speed;
         updateImage();
         inMachine = false;
+        upgraded = false;
     }
 
     public void act()
     {
         moveDown();
         checkMachine();
-        checkLeavingMachine();
+        checkHitbox();
         checkEnd();
         if (getWorld() == null) {
             return;
@@ -58,19 +59,21 @@ public abstract class Product extends SuperSmoothMover
         }
     }
     
-    private void checkLeavingMachine() {
-        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+    private void checkHitbox() {
+        Hitbox h = (Hitbox)getOneIntersectingObject(Hitbox.class);
         
-        if (m == null && inMachine) {
+        if (h != null && !upgraded) {
             type++;
             if (Greenfoot.getRandomNumber(10) == 0) {
                 type = 0;
             }
-            inMachine = false;
+            upgraded = true;
             updateImage();
+        } else if (h == null) {
+            upgraded = false; // reset when no longer touching a Hitbox
         }
     }
-
+    
     private void checkEnd()
     {
         World w = getWorld();
@@ -87,7 +90,7 @@ public abstract class Product extends SuperSmoothMover
             getWorld().removeObject(this);
         }
     }
-    
+
     public abstract void sell ();
 
     public int getOwner()
