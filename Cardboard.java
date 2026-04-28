@@ -9,10 +9,10 @@ public class Cardboard extends Product
     @Override
     public void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("broken_cardboard.png");
-        else if (type == 1) image = new GreenfootImage("material_cardboard.png");
-        else if (type == 2) image = new GreenfootImage("finish_cardboard.png");
-        else image = new GreenfootImage("expensive_cardboard.png");
+        if (type == 0) image = new GreenfootImage("brokencardboard.png");
+        else if (type == 1) image = new GreenfootImage("materialcardboard.png");
+        else if (type == 2) image = new GreenfootImage("cheapcardboard.png");
+        else image = new GreenfootImage("expensivecardboard.png");
 
         image.scale(50, 50);
         setImage(image);

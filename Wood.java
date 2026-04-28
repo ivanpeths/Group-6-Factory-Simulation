@@ -9,10 +9,10 @@ public class Wood extends Product
     @Override
     public void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("placeholder.png");
-        else if (type == 1) image = new GreenfootImage("placeholder.png");
-        else if (type == 2) image = new GreenfootImage("placeholder.png");
-        else image = new GreenfootImage("placeholder.png");
+        if (type == 0) image = new GreenfootImage("brokenwood.png");
+        else if (type == 1) image = new GreenfootImage("materialwood.png");
+        else if (type == 2) image = new GreenfootImage("cheapwood.png");
+        else image = new GreenfootImage("expensivewood.png");
 
         image.scale(50, 50);
         setImage(image);

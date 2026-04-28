@@ -9,10 +9,10 @@ public class Metal extends Product
     @Override
     public void updateImage() 
     {
-        if (type == 0) image = new GreenfootImage("placeholder.png");
-        else if (type == 1) image = new GreenfootImage("placeholder.png");
-        else if (type == 2) image = new GreenfootImage("placeholder.png");
-        else image = new GreenfootImage("placeholder.png");
+        if (type == 0) image = new GreenfootImage("brokeniron.png");
+        else if (type == 1) image = new GreenfootImage("materialiron.png");
+        else if (type == 2) image = new GreenfootImage("cheapiron.png");
+        else image = new GreenfootImage("expensiveiron.png");
 
         image.scale(50, 50);
         setImage(image);
