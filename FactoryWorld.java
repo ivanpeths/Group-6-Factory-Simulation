@@ -319,7 +319,7 @@ public class FactoryWorld extends World
         if (lastLeft >= spawnDelay) {
             if (Greenfoot.getRandomNumber(leftProductSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(leftProductQuality); // 0 or 1
+                int rand = Greenfoot.getRandomNumber(leftProductQuality);
                 
                 if (rand == 0) {
                     addObject(new Metal(1, leftSpeed), leftPos, 0);
