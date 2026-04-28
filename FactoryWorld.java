@@ -319,21 +319,15 @@ public class FactoryWorld extends World
                 if (rand == 0){
                     leftBreak.activate();
                     leftBrokeRight = 900;
-                    leftUpgradeCooldown = upgradeCooldown;
-                    return;
                 } else if (rand == 1){
                     leftBuy.activate();
-                    leftUpgradeCooldown = upgradeCooldown;
-                    return;
                 } else if (rand == 2){
                     leftQuality.activate();
-                    leftUpgradeCooldown = upgradeCooldown;
-                    return;
                 } else {
                     leftSpawnUpgrade.activate();
-                    leftUpgradeCooldown = upgradeCooldown;
-                    return;
                 }
+                leftUpgradeCooldown = upgradeCooldown;
+                return;
             }
         }
     }
@@ -351,25 +345,24 @@ public class FactoryWorld extends World
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
+                if (rightBrokeLeft >= 0){
+                    leftBreak.activate();
+                    leftUpgradeCooldown = upgradeCooldown;
+                    return;
+                }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
                     rightBreak.activate();
                     rightBrokeLeft = 900;
-                    rightUpgradeCooldown = upgradeCooldown;
-                    return;
                 } else if (rand == 1){
                     rightBuy.activate();
-                    rightUpgradeCooldown = upgradeCooldown;
-                    return;
                 } else if (rand == 2){
                     rightQuality.activate();
-                    rightUpgradeCooldown = upgradeCooldown;
-                    return;
                 } else {
                     rightSpawnUpgrade.activate();
-                    rightUpgradeCooldown = upgradeCooldown;
-                    return;
                 }
+                rightUpgradeCooldown = upgradeCooldown;
+                return;
             }
         }
     }
@@ -434,9 +427,12 @@ public class FactoryWorld extends World
                 lastRight = 0;
             }
         }
-
+        
+        // Act from last product spawn
         lastLeft++;
         lastRight++;
+        
+        // Revenge countdown if one breaks the other machine
         leftBrokeRight--;
         rightBrokeLeft--;
         
@@ -444,6 +440,7 @@ public class FactoryWorld extends World
         if (timer % 60 == 0){
             updateTimer();
         }
+        
         canUpgradeLeft();
         canUpgradeRight();
         checkWin();
