@@ -85,6 +85,9 @@ public class FactoryWorld extends World
     private Quality rightQuality;
     private Repair rightRepair;
     private Spawn rightSpawnUpgrade;
+    
+    // Pointer variables
+    private Pointer pointer;
 
     private SoundManager soundMan;
     public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed, SoundManager soundMan)
@@ -102,6 +105,7 @@ public class FactoryWorld extends World
         drawCountdown();
         
         this.soundMan = soundMan;
+        this.pointer = new Pointer(soundMan);
     }
         
     public boolean getStarted(){
@@ -270,13 +274,16 @@ public class FactoryWorld extends World
         }
     }
     
-    public void canUpgrade(){
+    public void canUpgradeLeft(){
         if (leftScore > 250){
             if (leftMach.getBroken()){
                 leftRepair.activate();
+                return;
             }
         }
-        
+    }
+    
+    public void canUpgradeRight(){
         if (rightScore > 250){
             if (rightMach.getBroken()){
                 rightRepair.activate();
@@ -290,6 +297,10 @@ public class FactoryWorld extends World
     
     public Machines getRightMachine(){
         return rightMach;
+    }
+    
+    public SoundManager getSoundMan(){
+        return soundMan;
     }
     
     public void act(){
@@ -348,7 +359,8 @@ public class FactoryWorld extends World
         if (timer % 60 == 0){
             updateTimer();
         }
-        canUpgrade();
+        canUpgradeLeft();
+        canUpgradeRight();
         checkWin();
     }
 }

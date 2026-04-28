@@ -17,25 +17,31 @@ public class SoundManager
     private GreenfootSound bgm;
     private GreenfootSound ambience;
     private GreenfootSound menu;
+    
     private GreenfootSound[] leftCoinSounds;
     private GreenfootSound[] rightCoinSounds;
+    private GreenfootSound[] errorSounds;
+    private GreenfootSound[] clickSounds;
     
-    // Coin variables
+    // Indexes
     private int leftCoinIndex = 0;
     private int rightCoinIndex = 0;
-    private int coinLength = 5;
+    private int errorIndex = 0;
+    private int clickIndex = 0;
     
     // Volumes
     private int coinVolume = 100;
     private int bgmVolume = 50;
     private int ambienceVolume = 20;
     private int menuVolume = 50;
-    
-    // Error variables
-    private GreenfootSound[] errorSounds;
-    private int errorIndex = 0;
+    private int clickVolume = 50;
     private int errorVolume = 50;
+    
+    // Lengths
+    private int coinLength = 5;
     private int errorLength = 5;
+    private int clickLength = 3;
+    
     
     public SoundManager(){
         setFiles();
@@ -53,7 +59,7 @@ public class SoundManager
         // Placeholder for menu.mp3
         menu = new GreenfootSound("ambience.mp3");
         menu.setVolume(menuVolume);
-        
+
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
             leftCoinSounds[i] = new GreenfootSound("left_coin.mp3");
@@ -70,6 +76,13 @@ public class SoundManager
         for (int i = 0; i < errorLength; i++){
             errorSounds[i] = new GreenfootSound("error.mp3");
             errorSounds[i].setVolume(errorVolume);
+        }
+        
+        // Placeholder for click.mp3
+        clickSounds = new GreenfootSound[clickLength];
+        for (int i = 0; i < clickLength; i++){
+            clickSounds[i] = new GreenfootSound("error.mp3");
+            clickSounds[i].setVolume(clickVolume);
         }
     }
     
@@ -122,5 +135,10 @@ public class SoundManager
     
     public boolean menuPlaying(){
         return menu.isPlaying();
+    }
+    
+    public void playClick(){
+        clickSounds[clickIndex].play();
+        clickIndex = (clickIndex + 1) % clickLength;
     }
 }

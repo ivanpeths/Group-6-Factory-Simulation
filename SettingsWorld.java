@@ -38,28 +38,28 @@ public class SettingsWorld extends World
     private Label leftQualityLabel;
     private Actor leftQualityLeft;
     private Label leftQualityAmtLabel;
-    private int leftQualityAmt = 400;
+    private int leftQualityAmt = 6;
     private Actor leftQualityRight;
     
     // Right quality
     private Label rightQualityLabel;
     private Actor rightQualityLeft;
     private Label rightQualityAmtLabel;
-    private int rightQualityAmt = 800;
+    private int rightQualityAmt = 6;
     private Actor rightQualityRight;
     
     // Left spawn rate
     private Label leftRateLabel;
     private Actor leftRateLeft;
     private Label leftRateAmtLabel;
-    private double leftRateAmt = 1.5;
+    private double leftRateAmt = 50;
     private Actor leftRateRight;
     
     // Right spawn rate
     private Label rightRateLabel;
     private Actor rightRateLeft;
     private Label rightRateAmtLabel;
-    private double rightRateAmt = 1.5;
+    private double rightRateAmt = 50;
     private Actor rightRateRight;
     
     // Label constants
@@ -74,8 +74,8 @@ public class SettingsWorld extends World
     private int scoreShiftIncrements = 20;
     private int qualityIncrements = 1;
     private int qualityShiftIncrements = 2;
-    private double rateIncrements = 1.0;
-    private double rateShiftIncrements = 2.0;
+    private double rateIncrements = 5;
+    private double rateShiftIncrements = 10;
     
     // Arrow images
     private GreenfootImage leftImg;
@@ -169,7 +169,7 @@ public class SettingsWorld extends World
     }
     
     public void setupLeftQuality(){
-        leftQualityLabel = new Label("Left Starting Qualityition", labelSize);
+        leftQualityLabel = new Label("Left Starting Quality", labelSize);
         leftQualityAmtLabel = new Label(leftQualityAmt, labelSize);
         leftQualityLeft = new BlankActor();
         leftQualityRight = new BlankActor();
@@ -194,7 +194,7 @@ public class SettingsWorld extends World
     }
     
     public void setupRightQuality(){
-        rightQualityLabel = new Label("Right Starting Qualityition", labelSize);
+        rightQualityLabel = new Label("Right Starting Quality", labelSize);
         rightQualityAmtLabel = new Label(rightQualityAmt, labelSize);
         rightQualityLeft = new BlankActor();
         rightQualityRight = new BlankActor();
