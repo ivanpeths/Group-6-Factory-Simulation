@@ -92,7 +92,8 @@ public class FactoryWorld extends World
     private int upgradeCooldown = 300;
     
     // Pointer variables
-    private Pointer pointer;
+    private Pointer leftPointer;
+    private Pointer rightPointer;
 
     private SoundManager soundMan;
     public FactoryWorld(int leftStarting, int rightStarting, int leftQual, int rightQual, int leftRate, int rightRate, SoundManager soundMan)
@@ -110,7 +111,8 @@ public class FactoryWorld extends World
         drawCountdown();
         
         this.soundMan = soundMan;
-        this.pointer = new Pointer(soundMan);
+        
+        setupPointers();
         
         soundMan.playStarting();
     }
@@ -130,6 +132,11 @@ public class FactoryWorld extends World
         soundMan.pauseStarting();
         soundMan.pauseBgm();
         soundMan.pauseAmbience();
+    }
+    
+    public void setupPointers(){
+        this.leftPointer = new Pointer(soundMan);
+        this.rightPointer = new Pointer(soundMan);
     }
     
     public void setSpawnRate(int leftRate, int rightRate){
