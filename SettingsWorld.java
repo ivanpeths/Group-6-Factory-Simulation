@@ -141,6 +141,8 @@ public class SettingsWorld extends World
         leftScoreAmtLabel.setValue(leftScoreAmt);
         if (oldAmt == leftScoreAmt){
             soundMan.playError();
+        } else {
+            soundMan.playMenuClick();
         }
     }
     
@@ -165,6 +167,8 @@ public class SettingsWorld extends World
         rightScoreAmtLabel.setValue(rightScoreAmt);
         if (oldAmt == rightScoreAmt){
             soundMan.playError();
+        } else {
+            soundMan.playMenuClick();
         }
     }
     
@@ -190,6 +194,8 @@ public class SettingsWorld extends World
         leftQualityAmtLabel.setValue(leftQualityAmt);
         if (oldAmt == leftQualityAmt){
             soundMan.playError();
+        } else {
+            soundMan.playMenuClick();
         }
     }
     
@@ -215,6 +221,8 @@ public class SettingsWorld extends World
         rightQualityAmtLabel.setValue(rightQualityAmt);
         if (oldAmt == rightQualityAmt){
             soundMan.playError();
+        } else {
+            soundMan.playMenuClick();
         }
     }
     
@@ -240,6 +248,8 @@ public class SettingsWorld extends World
         leftRateAmtLabel.setValue(leftRateAmt);
         if (oldAmt == leftRateAmt){
             soundMan.playError();
+        } else {
+            soundMan.playMenuClick();
         }
     }
     
@@ -265,6 +275,8 @@ public class SettingsWorld extends World
         rightRateAmtLabel.setValue(rightRateAmt);
         if (oldAmt == rightRateAmt){
             soundMan.playError();
+        } else {
+            soundMan.playMenuClick();
         }
     }
     

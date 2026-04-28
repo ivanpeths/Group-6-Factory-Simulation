@@ -80,9 +80,17 @@ public abstract class Product extends SuperSmoothMover
 
     private void checkEnd()
     {
-        if (getY() > getWorld().getHeight() - 10)
+        World w = getWorld();
+        FactoryWorld fw = (FactoryWorld) w;
+        if (getY() > w.getHeight() - 10)
         {
+            SoundManager soundMan = fw.getSoundMan();
             sell();
+            if (owner == 1) {
+                soundMan.playLeftCoin();
+            } else {
+                soundMan.playRightCoin();
+            }
             getWorld().removeObject(this);
         }
     }
