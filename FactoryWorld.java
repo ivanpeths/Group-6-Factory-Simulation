@@ -22,7 +22,11 @@ public class FactoryWorld extends World
     private int leftSpawn;
     private int rightSpawn;
     
-    private int productSpawn = 50;
+    private int rightProductSpawn = 50;
+    private int leftProductSpawn = 50;
+    
+    private int rightProductQuality = 6;
+    private int leftProductQuality = 6;
     
     // Score variables
     private Label leftScoreLabel;
@@ -136,8 +140,12 @@ public class FactoryWorld extends World
         }
     }
     
-    public void updateSpawnRate () {
-        productSpawn -= 5;
+    public void updateRightSpawn () {
+        rightProductSpawn -= 5;
+    }
+    
+    public void updateLeftSpawn () {
+        leftProductSpawn -= 5;
     }
     
     public void setBackground(){
@@ -239,16 +247,16 @@ public class FactoryWorld extends World
         }
 
         if (lastLeft >= spawnDelay) {
-            if (Greenfoot.getRandomNumber(productSpawn) == 0) {
+            if (Greenfoot.getRandomNumber(leftProductSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(3); // 0 or 1
+                int rand = Greenfoot.getRandomNumber(leftProductQuality); // 0 or 1
                 
                 if (rand == 0) {
-                    addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
-                } else if (rand == 1) {
                     addObject(new Metal(1, leftSpeed), leftSpawn, 0);
-                } else{
+                } else if (rand == 1 || rand == 2) {
                     addObject(new Wood(1, leftSpeed), leftSpawn, 0);
+                } else {
+                    addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
                 }
                 
                 lastLeft = 0;
@@ -256,16 +264,16 @@ public class FactoryWorld extends World
         }
 
         if (lastRight >= spawnDelay) {
-            if (Greenfoot.getRandomNumber(productSpawn) == 0) {
+            if (Greenfoot.getRandomNumber(rightProductSpawn) == 0) {
                 
-                int rand = Greenfoot.getRandomNumber(2);
+                int rand = Greenfoot.getRandomNumber(rightProductQuality);
                 
                 if (rand == 0) {
-                    addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
-                } else if (rand == 1) {
                     addObject(new Metal(2, rightSpeed), rightSpawn, 0);
-                } else{
+                } else if (rand == 1 || rand == 2) {
                     addObject(new Wood(2, rightSpeed), rightSpawn, 0);
+                } else {
+                    addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
                 }
                 
                 lastRight = 0;

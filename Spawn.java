@@ -10,12 +10,17 @@ public class Spawn extends Upgrades
 {
     public Spawn (int side) {
         super(side);
+        this.side = side;
         image = new GreenfootImage("spawning.png");
         setImage(image);
     }
     
     public void activate () {
         super.activate();
-        ((FactoryWorld)getWorld()).updateSpawnRate();
+        if (side == 1) {
+            ((FactoryWorld)getWorld()).updateLeftSpawn();
+        } else {
+            ((FactoryWorld)getWorld()).updateRightSpawn();
+        }
     }
 }
