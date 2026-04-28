@@ -10,11 +10,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Credits
  * Left coin: https://pixabay.com/sound-effects/film-special-effects-drop-coin-384921/ but tuned down
  * Right coin: https://pixabay.com/sound-effects/film-special-effects-drop-coin-384921/
- * Error: 
+ * Error: https://pixabay.com/sound-effects/film-special-effects-ui-error-pop-515668/
  * Click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/
- * Starting beep: 
- * BGM: 
- * Ambience: 
+ * Starting beep: https://pixabay.com/sound-effects/film-special-effects-race-start-beeps-125125/ but tuned down
+ * BGM: https://pixabay.com/music/electronic-fast-dynamic-rhythmic-music-499175/
+ * Ambience: https://pixabay.com/sound-effects/technology-steam-engine-loop-43171/
  * Menu: https://pixabay.com/music/main-title-dramatic-436882/
  * 
  * @author Kolby Ng
