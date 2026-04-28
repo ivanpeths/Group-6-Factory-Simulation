@@ -228,14 +228,30 @@ public class FactoryWorld extends World
 
         if (lastLeft >= spawnDelay) {
             if (Greenfoot.getRandomNumber(productSpawn) == 0) {
-                addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
+                
+                int rand = Greenfoot.getRandomNumber(2); // 0 or 1
+                
+                if (rand == 0) {
+                    addObject(new Cardboard(1, leftSpeed), leftSpawn, 0);
+                } else {
+                    addObject(new Metal(1, leftSpeed), leftSpawn, 0);
+                }
+                
                 lastLeft = 0;
             }
         }
 
         if (lastRight >= spawnDelay) {
             if (Greenfoot.getRandomNumber(productSpawn) == 0) {
-                addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
+                
+                int rand = Greenfoot.getRandomNumber(2);
+                
+                if (rand == 0) {
+                    addObject(new Cardboard(2, rightSpeed), rightSpawn, 0);
+                } else {
+                    addObject(new Metal(2, rightSpeed), rightSpawn, 0);
+                }
+                
                 lastRight = 0;
             }
         }
