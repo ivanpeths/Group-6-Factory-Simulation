@@ -1,3 +1,4 @@
+// Metal by Isaac
 import greenfoot.*;
 
 public class Metal extends Product
