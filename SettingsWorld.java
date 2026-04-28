@@ -83,9 +83,9 @@ public class SettingsWorld extends World
     private int imgSize = 75;
     
     private GreenfootImage background;
-    private SoundManager soundMan = new SoundManager();
+    private SoundManager soundMan;
     
-    public SettingsWorld()
+    public SettingsWorld(SoundManager soundMan)
     {    
         super(1200, 800, 1); 
         setupButton();
@@ -98,6 +98,18 @@ public class SettingsWorld extends World
         setupRightSpeed();
         setBackground();
         
+        this.soundMan = soundMan;
+        
+    }
+    
+    public void stopped(){
+        soundMan.pauseMenu();
+    }
+    
+    public void started(){
+        if (!soundMan.menuPlaying()){
+            soundMan.playMenu();
+        }
     }
     
     public void setupImages(){
@@ -272,7 +284,7 @@ public class SettingsWorld extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
-            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt, leftSpeedAmt, rightSpeedAmt));
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt, leftSpeedAmt, rightSpeedAmt, soundMan));
         }
         
         // Score increments while holding Shift

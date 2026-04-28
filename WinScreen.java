@@ -21,13 +21,16 @@ public class WinScreen extends World
     private Label buttonTitle;
     
     private GreenfootImage background;
+    private SoundManager soundMan;
     
-    public WinScreen(String winner, int loseScore)
+    public WinScreen(String winner, int loseScore, SoundManager soundMan)
     {    
         super(1200, 800, 1); 
         setupLabel(winner, loseScore);
         setupButton();
         setBackground();
+        
+        this.soundMan = soundMan;
         
     }
     
@@ -60,7 +63,7 @@ public class WinScreen extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(restartLabel)){
-            Greenfoot.setWorld(new SettingsWorld());
+            Greenfoot.setWorld(new SettingsWorld(soundMan));
         }
     }
 }

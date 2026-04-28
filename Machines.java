@@ -29,6 +29,8 @@ public abstract class Machines extends Actor
     
     public abstract void breakMachine ();
     
+    public abstract void unbreakMachine();
+    
     public boolean getBroken() {
         return broken;
     }

@@ -18,4 +18,10 @@ public class Handler extends Machines
         setImage(image);
         broken = true;
     }
+    
+    public void unbreakMachine(){
+        image = new GreenfootImage("machine3.png");
+        setImage(image);
+        broken = false;
+    }
 }

@@ -92,7 +92,7 @@ public class SoundManager
     }
     
     public void playBgm(){
-        bgm.play();
+        bgm.playLoop();
     }
     
     public void pauseBgm(){
@@ -118,5 +118,9 @@ public class SoundManager
     
     public void pauseMenu(){
         menu.pause();
+    }
+    
+    public boolean menuPlaying(){
+        return menu.isPlaying();
     }
 }
