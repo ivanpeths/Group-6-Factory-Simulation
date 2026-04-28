@@ -92,7 +92,7 @@ public class SoundManager
     }
     
     public void playBgm(){
-        bgm.play();
+        bgm.playLoop();
     }
     
     public void pauseBgm(){

@@ -223,6 +223,18 @@ public class FactoryWorld extends World
         }
     }
     
+    public void canUpgrade(){
+        
+    }
+    
+    public Machines getLeftMachine(){
+        return leftMach;
+    }
+    
+    public Machines getRightMachine(){
+        return rightMach;
+    }
+    
     public void act(){
         if (!gameStarted){
             startingTimer--;
@@ -279,7 +291,7 @@ public class FactoryWorld extends World
         if (timer % 60 == 0){
             updateTimer();
         }
-        
+        canUpgrade();
         checkWin();
     }
 }

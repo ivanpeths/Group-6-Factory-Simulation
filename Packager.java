@@ -18,4 +18,10 @@ public class Packager extends Machines
         setImage(image);
         broken = true;
     }
+    
+    public void unbreakMachine(){
+        image = new GreenfootImage("machine2.png");
+        setImage(image);
+        broken = false;
+    }
 }
