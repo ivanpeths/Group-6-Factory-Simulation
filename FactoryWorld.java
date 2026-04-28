@@ -115,6 +115,7 @@ public class FactoryWorld extends World
         setupPointers();
         
         soundMan.playStarting();
+        //soundMan.stopMenu();
     }
         
     public boolean getStarted(){
@@ -123,7 +124,7 @@ public class FactoryWorld extends World
     
     public void started(){
         if (gameStarted) {
-            soundMan.playBgm();
+            //soundMan.playBgm();
             soundMan.playAmbience();
         }
     }
@@ -383,7 +384,7 @@ public class FactoryWorld extends World
                 gameStarted = true;
                 removeCountdown();
                 drawTimer();
-                soundMan.playBgm();
+                //soundMan.playBgm();
                 soundMan.playAmbience();
             }
             updateCountdown();
