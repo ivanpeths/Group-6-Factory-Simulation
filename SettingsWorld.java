@@ -3,13 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Second screen of the game, can tweak the following
  * - Starting scores
-<<<<<<< Updated upstream
- * - Starting positions
- * - Product speed
-=======
  * - Starting quality
  * - Product spawn rate
->>>>>>> Stashed changes
  * 
  * Click on arrows to adjust value
  * Hold Shift while clicking on arrows to adjust with a larger increment
