@@ -119,4 +119,8 @@ public class SoundManager
     public void pauseMenu(){
         menu.pause();
     }
+    
+    public boolean menuPlaying(){
+        return menu.isPlaying();
+    }
 }

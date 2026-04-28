@@ -66,11 +66,9 @@ public class FactoryWorld extends World
     // Speed variables
     private double leftSpeed;
     private double rightSpeed;
-    
-    // Sound Manager
-    private SoundManager soundMan = new SoundManager();
 
-    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed)
+    private SoundManager soundMan;
+    public FactoryWorld(int leftStarting, int rightStarting, int leftPos, int rightPos, double leftSpeed, double rightSpeed, SoundManager soundMan)
     {    
         super(1200, 800, 1); 
         
@@ -83,6 +81,8 @@ public class FactoryWorld extends World
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
         drawCountdown();
+        
+        this.soundMan = soundMan;
     }
         
     public boolean getStarted(){
@@ -216,10 +216,10 @@ public class FactoryWorld extends World
     
     public void checkWin(){
         if (leftScore >= winCond){
-            Greenfoot.setWorld(new WinScreen("Left", rightScore));
+            Greenfoot.setWorld(new WinScreen("Left", rightScore, soundMan));
         }
         else if (rightScore >= winCond){
-            Greenfoot.setWorld(new WinScreen("Right", leftScore));
+            Greenfoot.setWorld(new WinScreen("Right", leftScore, soundMan));
         }
     }
     

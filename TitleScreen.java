@@ -17,13 +17,22 @@ public class TitleScreen extends World
     private GreenfootImage background;
     private int fontSize = 75;
     
+    private SoundManager soundMan = new SoundManager();
+    
     public TitleScreen()
     {    
         super(1200, 800, 1); 
         setupLabel();
         setupButton();
         setBackground();
-        
+    }
+    
+    public void stopped(){
+        soundMan.pauseMenu();
+    }
+    
+    public void started(){
+        soundMan.playMenu();
     }
     
     public void setupLabel(){
@@ -49,7 +58,7 @@ public class TitleScreen extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(startLabel)){
-            Greenfoot.setWorld(new SettingsWorld());
+            Greenfoot.setWorld(new SettingsWorld(soundMan));
         }
     }
 }
