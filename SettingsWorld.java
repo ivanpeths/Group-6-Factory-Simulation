@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Second screen of the game, can tweak the following
  * - Starting scores
- * - Starting quality
+ * - Starting positions
  * - Product spawn rate
  * 
  * Click on arrows to adjust value
@@ -34,55 +34,48 @@ public class SettingsWorld extends World
     private int rightScoreAmt = 0;
     private Actor rightScoreRight;
     
-    // Left position
-    private Label leftPosLabel;
-    private Actor leftPosLeft;
-    private Label leftPosAmtLabel;
-    private int leftPosAmt = 400;
-    private Actor leftPosRight;
+    // Left quality
+    private Label leftQualityLabel;
+    private Actor leftQualityLeft;
+    private Label leftQualityAmtLabel;
+    private int leftQualityAmt = 400;
+    private Actor leftQualityRight;
     
-    // Right position
-    private Label rightPosLabel;
-    private Actor rightPosLeft;
-    private Label rightPosAmtLabel;
-    private int rightPosAmt = 800;
-    private Actor rightPosRight;
+    // Right quality
+    private Label rightQualityLabel;
+    private Actor rightQualityLeft;
+    private Label rightQualityAmtLabel;
+    private int rightQualityAmt = 800;
+    private Actor rightQualityRight;
     
-    // Left speed
-    private Label leftSpeedLabel;
-    private Actor leftSpeedLeft;
-    private Label leftSpeedAmtLabel;
-    private double leftSpeedAmt = 1.5;
-    private Actor leftSpeedRight;
+    // Left spawn rate
+    private Label leftRateLabel;
+    private Actor leftRateLeft;
+    private Label leftRateAmtLabel;
+    private double leftRateAmt = 1.5;
+    private Actor leftRateRight;
     
-    // Right speed
-    private Label rightSpeedLabel;
-    private Actor rightSpeedLeft;
-    private Label rightSpeedAmtLabel;
-    private double rightSpeedAmt = 1.5;
-    private Actor rightSpeedRight;
+    // Right spawn rate
+    private Label rightRateLabel;
+    private Actor rightRateLeft;
+    private Label rightRateAmtLabel;
+    private double rightRateAmt = 1.5;
+    private Actor rightRateRight;
     
     // Label constants
     private int labelSize = 50;
     private int leftScoreY = 100;
     private int rightScoreY = 190;
-<<<<<<< Updated upstream
-    private int leftPosY = 280;
-    private int rightPosY = 370;
-    private int leftSpeedY = 460;
-    private int rightSpeedY = 550;
-=======
     private int leftQualityY = 280;
     private int rightQualityY = 370;
     private int leftRateY = 460;
     private int rightRateY = 550;
->>>>>>> Stashed changes
     private int scoreIncrements = 10;
     private int scoreShiftIncrements = 20;
-    private int posIncrements = 10;
-    private int posShiftIncrements = 20;
-    private double speedIncrements = 0.5;
-    private double speedShiftIncrements = 1.0;
+    private int qualityIncrements = 1;
+    private int qualityShiftIncrements = 2;
+    private double rateIncrements = 1.0;
+    private double rateShiftIncrements = 2.0;
     
     // Arrow images
     private GreenfootImage leftImg;
@@ -99,10 +92,10 @@ public class SettingsWorld extends World
         setupImages();
         setupLeftScore();
         setupRightScore();
-        setupLeftPos();
-        setupRightPos();
-        setupLeftSpeed();
-        setupRightSpeed();
+        setupLeftQuality();
+        setupRightQuality();
+        setupLeftRate();
+        setupRightRate();
         setBackground();
         
         this.soundMan = soundMan;
@@ -175,122 +168,102 @@ public class SettingsWorld extends World
         }
     }
     
-<<<<<<< Updated upstream
-    public void setupLeftPos(){
-        leftPosLabel = new Label("Left Starting Position", labelSize);
-        leftPosAmtLabel = new Label(leftPosAmt, labelSize);
-        leftPosLeft = new BlankActor();
-        leftPosRight = new BlankActor();
-        leftPosLeft.setImage(leftImg);
-        leftPosRight.setImage(rightImg);
-=======
     public void setupLeftQuality(){
-        leftQualityLabel = new Label("Left Starting Quality", labelSize);
+        leftQualityLabel = new Label("Left Starting Qualityition", labelSize);
         leftQualityAmtLabel = new Label(leftQualityAmt, labelSize);
         leftQualityLeft = new BlankActor();
         leftQualityRight = new BlankActor();
         leftQualityLeft.setImage(leftImg);
         leftQualityRight.setImage(rightImg);
->>>>>>> Stashed changes
         
-        addObject(leftPosLabel, getWidth() / 4, leftPosY);
-        addObject(leftPosLeft, getWidth() / 8 * 5, leftPosY);
-        addObject(leftPosAmtLabel, getWidth() / 8 * 6, leftPosY);
-        addObject(leftPosRight, getWidth() / 8 * 7, leftPosY);
+        addObject(leftQualityLabel, getWidth() / 4, leftQualityY);
+        addObject(leftQualityLeft, getWidth() / 8 * 5, leftQualityY);
+        addObject(leftQualityAmtLabel, getWidth() / 8 * 6, leftQualityY);
+        addObject(leftQualityRight, getWidth() / 8 * 7, leftQualityY);
         
     }
     
     // Clamp min and max
-    public void changeLeftPos(int amt){
-        int oldAmt = leftPosAmt;
-        leftPosAmt = (Math.max(Math.min(530, leftPosAmt + amt), 170));
-        leftPosAmtLabel.setValue(leftPosAmt);
-        if (oldAmt == leftPosAmt){
+    public void changeLeftQuality(int amt){
+        int oldAmt = leftQualityAmt;
+        leftQualityAmt = (Math.max(Math.min(10, leftQualityAmt + amt), 1));
+        leftQualityAmtLabel.setValue(leftQualityAmt);
+        if (oldAmt == leftQualityAmt){
             soundMan.playError();
         }
     }
     
-<<<<<<< Updated upstream
-    public void setupRightPos(){
-        rightPosLabel = new Label("Right Starting Position", labelSize);
-        rightPosAmtLabel = new Label(rightPosAmt, labelSize);
-        rightPosLeft = new BlankActor();
-        rightPosRight = new BlankActor();
-        rightPosLeft.setImage(leftImg);
-        rightPosRight.setImage(rightImg);
-=======
     public void setupRightQuality(){
-        rightQualityLabel = new Label("Right Starting Quality", labelSize);
+        rightQualityLabel = new Label("Right Starting Qualityition", labelSize);
         rightQualityAmtLabel = new Label(rightQualityAmt, labelSize);
         rightQualityLeft = new BlankActor();
         rightQualityRight = new BlankActor();
         rightQualityLeft.setImage(leftImg);
         rightQualityRight.setImage(rightImg);
->>>>>>> Stashed changes
         
-        addObject(rightPosLabel, getWidth() / 4, rightPosY);
-        addObject(rightPosLeft, getWidth() / 8 * 5, rightPosY);
-        addObject(rightPosAmtLabel, getWidth() / 8 * 6, rightPosY);
-        addObject(rightPosRight, getWidth() / 8 * 7, rightPosY);
+        addObject(rightQualityLabel, getWidth() / 4, rightQualityY);
+        addObject(rightQualityLeft, getWidth() / 8 * 5, rightQualityY);
+        addObject(rightQualityAmtLabel, getWidth() / 8 * 6, rightQualityY);
+        addObject(rightQualityRight, getWidth() / 8 * 7, rightQualityY);
         
     }
     
     // Clamp min and max
-    public void changeRightPos(int amt){
-        int oldAmt = rightPosAmt;
-        rightPosAmt = (Math.max(Math.min(1040, rightPosAmt + amt), 680));
-        rightPosAmtLabel.setValue(rightPosAmt);
-        if (oldAmt == rightPosAmt){
+    public void changeRightQuality(int amt){
+        int oldAmt = rightQualityAmt;
+        rightQualityAmt = (Math.max(Math.min(10, rightQualityAmt + amt), 1));
+        rightQualityAmtLabel.setValue(rightQualityAmt);
+        if (oldAmt == rightQualityAmt){
             soundMan.playError();
         }
     }
     
-        public void setupLeftSpeed(){
-        leftSpeedLabel = new Label("Left Starting Speed", labelSize);
-        leftSpeedAmtLabel = new Label(Double.toString(leftSpeedAmt), labelSize);
-        leftSpeedLeft = new BlankActor();
-        leftSpeedRight = new BlankActor();
-        leftSpeedLeft.setImage(leftImg);
-        leftSpeedRight.setImage(rightImg);
+        public void setupLeftRate(){
+        leftRateLabel = new Label("Left Starting Rate", labelSize);
+        leftRateAmtLabel = new Label(Double.toString(leftRateAmt), labelSize);
+        leftRateLeft = new BlankActor();
+        leftRateRight = new BlankActor();
+        leftRateLeft.setImage(leftImg);
+        leftRateRight.setImage(rightImg);
         
-        addObject(leftSpeedLabel, getWidth() / 4, leftSpeedY);
-        addObject(leftSpeedLeft, getWidth() / 8 * 5, leftSpeedY);
-        addObject(leftSpeedAmtLabel, getWidth() / 8 * 6, leftSpeedY);
-        addObject(leftSpeedRight, getWidth() / 8 * 7, leftSpeedY);
+        addObject(leftRateLabel, getWidth() / 4, leftRateY);
+        addObject(leftRateLeft, getWidth() / 8 * 5, leftRateY);
+        addObject(leftRateAmtLabel, getWidth() / 8 * 6, leftRateY);
+        addObject(leftRateRight, getWidth() / 8 * 7, leftRateY);
         
     }
     
     // Clamp min and max
-    public void changeLeftSpeed(double amt){
-        double oldAmt = leftSpeedAmt;
-        leftSpeedAmt = (Math.max(Math.min(5, leftSpeedAmt + amt), 0.5));
-        leftSpeedAmtLabel.setValue(Double.toString(leftSpeedAmt));
-        if (oldAmt == leftSpeedAmt){
+    public void changeLeftRate(double amt){
+        double oldAmt = leftRateAmt;
+        leftRateAmt = (Math.max(Math.min(100, leftRateAmt + amt), 1));
+        leftRateAmtLabel.setValue(Double.toString(leftRateAmt));
+        if (oldAmt == leftRateAmt){
             soundMan.playError();
         }
     }
     
-    public void setupRightSpeed(){
-        rightSpeedLabel = new Label("Right Starting Speed", labelSize);
-        rightSpeedAmtLabel = new Label(Double.toString(rightSpeedAmt), labelSize);
-        rightSpeedLeft = new BlankActor();
-        rightSpeedRight = new BlankActor();
-        rightSpeedLeft.setImage(leftImg);
-        rightSpeedRight.setImage(rightImg);
+    public void setupRightRate(){
+        rightRateLabel = new Label("Right Starting Rate", labelSize);
+        rightRateAmtLabel = new Label(Double.toString(rightRateAmt), labelSize);
+        rightRateLeft = new BlankActor();
+        rightRateRight = new BlankActor();
+        rightRateLeft.setImage(leftImg);
+        rightRateRight.setImage(rightImg);
         
-        addObject(rightSpeedLabel, getWidth() / 4, rightSpeedY);
-        addObject(rightSpeedLeft, getWidth() / 8 * 5, rightSpeedY);
-        addObject(rightSpeedAmtLabel, getWidth() / 8 * 6, rightSpeedY);
-        addObject(rightSpeedRight, getWidth() / 8 * 7, rightSpeedY);
+        addObject(rightRateLabel, getWidth() / 4, rightRateY);
+        addObject(rightRateLeft, getWidth() / 8 * 5, rightRateY);
+        addObject(rightRateAmtLabel, getWidth() / 8 * 6, rightRateY);
+        addObject(rightRateRight, getWidth() / 8 * 7, rightRateY);
         
     }
     
     // Clamp min and max
-    public void changeRightSpeed(double amt){
-        double oldAmt = rightSpeedAmt;
-        rightSpeedAmt = (Math.max(Math.min(5, rightSpeedAmt + amt), 0.5));
-        rightSpeedAmtLabel.setValue(Double.toString(rightSpeedAmt));
-        if (oldAmt == rightSpeedAmt){
+    public void changeRightRate(double amt){
+        double oldAmt = rightRateAmt;
+        rightRateAmt = (Math.max(Math.min(100, rightRateAmt + amt), 1));
+        rightRateAmtLabel.setValue(Double.toString(rightRateAmt));
+        if (oldAmt == rightRateAmt){
             soundMan.playError();
         }
     }
@@ -311,7 +284,7 @@ public class SettingsWorld extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
-            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftPosAmt, rightPosAmt, leftSpeedAmt, rightSpeedAmt, soundMan));
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftQualityAmt, rightQualityAmt, leftRateAmt, rightRateAmt, soundMan));
         }
         
         // Score increments while holding Shift
@@ -356,88 +329,89 @@ public class SettingsWorld extends World
             return;
         }
         
-        // Position increments while holding Shift
-        if (Greenfoot.mouseClicked(leftPosLeft) && Greenfoot.isKeyDown("shift")){
-            changeLeftPos(posShiftIncrements * -1);
+        // Quality increments while holding Shift
+        if (Greenfoot.mouseClicked(leftQualityLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftQuality(qualityShiftIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(leftPosRight) && Greenfoot.isKeyDown("shift")){
-            changeLeftPos(posShiftIncrements);
+        if (Greenfoot.mouseClicked(leftQualityRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftQuality(qualityShiftIncrements);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightPosLeft) && Greenfoot.isKeyDown("shift")){
-            changeRightPos(posShiftIncrements * -1);
+        if (Greenfoot.mouseClicked(rightQualityLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightQuality(qualityShiftIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightPosRight) && Greenfoot.isKeyDown("shift")){
-            changeRightPos(posShiftIncrements);
+        if (Greenfoot.mouseClicked(rightQualityRight) && Greenfoot.isKeyDown("shift")){
+            changeRightQuality(qualityShiftIncrements);
             return;
         }
         
-        // Position increments
-        if (Greenfoot.mouseClicked(leftPosLeft)){
-            changeLeftPos(posIncrements * -1);
+        // Quality increments
+        if (Greenfoot.mouseClicked(leftQualityLeft)){
+            changeLeftQuality(qualityIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(leftPosRight)){
-            changeLeftPos(posIncrements);
+        if (Greenfoot.mouseClicked(leftQualityRight)){
+            changeLeftQuality(qualityIncrements);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightPosLeft)){
-            changeRightPos(posIncrements * -1);
+        if (Greenfoot.mouseClicked(rightQualityLeft)){
+            changeRightQuality(qualityIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightPosRight)){
-            changeRightPos(posIncrements);
+        if (Greenfoot.mouseClicked(rightQualityRight)){
+            changeRightQuality(qualityIncrements);
             return;
         }
         
-        // Speed increments while holding Shift
-        if (Greenfoot.mouseClicked(leftSpeedLeft) && Greenfoot.isKeyDown("shift")){
-            changeLeftSpeed(speedShiftIncrements * -1);
+        // Rate increments while holding Shift
+        if (Greenfoot.mouseClicked(leftRateLeft) && Greenfoot.isKeyDown("shift")){
+            changeLeftRate(rateShiftIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(leftSpeedRight) && Greenfoot.isKeyDown("shift")){
-            changeLeftSpeed(speedShiftIncrements);
+        if (Greenfoot.mouseClicked(leftRateRight) && Greenfoot.isKeyDown("shift")){
+            changeLeftRate(rateShiftIncrements);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightSpeedLeft) && Greenfoot.isKeyDown("shift")){
-            changeRightSpeed(speedShiftIncrements * -1);
+        if (Greenfoot.mouseClicked(rightRateLeft) && Greenfoot.isKeyDown("shift")){
+            changeRightRate(rateShiftIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightSpeedRight) && Greenfoot.isKeyDown("shift")){
-            changeRightSpeed(speedShiftIncrements);
+        if (Greenfoot.mouseClicked(rightRateRight) && Greenfoot.isKeyDown("shift")){
+            changeRightRate(rateShiftIncrements);
             return;
         }
         
-        // Speed increments
-        if (Greenfoot.mouseClicked(leftSpeedLeft)){
-            changeLeftSpeed(speedIncrements * -1);
+        // Rate increments
+        if (Greenfoot.mouseClicked(leftRateLeft)){
+            changeLeftRate(rateIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(leftSpeedRight)){
-            changeLeftSpeed(speedIncrements);
+        if (Greenfoot.mouseClicked(leftRateRight)){
+            changeLeftRate(rateIncrements);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightSpeedLeft)){
-            changeRightSpeed(speedIncrements * -1);
+        if (Greenfoot.mouseClicked(rightRateLeft)){
+            changeRightRate(rateIncrements * -1);
             return;
         }
         
-        if (Greenfoot.mouseClicked(rightSpeedRight)){
-            changeRightSpeed(speedIncrements);
+        if (Greenfoot.mouseClicked(rightRateRight)){
+            changeRightRate(rateIncrements);
             return;
         }
     }
 }
+
