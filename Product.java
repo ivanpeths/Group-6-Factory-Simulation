@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.List;
 
 public abstract class Product extends SuperSmoothMover  
 {
@@ -9,6 +10,7 @@ public abstract class Product extends SuperSmoothMover
     protected GreenfootImage image;
     
     protected boolean inMachine;
+    private boolean wasTouchingMachine;
 
     public Product(int owner, double speed)
     {
@@ -17,14 +19,15 @@ public abstract class Product extends SuperSmoothMover
         this.speed = speed;
         updateImage();
         inMachine = false;
+        wasTouchingMachine = false;
     }
 
     public void act()
     {
         moveDown();
-        checkMachine();
-        checkLeavingMachine();
+        handleMachineInteraction();
         checkEnd();
+
         if (getWorld() == null) {
             return;
         }
@@ -37,37 +40,41 @@ public abstract class Product extends SuperSmoothMover
         setLocation(getExactX(), getPreciseY() + speed);
     }
 
-    private void checkMachine()
+    private void handleMachineInteraction()
     {
-        Machines m = (Machines)getOneIntersectingObject(Machines.class);
-        
-        if (m != null) {
-            if (!(m.getBroken()) && type != 0) {
+        List<Machines> machines = getIntersectingObjects(Machines.class);
+        boolean touchingMachine = !machines.isEmpty();
+
+        // enter machine
+        if (touchingMachine && !wasTouchingMachine) {
+            Machines m = machines.get(0);
+
+            if (!m.getBroken() && type != 0) {
                 inMachine = true;
-                updateImage();
             }
         }
+
+        // leave machine
+        if (!touchingMachine && wasTouchingMachine && inMachine) {
+            type++;
+
+            if (Greenfoot.getRandomNumber(10) == 0) {
+                type = 0;
+            }
+
+            inMachine = false;
+            updateImage();
+        }
+
+        wasTouchingMachine = touchingMachine;
     }
-   
+
     public void addScore (int score) {
         FactoryWorld world = (FactoryWorld)getWorld();
         if (owner == 1) {
             world.changeLeftScore(score);
         } else {
             world.changeRightScore(score);
-        }
-    }
-    
-    private void checkLeavingMachine() {
-        Machines m = (Machines)getOneIntersectingObject(Machines.class);
-        
-        if (m == null && inMachine) {
-            type++;
-            if (Greenfoot.getRandomNumber(10) == 0) {
-                type = 0;
-            }
-            inMachine = false;
-            updateImage();
         }
     }
 
