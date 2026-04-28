@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class BreakMachine here.
  * 
  * @author (your name) 
- * @version (a version number or a date)
+ * @version (a version number or a date) 
  */
 public class Break extends Upgrades
 {
