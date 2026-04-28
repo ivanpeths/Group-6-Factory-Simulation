@@ -10,7 +10,6 @@ public class Spawn extends Upgrades
 {
     public Spawn (int side) {
         super(side);
-        this.side = side;
         image = new GreenfootImage("spawning.png");
         setImage(image);
     }

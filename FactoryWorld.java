@@ -148,6 +148,14 @@ public class FactoryWorld extends World
         leftProductSpawn -= 5;
     }
     
+    public void updateLeftQuality () {
+        leftProductQuality--;
+    }
+    
+    public void updateRightQuality () {
+        rightProductQuality--;
+    }
+    
     public void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground (background);
