@@ -13,7 +13,8 @@ public class Metal extends Product
         if (type == 0) image = new GreenfootImage("brokeniron.png");
         else if (type == 1) image = new GreenfootImage("materialiron.png");
         else if (type == 2) image = new GreenfootImage("cheapiron.png");
-        else image = new GreenfootImage("expensiveiron.png");
+        else if (type == 3) image = new GreenfootImage("expensiveiron.png");
+        else image = new GreenfootImage("veryexpensiveiron.png");
 
         image.scale(50, 50);
         setImage(image);
