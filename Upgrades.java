@@ -22,10 +22,10 @@ public abstract class Upgrades extends Actor
     }
     
     public void act () {
-        if (!activated) {
+        if (activated) {
             rechargeTimer++;
         }
-        if (rechargeTimer == 900) {
+        if (rechargeTimer >= 900) {
             activated = false;
             getImage().setTransparency(255);
         }
@@ -48,6 +48,7 @@ public abstract class Upgrades extends Actor
     public void activate () {
         getImage().setTransparency(50);
         activated = true;
+        rechargeTimer = 0;
         if (side == 1) {
             ((FactoryWorld)getWorld()).changeLeftScore(-100);
         } else {
