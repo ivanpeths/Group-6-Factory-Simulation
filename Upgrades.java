@@ -22,14 +22,15 @@ public abstract class Upgrades extends Actor
     }
     
     public void act () {
-        if (!activated) {
+        if (activated) {
             rechargeTimer++;
         }
-        if (rechargeTimer == 900) {
+        if (rechargeTimer >= 900) {
             activated = false;
             getImage().setTransparency(255);
         }
-
+            
+        /* Not the effect I had in mind - Kolby
         if (isTouching(Pointer.class) && !activated) { // Remove after pointer works
             if (side == 1) {
                 if (((FactoryWorld)getWorld()).getLeftScore() >= 100) {
@@ -41,11 +42,13 @@ public abstract class Upgrades extends Actor
                 }
             }       
         }
+        */
     }
     
     public void activate () {
         getImage().setTransparency(50);
         activated = true;
+        rechargeTimer = 0;
         if (side == 1) {
             ((FactoryWorld)getWorld()).changeLeftScore(-100);
         } else {
