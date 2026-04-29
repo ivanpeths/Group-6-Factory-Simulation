@@ -15,13 +15,12 @@ public class Break extends Upgrades
     }
     
     public void activate () {
+        FactoryWorld w = (FactoryWorld) getWorld();
         super.activate();
-
-    FactoryWorld world = (FactoryWorld)getWorld();
-        if (side == 1) {
-            world.getRightMachine().breakMachine();
+        if (side == 1){
+            w.getRightMachine().breakMachine();
         } else {
-            world.getLeftMachine().breakMachine();
+            w.getLeftMachine().breakMachine();
         }
     }
 }
