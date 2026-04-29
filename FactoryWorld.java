@@ -55,12 +55,16 @@ public class FactoryWorld extends World
     // Left variables
     private Machines leftMach;
     private Hitbox leftAssemHit;
+    private Hitbox leftPackHit;
+    private Hitbox leftHandHit;
     private int lastLeft = spawnDelay;
     private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
     private Hitbox rightAssemHit;
+    private Hitbox rightPackHit;
+    private Hitbox rightHandHit;
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
