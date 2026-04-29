@@ -336,14 +336,14 @@ public class FactoryWorld extends World
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
-                if (leftBrokeRight >= 0){
+                if (rightBrokeLeft >= 0 && !rightMach.getBroken()){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     soundMan.playBreak();
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
-                if (rand == 0){
+                if (rand == 0 && !rightMach.getBroken()){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     soundMan.playBreak();
                     leftBrokeRight = 900;
@@ -373,14 +373,14 @@ public class FactoryWorld extends World
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
-                if (rightBrokeLeft >= 0){
+                if (leftBrokeRight >= 0 && !leftMach.getBroken()){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
                     soundMan.playBreak();
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
-                if (rand == 0){
+                if (rand == 0 && !leftMach.getBroken()){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
                     soundMan.playBreak();
                     rightBrokeLeft = 900;

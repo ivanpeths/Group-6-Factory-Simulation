@@ -50,7 +50,7 @@ public class SoundManager
     private int coinVolume = 30;
     // private int bgmVolume = 50;
     private int ambienceVolume = 20;
-    private int menuVolume = 40;
+    private int menuVolume = 30;
     private int clickVolume = 50;
     private int errorVolume = 40;
     private int menuClickVolume = 30;
