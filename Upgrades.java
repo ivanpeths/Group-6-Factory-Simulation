@@ -1,16 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Powerups here.
+ * Upgrades randomly used by the computer
  * 
  * @author Ivan
- * @version (a version number or a date) 
  */
 public abstract class Upgrades extends Actor
 {
     protected GreenfootImage image;
-    protected int rechargeTimer;
-    protected boolean activated;
+    protected int rechargeTimer; //timer for recharging
+    protected boolean activated; //has this been used recently?
     protected int side;
     
     public Upgrades (int side) {
@@ -22,11 +21,11 @@ public abstract class Upgrades extends Actor
     }
     
     public void act () {
-        if (activated) {
+        if (activated) { //start reset timer when activated
             rechargeTimer++;
         }
-        if (rechargeTimer >= 900) {
-            activated = false;
+        if (rechargeTimer >= 900) { //15 seconds
+            activated = false; //reactivate and become opaque
             getImage().setTransparency(255);
         }
             
@@ -45,12 +44,12 @@ public abstract class Upgrades extends Actor
         */
     }
     
-    public void activate () {
-        getImage().setTransparency(50);
-        activated = true;
+    public void activate () { //activate upgrade, changed by each subclass
+        getImage().setTransparency(50); //transparency down to show used
+        activated = true; 
         rechargeTimer = 0;
         if (side == 1) {
-            ((FactoryWorld)getWorld()).changeLeftScore(-100);
+            ((FactoryWorld)getWorld()).changeLeftScore(-100); //costs $100
         } else {
             ((FactoryWorld)getWorld()).changeRightScore(-100);
         }
