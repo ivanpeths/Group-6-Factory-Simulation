@@ -57,6 +57,10 @@ public abstract class Product extends SuperSmoothMover
                 inMachine = true;
                 currentMachine = m;
             }
+            
+            if (currentMachine != null) {
+                m.checkBreak();
+            }
         }
 
         // leave machine
@@ -79,7 +83,7 @@ public abstract class Product extends SuperSmoothMover
             if (Greenfoot.getRandomNumber(10) == 0) {
                 type = 0;
             }
-
+            
             upgraded = true;
             updateImage();
         } 

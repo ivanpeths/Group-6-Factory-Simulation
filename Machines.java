@@ -22,7 +22,7 @@ public abstract class Machines extends Actor
     }
     
     public void checkBreak () {
-        if (Greenfoot.getRandomNumber(30) == 0) {
+        if (Greenfoot.getRandomNumber(15) == 0) {
             breakMachine();
         }
     }

@@ -78,8 +78,8 @@ public class FactoryWorld extends World
     private Label timerLabel;
     
     // Speed variables
-    private double leftSpeed = 1.5;
-    private double rightSpeed = 1.5;
+    private double leftSpeed = 2;
+    private double rightSpeed = 2;
     
     // Upgrade variables
     private int leftUpgradeX = 50;
