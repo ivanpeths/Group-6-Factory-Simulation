@@ -8,21 +8,23 @@ public abstract class Product extends SuperSmoothMover
 
     protected int type;
     protected GreenfootImage image;
-    
+
     protected boolean inMachine;
     protected boolean upgraded;
 
     private boolean wasTouchingMachine;
+    private Machines currentMachine;
 
     public Product(int owner, double speed)
     {
         this.owner = owner;
-        type = 1; // material
+        type = 1;
         this.speed = speed;
 
         inMachine = false;
         upgraded = false;
         wasTouchingMachine = false;
+        currentMachine = null;
 
         updateImage();
     }
@@ -47,25 +49,30 @@ public abstract class Product extends SuperSmoothMover
         List<Machines> machines = getIntersectingObjects(Machines.class);
         boolean touchingMachine = !machines.isEmpty();
 
-        // ENTER machine
+        // ENTER
         if (touchingMachine && !wasTouchingMachine) {
             Machines m = machines.get(0);
 
             if (!m.getBroken() && type != 0) {
                 inMachine = true;
+                currentMachine = m;
             }
         }
 
-        // LEAVE machine
+        // LEAVE
         if (!touchingMachine && wasTouchingMachine && inMachine) {
-            type++;
 
-            // 10% chance broken
-            if (Greenfoot.getRandomNumber(10) == 0) {
-                type = 0;
+            if (currentMachine != null && !currentMachine.getBroken()) {
+                type++;
+                type = Math.min(type, 3);
+
+                if (Greenfoot.getRandomNumber(10) == 0) {
+                    type = 0;
+                }
             }
 
             inMachine = false;
+            currentMachine = null;
             updateImage();
         }
 
@@ -78,6 +85,7 @@ public abstract class Product extends SuperSmoothMover
 
         if (h != null && !upgraded) {
             type++;
+            type = Math.min(type, 3);
 
             if (Greenfoot.getRandomNumber(10) == 0) {
                 type = 0;
@@ -94,8 +102,7 @@ public abstract class Product extends SuperSmoothMover
     public void addScore (int score) 
     {
         FactoryWorld world = (FactoryWorld)getWorld();
-
-        if (world == null) return; // safety
+        if (world == null) return;
 
         if (owner == 1) {
             world.changeLeftScore(score);
@@ -116,11 +123,8 @@ public abstract class Product extends SuperSmoothMover
 
             sell();
 
-            if (owner == 1) {
-                soundMan.playLeftCoin();
-            } else {
-                soundMan.playRightCoin();
-            }
+            if (owner == 1) soundMan.playLeftCoin();
+            else soundMan.playRightCoin();
 
             w.removeObject(this);
         }
@@ -128,13 +132,6 @@ public abstract class Product extends SuperSmoothMover
 
     public abstract void sell ();
 
-    public int getOwner()
-    {
-        return owner;
-    }
-
-    public int getType()
-    {
-        return type;
-    }
+    public int getOwner() { return owner; }
+    public int getType() { return type; }
 }
