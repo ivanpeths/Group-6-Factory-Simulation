@@ -57,8 +57,8 @@ public class Pointer extends SuperSmoothMover
             setLocation(startX, startY);
             curUpgrade = null;
         } else {
-            turnTowards((int) targetX, (int) targetY);
-            move(speed);
+            double ratio = speed / distance;
+            setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
         }
     }
 }

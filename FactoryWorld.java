@@ -32,7 +32,7 @@ public class FactoryWorld extends World
     private int rightScore;
     private int labelY = 35;
     private int labelSize = 50;
-    private int winCond = 1000;
+    private int winCond = 500;
     
     // Bar variables
     private SuperStatBar leftBar;
@@ -94,6 +94,8 @@ public class FactoryWorld extends World
     private boolean leftBought = false;
     private boolean rightBought = false;
     
+    private int minScoreBuy = 200;
+    
     private Packager leftPackager;
     private Packager rightPackager;
     
@@ -108,7 +110,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
-        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Assembler.class, Product.class, Conveyor.class);
+        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setProdQual(leftQual, rightQual);
@@ -311,7 +313,7 @@ public class FactoryWorld extends World
             return;
         }
         
-        if (leftScore > 250){
+        if (leftScore > minScoreBuy){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (leftMach.getBroken()){
                     leftPointer.activate(leftUpgradeX, 489, leftRepair);
@@ -346,7 +348,7 @@ public class FactoryWorld extends World
             return;
         }
         
-        if (rightScore > 250){
+        if (rightScore > minScoreBuy){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (rightMach.getBroken()){
                     rightPointer.activate(rightUpgradeX, 489, rightRepair);
