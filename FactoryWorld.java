@@ -54,13 +54,17 @@ public class FactoryWorld extends World
     
     // Left variables
     private Machines leftMach;
-    private Hitbox leftHit;
+    private Hitbox leftAssemHit;
+    private Hitbox leftPackHit;
+    private Hitbox leftHandHit;
     private int lastLeft = spawnDelay;
     private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
-    private Hitbox rightHit;
+    private Hitbox rightAssemHit;
+    private Hitbox rightPackHit;
+    private Hitbox rightHandHit;
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
@@ -176,10 +180,14 @@ public class FactoryWorld extends World
     }
     
     public void drawHitboxes(int leftPos, int rightPos){
-        leftHit = new Hitbox();
-        rightHit = new Hitbox();
-        addObject(leftHit, leftPos, getHeight() / 2);
-        addObject(rightHit, rightPos, getHeight() / 2);
+        leftAssemHit = new Hitbox();
+        rightAssemHit = new Hitbox();
+        leftPackHit = new Hitbox();
+        rightPackHit = new Hitbox();
+        leftHandHit = new Hitbox();
+        rightHandHit = new Hitbox();
+        addObject(leftAssemHit, leftPos, getHeight() / 2);
+        addObject(rightAssemHit, rightPos, getHeight() / 2);
     }
     
     public void drawUpgrades () {
@@ -384,7 +392,7 @@ public class FactoryWorld extends World
         leftPackager = new Packager();
         addObject(leftPackager, leftPos, getHeight() / 2 + 120);
     
-        leftHit.setLocation(leftPos, getHeight() / 2 + 200);
+        leftPackHit.setLocation(leftPos, getHeight() / 2 + 200);
     }
     
     public void addRightPackager() {
@@ -394,7 +402,7 @@ public class FactoryWorld extends World
         rightPackager = new Packager();
         addObject(rightPackager, rightPos, getHeight() / 2 + 120);
     
-        rightHit.setLocation(rightPos, getHeight() / 2 + 200);
+        rightPackHit.setLocation(rightPos, getHeight() / 2 + 200);
     }
     
     public Machines getLeftMachine(){
