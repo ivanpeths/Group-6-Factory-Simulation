@@ -122,7 +122,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
-        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Assembler.class, Product.class, Conveyor.class);
+        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Machines.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setProdQual(leftQual, rightQual);
@@ -398,10 +398,10 @@ public class FactoryWorld extends World
         leftBought = true;
     
         leftPackager = new Packager();
-        addObject(leftPackager, leftPos, getHeight() / 4 * 3);
+        addObject(leftPackager, leftPos, (getHeight() / 4 * 3) + 40);
     
         leftPackagerHitbox = new Hitbox();
-        addObject(leftPackagerHitbox, leftPos, getHeight() / 4 * 3);
+        addObject(leftPackagerHitbox, leftPos, (getHeight() / 4 * 3) + 40);
     }
     
     public void addRightPackager() {
@@ -409,10 +409,10 @@ public class FactoryWorld extends World
         rightBought = true;
     
         rightPackager = new Packager();
-        addObject(rightPackager, rightPos, getHeight() / 4 * 3);
+        addObject(rightPackager, rightPos, (getHeight() / 4 * 3) + 40);
     
         rightPackagerHitbox = new Hitbox();
-        addObject(rightPackagerHitbox, rightPos, getHeight() / 4 * 3);
+        addObject(rightPackagerHitbox, rightPos, (getHeight() / 4 * 3) + 40);
     }
     
     public void addLeftHandler () {
@@ -420,10 +420,10 @@ public class FactoryWorld extends World
         leftBoughtHandler = true;
         
         leftHandler = new Handler();
-        addObject(leftMach, leftPos, getHeight() / 4);
+        addObject(leftHandler, leftPos, (getHeight() / 4) - 40);
         
         leftHandlerHitbox = new Hitbox();
-        addObject(leftHandlerHitbox, leftPos, getHeight() / 4);
+        addObject(leftHandlerHitbox, leftPos, (getHeight() / 4) - 40);
     }
     
     public void addRightHandler () {
@@ -431,10 +431,10 @@ public class FactoryWorld extends World
         rightBoughtHandler = true;
         
         rightHandler = new Handler();
-        addObject(leftMach, leftPos, getHeight() / 4);
+        addObject(rightHandler, rightPos, (getHeight() / 4) - 40);
         
         rightHandlerHitbox = new Hitbox();
-        addObject(rightHandlerHitbox, rightPos, getHeight() / 4);
+        addObject(rightHandlerHitbox, rightPos, (getHeight() / 4) - 40);
     }
     
     public int leftMachinesRemaining () {

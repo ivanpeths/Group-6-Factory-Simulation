@@ -30,7 +30,7 @@ public class Buy extends Upgrades
         } else {
             if (world.rightMachinesRemaining() == 0) {
                 world.addRightHandler();
-            } else if (world.leftMachinesRemaining() == 1) {
+            } else if (world.rightMachinesRemaining() == 1) {
                 world.addRightPackager();
             } else {
                 ((FactoryWorld)getWorld()).changeRightScore(100);
