@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Powerups here.
  * 
- * @author (your name) 
+ * @author Ivan
  * @version (a version number or a date) 
  */
 public abstract class Upgrades extends Actor
@@ -14,10 +14,10 @@ public abstract class Upgrades extends Actor
     protected int side;
     
     public Upgrades (int side) {
-        if (side == 50) {
-            this.side = 1;
+        if (side == 50) { //which pixel are products spawning?
+            this.side = 1; //left
         } else if (side == 1150) {
-            this.side = 2;
+            this.side = 2; //right
         }
     }
     

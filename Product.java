@@ -75,17 +75,20 @@ public abstract class Product extends SuperSmoothMover
     private void checkHitbox() 
     {
         Hitbox h = (Hitbox)getOneIntersectingObject(Hitbox.class);
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
 
         if (h != null && !upgraded) {
-            type++;
-            type = Math.min(type, 3);
-
-            if (Greenfoot.getRandomNumber(10) == 0) {
-                type = 0;
+            if (!m.getBroken()) {
+                type++;
+                type = Math.min(type, 3);
+    
+                if (Greenfoot.getRandomNumber(10) == 0) {
+                    type = 0;
+                }
+                
+                upgraded = true;
+                updateImage();
             }
-            
-            upgraded = true;
-            updateImage();
         } 
         else if (h == null) {
             upgraded = false;
