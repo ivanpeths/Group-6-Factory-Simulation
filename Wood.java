@@ -13,7 +13,8 @@ public class Wood extends Product
         if (type == 0) image = new GreenfootImage("brokenwood.png");
         else if (type == 1) image = new GreenfootImage("materialwood.png");
         else if (type == 2) image = new GreenfootImage("cheapwood.png");
-        else image = new GreenfootImage("expensivewood.png");
+        else if (type == 3) image = new GreenfootImage("expensivewood.png");
+        else image = new GreenfootImage("veryexpensivewood.png");
 
         image.scale(50, 50);
         setImage(image);

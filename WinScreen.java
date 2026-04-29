@@ -38,10 +38,10 @@ public class WinScreen extends World
         titleLabel = new Label(winner + " wins!", size);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
         if (winner.equals("Left")){
-            loseLabel = new Label("Right had $" + loseScore + " only!", size);
+            loseLabel = new Label("Right only had $" + loseScore + "!", size);
             addObject(loseLabel, getWidth() / 2, getHeight() / 4 * 2);
         } else {
-            loseLabel = new Label("Left had $" + loseScore + " only!", size);
+            loseLabel = new Label("Left only had $" + loseScore + "!", size);
             addObject(loseLabel, getWidth() / 2, getHeight() / 4 * 2);
         }
         

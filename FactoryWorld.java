@@ -68,13 +68,18 @@ public class FactoryWorld extends World
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
+    private Machines leftHandler;
+    private Machines rightHandler;
+    private Machines leftPackager;
+    private Machines rightPackager;
+    
     // Game timer
     private int timer = 0;
     private Label timerLabel;
     
     // Speed variables
-    private double leftSpeed = 1.5;
-    private double rightSpeed = 1.5;
+    private double leftSpeed = 2;
+    private double rightSpeed = 2;
     
     // Upgrade variables
     private int leftUpgradeX = 50;
@@ -97,11 +102,14 @@ public class FactoryWorld extends World
 
     private boolean leftBought = false;
     private boolean rightBought = false;
+    private boolean leftBoughtHandler = false;
+    private boolean rightBoughtHandler = false;
+    private Hitbox leftHandlerHitbox;
+    private Hitbox rightHandlerHitbox;
+    private Hitbox leftPackagerHitbox;
+    private Hitbox rightPackagerHitbox;
     
     private int minScoreBuy = 100;
-    
-    private Packager leftPackager;
-    private Packager rightPackager;
     
     private int upgradeCooldown = 300;
     
@@ -114,7 +122,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
-        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Assembler.class, Product.class, Conveyor.class);
+        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Machines.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setProdQual(leftQual, rightQual);
@@ -390,9 +398,10 @@ public class FactoryWorld extends World
         leftBought = true;
     
         leftPackager = new Packager();
-        addObject(leftPackager, leftPos, getHeight() / 2 + 120);
+        addObject(leftPackager, leftPos, (getHeight() / 4 * 3) + 40);
     
-        leftPackHit.setLocation(leftPos, getHeight() / 2 + 200);
+        leftPackagerHitbox = new Hitbox();
+        addObject(leftPackagerHitbox, leftPos, (getHeight() / 4 * 3) + 40);
     }
     
     public void addRightPackager() {
@@ -400,9 +409,52 @@ public class FactoryWorld extends World
         rightBought = true;
     
         rightPackager = new Packager();
-        addObject(rightPackager, rightPos, getHeight() / 2 + 120);
+        addObject(rightPackager, rightPos, (getHeight() / 4 * 3) + 40);
     
-        rightPackHit.setLocation(rightPos, getHeight() / 2 + 200);
+        rightPackagerHitbox = new Hitbox();
+        addObject(rightPackagerHitbox, rightPos, (getHeight() / 4 * 3) + 40);
+    }
+    
+    public void addLeftHandler () {
+        if (leftBoughtHandler) return;
+        leftBoughtHandler = true;
+        
+        leftHandler = new Handler();
+        addObject(leftHandler, leftPos, (getHeight() / 4) - 40);
+        
+        leftHandlerHitbox = new Hitbox();
+        addObject(leftHandlerHitbox, leftPos, (getHeight() / 4) - 40);
+    }
+    
+    public void addRightHandler () {
+        if (rightBoughtHandler) return;
+        rightBoughtHandler = true;
+        
+        rightHandler = new Handler();
+        addObject(rightHandler, rightPos, (getHeight() / 4) - 40);
+        
+        rightHandlerHitbox = new Hitbox();
+        addObject(rightHandlerHitbox, rightPos, (getHeight() / 4) - 40);
+    }
+    
+    public int leftMachinesRemaining () {
+        if (!leftBought && !leftBoughtHandler) {
+            return 0;
+        } else if (!leftBought) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    
+    public int rightMachinesRemaining () {
+        if (!rightBought && !rightBoughtHandler) {
+            return 0;
+        } else if (!rightBought) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
     
     public Machines getLeftMachine(){

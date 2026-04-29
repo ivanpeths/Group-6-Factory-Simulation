@@ -38,7 +38,7 @@ public class TitleScreen extends World
     public void setupLabel(){
         titleLabel = new Label("Factory Simulation", fontSize);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
-        nameLabel = new Label("Created by ", fontSize);
+        nameLabel = new Label("Created by Group 6", fontSize);
         addObject(nameLabel, getWidth() / 2, getHeight() / 2);
     }
     

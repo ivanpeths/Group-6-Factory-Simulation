@@ -1,37 +1,32 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Machines here.
+ * Machines upgrade items into new types, they can be broken and repaired.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Ivan 
  */
 public abstract class Machines extends Actor
 {
     protected GreenfootImage image;
-    protected boolean broken;
+    protected boolean broken; //broken or not
     public Machines () {
-        broken = false;
+        broken = false; //start fixed
         if (Greenfoot.getRandomNumber(5) == 0) {
-            breakMachine();
+            breakMachine(); //random 1/5 chance to start broken
         }
-    }
-    
-    public void act () {
-        
     }
     
     public void checkBreak () {
-        if (Greenfoot.getRandomNumber(30) == 0) {
-            breakMachine();
+        if (Greenfoot.getRandomNumber(15) == 0) {
+            breakMachine(); //random 1/15 chance to break for every product made
         }
     }
     
-    public abstract void breakMachine ();
+    public abstract void breakMachine (); //break
     
-    public abstract void unbreakMachine();
+    public abstract void unbreakMachine(); //repair
     
     public boolean getBroken() {
-        return broken;
+        return broken; //check if products should be upgraded
     }
 }
