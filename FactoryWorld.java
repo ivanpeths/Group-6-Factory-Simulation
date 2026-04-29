@@ -90,6 +90,12 @@ public class FactoryWorld extends World
     private Spawn rightSpawnUpgrade;
     private int rightBrokeLeft = -1;
     private int rightUpgradeCooldown = 0;
+
+    private boolean leftBought = false;
+    private boolean rightBought = false;
+    
+    private Packager leftPackager;
+    private Packager rightPackager;
     
     private int upgradeCooldown = 300;
     
@@ -365,6 +371,26 @@ public class FactoryWorld extends World
                 return;
             }
         }
+    }
+
+    public void addLeftPackager() {
+        if (leftBought) return;
+        leftBought = true;
+    
+        leftPackager = new Packager();
+        addObject(leftPackager, leftPos, getHeight() / 2 + 120);
+    
+        leftHit.setLocation(leftPos, getHeight() / 2 + 200);
+    }
+    
+    public void addRightPackager() {
+        if (rightBought) return;
+        rightBought = true;
+    
+        rightPackager = new Packager();
+        addObject(rightPackager, rightPos, getHeight() / 2 + 120);
+    
+        rightHit.setLocation(rightPos, getHeight() / 2 + 200);
     }
     
     public Machines getLeftMachine(){
