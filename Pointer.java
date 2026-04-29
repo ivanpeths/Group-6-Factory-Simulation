@@ -14,7 +14,7 @@ public class Pointer extends SuperSmoothMover
     private int startY = 0;
     private double targetX;
     private double targetY;
-    private double speed = 5.0;
+    private double speed = 8.0;
     private boolean moving;
     private SoundManager soundMan;
     private Upgrades curUpgrade;
