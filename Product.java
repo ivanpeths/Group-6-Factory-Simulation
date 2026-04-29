@@ -49,7 +49,7 @@ public abstract class Product extends SuperSmoothMover
         List<Machines> machines = getIntersectingObjects(Machines.class);
         boolean touchingMachine = !machines.isEmpty();
 
-        // ENTER
+        // enter machine
         if (touchingMachine && !wasTouchingMachine) {
             Machines m = machines.get(0);
 
@@ -59,7 +59,7 @@ public abstract class Product extends SuperSmoothMover
             }
         }
 
-        // LEAVE
+        // leave machine
         if (!touchingMachine && wasTouchingMachine && inMachine) {
 
             if (currentMachine != null && !currentMachine.getBroken()) {
