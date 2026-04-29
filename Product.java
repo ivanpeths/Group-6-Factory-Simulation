@@ -3,7 +3,7 @@ import java.util.List;
 
 public abstract class Product extends SuperSmoothMover  
 {
-    protected int owner; // which player it belongs to
+    protected int owner; // which player it belongs to 
     protected double speed; // movement speed 
 
     protected int type;
