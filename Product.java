@@ -1,10 +1,9 @@
 import greenfoot.*;
-import java.util.List;
 
 public abstract class Product extends SuperSmoothMover  
 {
     protected int owner; // which player it belongs to
-    protected double speed; // movement speed 
+    protected double speed; // movement speed
 
     protected int type;
     protected GreenfootImage image;
@@ -27,7 +26,6 @@ public abstract class Product extends SuperSmoothMover
         checkMachine();
         checkHitbox();
         checkEnd();
-
         if (getWorld() == null) {
             return;
         }
@@ -40,35 +38,18 @@ public abstract class Product extends SuperSmoothMover
         setLocation(getExactX(), getPreciseY() + speed);
     }
 
-    private void handleMachineInteraction()
+    private void checkMachine()
     {
-        List<Machines> machines = getIntersectingObjects(Machines.class);
-        boolean touchingMachine = !machines.isEmpty();
-
-        // enter machine
-        if (touchingMachine && !wasTouchingMachine) {
-            Machines m = machines.get(0);
-
-            if (!m.getBroken() && type != 0) {
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
+        
+        if (m != null) {
+            if (!(m.getBroken()) && type != 0) {
                 inMachine = true;
+                updateImage();
             }
         }
-
-        // leave machine
-        if (!touchingMachine && wasTouchingMachine && inMachine) {
-            type++;
-
-            if (Greenfoot.getRandomNumber(10) == 0) {
-                type = 0;
-            }
-
-            inMachine = false;
-            updateImage();
-        }
-
-        wasTouchingMachine = touchingMachine;
     }
-
+   
     public void addScore (int score) {
         FactoryWorld world = (FactoryWorld)getWorld();
         if (owner == 1) {
@@ -122,3 +103,4 @@ public abstract class Product extends SuperSmoothMover
         return type;
     }
 }
+
