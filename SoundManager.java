@@ -17,6 +17,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Ambience: https://pixabay.com/sound-effects/technology-steam-engine-loop-43171/
  * Menu: https://pixabay.com/music/main-title-dramatic-436882/
  * Settings click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/ but tuned down
+ * Break: https://pixabay.com/sound-effects/film-special-effects-powerful-cannon-254542/
  * 
  * @author Kolby Ng
  */
@@ -34,6 +35,7 @@ public class SoundManager
     private GreenfootSound[] errorSounds;
     private GreenfootSound[] clickSounds;
     private GreenfootSound[] menuClickSounds;
+    private GreenfootSound[] breakSounds;
     
     // Indexes
     private int leftCoinIndex = 0;
@@ -41,6 +43,7 @@ public class SoundManager
     private int errorIndex = 0;
     private int clickIndex = 0;
     private int menuClickIndex = 0;
+    private int breakIndex = 0;
     
     // Volumes
     private int startingSoundVolume = 30;
@@ -49,14 +52,16 @@ public class SoundManager
     private int ambienceVolume = 20;
     private int menuVolume = 40;
     private int clickVolume = 50;
-    private int errorVolume = 50;
-    private int menuClickVolume = 50;
+    private int errorVolume = 40;
+    private int menuClickVolume = 30;
+    private int breakVolume = 30;
     
     // Lengths
     private int coinLength = 5;
     private int errorLength = 5;
     private int clickLength = 3;
     private int menuClickLength = 3;
+    private int breakLength = 2;
     
     
     public SoundManager(){
@@ -104,6 +109,12 @@ public class SoundManager
         for (int i = 0; i < menuClickLength; i++){
             menuClickSounds[i] = new GreenfootSound("menu_click.mp3");
             menuClickSounds[i].setVolume(menuClickVolume);
+        }
+        
+        breakSounds = new GreenfootSound[clickLength];
+        for (int i = 0; i < breakLength; i++){
+            breakSounds[i] = new GreenfootSound("break.mp3");
+            breakSounds[i].setVolume(breakVolume);
         }
     }
     
@@ -180,5 +191,11 @@ public class SoundManager
     public void playMenuClick(){
         menuClickSounds[menuClickIndex].play();
         menuClickIndex = (menuClickIndex + 1) % menuClickLength;
+    }
+    
+    // Break machine
+    public void playBreak(){
+        breakSounds[breakIndex].play();
+        breakIndex = (breakIndex + 1) % breakLength;
     }
 }

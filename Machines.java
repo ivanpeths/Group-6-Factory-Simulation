@@ -11,13 +11,11 @@ public abstract class Machines extends Actor
     protected boolean broken; //broken or not
     public Machines () {
         broken = false; //start fixed
-        if (Greenfoot.getRandomNumber(5) == 0) {
-            breakMachine(); //random 1/5 chance to start broken
-        }
     }
     
     public void checkBreak () {
         if (Greenfoot.getRandomNumber(15) == 0) {
+            ((FactoryWorld) getWorld()).getSoundMan().playBreak();
             breakMachine(); //random 1/15 chance to break for every product made
         }
     }

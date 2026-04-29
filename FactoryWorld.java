@@ -78,8 +78,8 @@ public class FactoryWorld extends World
     private Label timerLabel;
     
     // Speed variables
-    private double leftSpeed = 5;
-    private double rightSpeed = 5;
+    private double leftSpeed = 4;
+    private double rightSpeed = 4;
     
     // Upgrade variables
     private int leftUpgradeX = 50;
@@ -338,12 +338,14 @@ public class FactoryWorld extends World
                 }
                 if (leftBrokeRight >= 0){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
+                    soundMan.playBreak();
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
+                    soundMan.playBreak();
                     leftBrokeRight = 900;
                 } else if (rand == 1){
                     leftPointer.activate(leftUpgradeX, 663, leftBuy);
@@ -373,12 +375,14 @@ public class FactoryWorld extends World
                 }
                 if (rightBrokeLeft >= 0){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
+                    soundMan.playBreak();
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
+                    soundMan.playBreak();
                     rightBrokeLeft = 900;
                 } else if (rand == 1){
                     rightPointer.activate(rightUpgradeX, 663, rightBuy);
