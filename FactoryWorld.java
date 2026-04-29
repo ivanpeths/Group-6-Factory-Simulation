@@ -109,7 +109,7 @@ public class FactoryWorld extends World
     private Hitbox leftPackagerHitbox;
     private Hitbox rightPackagerHitbox;
     
-    private int minScoreBuy = 200;
+    private int minScoreBuy = 100;
     
     private int upgradeCooldown = 300;
     
@@ -154,7 +154,7 @@ public class FactoryWorld extends World
     
     public void stopped(){
         soundMan.pauseStarting();
-        soundMan.pauseBgm();
+        // soundMan.pauseBgm();
         soundMan.pauseAmbience();
     }
     

@@ -11,6 +11,7 @@ public abstract class Upgrades extends Actor
     protected int rechargeTimer; //timer for recharging
     protected boolean activated; //has this been used recently?
     protected int side;
+    private int cost = 50;
     
     public Upgrades (int side) {
         if (side == 50) { //which pixel are products spawning?
@@ -49,9 +50,9 @@ public abstract class Upgrades extends Actor
         activated = true; 
         rechargeTimer = 0;
         if (side == 1) {
-            ((FactoryWorld)getWorld()).changeLeftScore(-100); //costs $100
+            ((FactoryWorld)getWorld()).changeLeftScore(cost * -1); //costs $50
         } else {
-            ((FactoryWorld)getWorld()).changeRightScore(-100);
+            ((FactoryWorld)getWorld()).changeRightScore(cost * -1);
         }
     }
     
