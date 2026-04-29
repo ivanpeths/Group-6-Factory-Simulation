@@ -16,5 +16,13 @@ public class Buy extends Upgrades
     
     public void activate () {
         super.activate();
+    
+        FactoryWorld world = (FactoryWorld)getWorld();
+    
+        if (side == 1) {
+            world.addLeftPackager();
+        } else {
+            world.addRightPackager();
+        }
     }
 }
