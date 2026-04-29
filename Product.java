@@ -61,10 +61,6 @@ public abstract class Product extends SuperSmoothMover
 
         // leave machine
         if (!touchingMachine && wasTouchingMachine && inMachine) {
-<<<<<<< HEAD
-=======
-
->>>>>>> ba384976085b8c36a037561f5c8b484134f85632
             inMachine = false;
             currentMachine = null;
         }

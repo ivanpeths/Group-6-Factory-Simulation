@@ -102,20 +102,14 @@ public class FactoryWorld extends World
 
     private boolean leftBought = false;
     private boolean rightBought = false;
-<<<<<<< HEAD
     private boolean leftBoughtHandler = false;
     private boolean rightBoughtHandler = false;
     private Hitbox leftHandlerHitbox;
     private Hitbox rightHandlerHitbox;
     private Hitbox leftPackagerHitbox;
     private Hitbox rightPackagerHitbox;
-=======
     
     private int minScoreBuy = 200;
-    
-    private Packager leftPackager;
-    private Packager rightPackager;
->>>>>>> ba384976085b8c36a037561f5c8b484134f85632
     
     private int upgradeCooldown = 300;
     
@@ -406,12 +400,8 @@ public class FactoryWorld extends World
         leftPackager = new Packager();
         addObject(leftPackager, leftPos, getHeight() / 4 * 3);
     
-<<<<<<< HEAD
         leftPackagerHitbox = new Hitbox();
         addObject(leftPackagerHitbox, leftPos, getHeight() / 4 * 3);
-=======
-        leftPackHit.setLocation(leftPos, getHeight() / 2 + 200);
->>>>>>> ba384976085b8c36a037561f5c8b484134f85632
     }
     
     public void addRightPackager() {
@@ -421,7 +411,6 @@ public class FactoryWorld extends World
         rightPackager = new Packager();
         addObject(rightPackager, rightPos, getHeight() / 4 * 3);
     
-<<<<<<< HEAD
         rightPackagerHitbox = new Hitbox();
         addObject(rightPackagerHitbox, rightPos, getHeight() / 4 * 3);
     }
@@ -461,16 +450,11 @@ public class FactoryWorld extends World
     public int rightMachinesRemaining () {
         if (!rightBought && !rightBoughtHandler) {
             return 0;
-        } else if (!rightBought && rightBoughtHandler) {
+        } else if (!rightBought) {
             return 1;
-        } else if (rightBought && !rightBoughtHandler) {
-            return 2;
         } else {
-            return 3;
+            return 2;
         }
-=======
-        rightPackHit.setLocation(rightPos, getHeight() / 2 + 200);
->>>>>>> ba384976085b8c36a037561f5c8b484134f85632
     }
     
     public Machines getLeftMachine(){
