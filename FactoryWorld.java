@@ -64,6 +64,11 @@ public class FactoryWorld extends World
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
+    private Machines leftHandler;
+    private Machines rightHandler;
+    private Machines leftPackager;
+    private Machines rightPackager;
+    
     // Game timer
     private int timer = 0;
     private Label timerLabel;
@@ -93,9 +98,12 @@ public class FactoryWorld extends World
 
     private boolean leftBought = false;
     private boolean rightBought = false;
-    
-    private Packager leftPackager;
-    private Packager rightPackager;
+    private boolean leftBoughtHandler = false;
+    private boolean rightBoughtHandler = false;
+    private Hitbox leftHandlerHitbox;
+    private Hitbox rightHandlerHitbox;
+    private Hitbox leftPackagerHitbox;
+    private Hitbox rightPackagerHitbox;
     
     private int upgradeCooldown = 300;
     
@@ -378,9 +386,10 @@ public class FactoryWorld extends World
         leftBought = true;
     
         leftPackager = new Packager();
-        addObject(leftPackager, leftPos, getHeight() / 2 + 120);
+        addObject(leftPackager, leftPos, getHeight() / 4 * 3);
     
-        leftHit.setLocation(leftPos, getHeight() / 2 + 200);
+        leftPackagerHitbox = new Hitbox();
+        addObject(leftPackagerHitbox, leftPos, getHeight() / 4 * 3);
     }
     
     public void addRightPackager() {
@@ -388,9 +397,54 @@ public class FactoryWorld extends World
         rightBought = true;
     
         rightPackager = new Packager();
-        addObject(rightPackager, rightPos, getHeight() / 2 + 120);
+        addObject(rightPackager, rightPos, getHeight() / 4 * 3);
     
-        rightHit.setLocation(rightPos, getHeight() / 2 + 200);
+        rightPackagerHitbox = new Hitbox();
+        addObject(rightPackagerHitbox, rightPos, getHeight() / 4 * 3);
+    }
+    
+    public void addLeftHandler () {
+        if (leftBoughtHandler) return;
+        leftBoughtHandler = true;
+        
+        leftHandler = new Handler();
+        addObject(leftMach, leftPos, getHeight() / 4);
+        
+        leftHandlerHitbox = new Hitbox();
+        addObject(leftHandlerHitbox, leftPos, getHeight() / 4);
+    }
+    
+    public void addRightHandler () {
+        if (rightBoughtHandler) return;
+        rightBoughtHandler = true;
+        
+        rightHandler = new Handler();
+        addObject(leftMach, leftPos, getHeight() / 4);
+        
+        rightHandlerHitbox = new Hitbox();
+        addObject(rightHandlerHitbox, rightPos, getHeight() / 4);
+    }
+    
+    public int leftMachinesRemaining () {
+        if (!leftBought && !leftBoughtHandler) {
+            return 0;
+        } else if (!leftBought) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    
+    public int rightMachinesRemaining () {
+        if (!rightBought && !rightBoughtHandler) {
+            return 0;
+        } else if (!rightBought && rightBoughtHandler) {
+            return 1;
+        } else if (rightBought && !rightBoughtHandler) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
     
     public Machines getLeftMachine(){

@@ -20,9 +20,21 @@ public class Buy extends Upgrades
         FactoryWorld world = (FactoryWorld)getWorld();
     
         if (side == 1) {
-            world.addLeftPackager();
+            if (world.leftMachinesRemaining() == 0) {
+                world.addLeftHandler();
+            } else if (world.leftMachinesRemaining() == 1) {
+                world.addLeftPackager();
+            } else {
+                ((FactoryWorld)getWorld()).changeLeftScore(100);
+            }
         } else {
-            world.addRightPackager();
+            if (world.rightMachinesRemaining() == 0) {
+                world.addRightHandler();
+            } else if (world.leftMachinesRemaining() == 1) {
+                world.addRightPackager();
+            } else {
+                ((FactoryWorld)getWorld()).changeRightScore(100);
+            }
         }
     }
 }
