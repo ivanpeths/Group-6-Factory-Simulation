@@ -94,6 +94,8 @@ public class FactoryWorld extends World
     private boolean leftBought = false;
     private boolean rightBought = false;
     
+    private int minScoreBuy = 200;
+    
     private Packager leftPackager;
     private Packager rightPackager;
     
@@ -108,7 +110,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
-        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Assembler.class, Product.class, Conveyor.class);
+        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setProdQual(leftQual, rightQual);
@@ -145,8 +147,10 @@ public class FactoryWorld extends World
     }
     
     public void setupPointers(){
-        this.leftPointer = new Pointer(soundMan);
-        this.rightPointer = new Pointer(soundMan);
+        this.leftPointer = new Pointer(soundMan, getWidth() / 8 * 3, getHeight() / 2);
+        this.rightPointer = new Pointer(soundMan, getWidth() / 8 * 5, getHeight() / 2);
+        addObject(leftPointer, getWidth() / 8 * 3, getHeight() / 2);
+        addObject(rightPointer, getWidth() / 8 * 5, getHeight() / 2);
     }
     
     public void setSpawnRate(int leftRate, int rightRate){
@@ -309,28 +313,28 @@ public class FactoryWorld extends World
             return;
         }
         
-        if (leftScore > 250){
+        if (leftScore > minScoreBuy){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (leftMach.getBroken()){
-                    leftRepair.activate();
+                    leftPointer.activate(leftUpgradeX, 489, leftRepair);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
-                if (rightBrokeLeft >= 0){
-                    leftBreak.activate();
+                if (leftBrokeRight >= 0){
+                    leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
-                    leftBreak.activate();
+                    leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     leftBrokeRight = 900;
                 } else if (rand == 1){
-                    leftBuy.activate();
+                    leftPointer.activate(leftUpgradeX, 663, leftBuy);
                 } else if (rand == 2){
-                    leftQuality.activate();
+                    leftPointer.activate(leftUpgradeX, 576, leftQuality);
                 } else {
-                    leftSpawnUpgrade.activate();
+                    leftPointer.activate(leftUpgradeX, 402, leftSpawnUpgrade);
                 }
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
@@ -344,28 +348,28 @@ public class FactoryWorld extends World
             return;
         }
         
-        if (rightScore > 250){
+        if (rightScore > minScoreBuy){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (rightMach.getBroken()){
-                    rightRepair.activate();
+                    rightPointer.activate(rightUpgradeX, 489, rightRepair);
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 if (rightBrokeLeft >= 0){
-                    leftBreak.activate();
-                    leftUpgradeCooldown = upgradeCooldown;
+                    rightPointer.activate(rightUpgradeX, 750, rightBreak);
+                    rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
-                    rightBreak.activate();
+                    rightPointer.activate(rightUpgradeX, 750, rightBreak);
                     rightBrokeLeft = 900;
                 } else if (rand == 1){
-                    rightBuy.activate();
+                    rightPointer.activate(rightUpgradeX, 663, rightBuy);
                 } else if (rand == 2){
-                    rightQuality.activate();
+                    rightPointer.activate(rightUpgradeX, 576, rightQuality);
                 } else {
-                    rightSpawnUpgrade.activate();
+                    rightPointer.activate(rightUpgradeX, 402, rightSpawnUpgrade);
                 }
                 rightUpgradeCooldown = upgradeCooldown;
                 return;
