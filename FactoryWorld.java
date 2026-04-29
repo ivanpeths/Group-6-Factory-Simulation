@@ -312,25 +312,25 @@ public class FactoryWorld extends World
         if (leftScore > 250){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (leftMach.getBroken()){
-                    leftRepair.activate();
+                    leftPointer.activate(leftUpgradeX, 489, leftRepair);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
-                if (rightBrokeLeft >= 0){
-                    leftBreak.activate();
-                    leftUpgradeCooldown = upgradeCooldown;
+                if (leftBrokeRight >= 0){
+                    leftPointer.activate(leftUpgradeX, 750, leftBreak);
+                    rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
-                    leftBreak.activate();
+                    leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     leftBrokeRight = 900;
                 } else if (rand == 1){
-                    leftBuy.activate();
+                    leftPointer.activate(leftUpgradeX, 663, leftBuy);
                 } else if (rand == 2){
-                    leftQuality.activate();
+                    leftPointer.activate(leftUpgradeX, 576, leftQuality);
                 } else {
-                    leftSpawnUpgrade.activate();
+                    leftPointer.activate(leftUpgradeX, 402, leftSpawnUpgrade);
                 }
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
@@ -347,25 +347,25 @@ public class FactoryWorld extends World
         if (rightScore > 250){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (rightMach.getBroken()){
-                    rightRepair.activate();
+                    rightPointer.activate(rightUpgradeX, 489, rightRepair);
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 if (rightBrokeLeft >= 0){
-                    leftBreak.activate();
+                    rightPointer.activate(rightUpgradeX, 750, rightBreak);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
-                    rightBreak.activate();
+                    rightPointer.activate(rightUpgradeX, 750, rightBreak);
                     rightBrokeLeft = 900;
                 } else if (rand == 1){
-                    rightBuy.activate();
+                    rightPointer.activate(rightUpgradeX, 663, rightBuy);
                 } else if (rand == 2){
-                    rightQuality.activate();
+                    rightPointer.activate(rightUpgradeX, 576, rightQuality);
                 } else {
-                    rightSpawnUpgrade.activate();
+                    rightPointer.activate(rightUpgradeX, 402, rightSpawnUpgrade);
                 }
                 rightUpgradeCooldown = upgradeCooldown;
                 return;

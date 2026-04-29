@@ -14,9 +14,10 @@ public class Pointer extends SuperSmoothMover
     private int startY = 0;
     private double targetX;
     private double targetY;
-    private double speed;
+    private double speed = 2.0;
     private boolean moving;
     private SoundManager soundMan;
+    private Upgrades curUpgrade;
     
     public Pointer(SoundManager soundMan, int startX, int startY){
         GreenfootImage img = new GreenfootImage("pointer.png");
@@ -27,10 +28,10 @@ public class Pointer extends SuperSmoothMover
         this.startY = startY;
     }
     
-    public void startMoving(double targetX, double targetY, double speed){
+    public void activate(double targetX, double targetY, Upgrades upgrade){
         this.targetX = targetX;
         this.targetY = targetY;
-        this.speed = speed;
+        this.curUpgrade = upgrade;
         moving = true;
     }
     
@@ -49,7 +50,10 @@ public class Pointer extends SuperSmoothMover
             setLocation(targetX, targetY);
             moving = false;
             soundMan.playClick();
+            getImage().setTransparency(0);
+            curUpgrade.activate();
             setLocation(startX, startY);
+            curUpgrade = null;
         } else {
             turnTowards((int) targetX, (int) targetY);
             move(speed);
