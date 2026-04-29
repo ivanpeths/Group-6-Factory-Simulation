@@ -98,7 +98,7 @@ public class FactoryWorld extends World
     private boolean leftBought = false;
     private boolean rightBought = false;
     
-    private int minScoreBuy = 200;
+    private int minScoreBuy = 100;
     
     private Packager leftPackager;
     private Packager rightPackager;
@@ -146,7 +146,7 @@ public class FactoryWorld extends World
     
     public void stopped(){
         soundMan.pauseStarting();
-        soundMan.pauseBgm();
+        // soundMan.pauseBgm();
         soundMan.pauseAmbience();
     }
     
