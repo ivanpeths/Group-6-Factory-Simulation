@@ -1,3 +1,6 @@
+// Product by Isaac
+// All images by Gemini
+
 import greenfoot.*;
 import java.util.List;
 
