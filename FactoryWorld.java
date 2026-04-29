@@ -318,7 +318,7 @@ public class FactoryWorld extends World
                 }
                 if (leftBrokeRight >= 0){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
-                    rightUpgradeCooldown = upgradeCooldown;
+                    leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
@@ -353,7 +353,7 @@ public class FactoryWorld extends World
                 }
                 if (rightBrokeLeft >= 0){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
-                    leftUpgradeCooldown = upgradeCooldown;
+                    rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
