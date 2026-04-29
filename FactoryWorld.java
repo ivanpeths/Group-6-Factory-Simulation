@@ -145,8 +145,8 @@ public class FactoryWorld extends World
     }
     
     public void setupPointers(){
-        this.leftPointer = new Pointer(soundMan);
-        this.rightPointer = new Pointer(soundMan);
+        this.leftPointer = new Pointer(soundMan, getWidth() / 8 * 3, getHeight() / 2);
+        this.rightPointer = new Pointer(soundMan, getWidth() / 8 * 5, getHeight() / 2);
     }
     
     public void setSpawnRate(int leftRate, int rightRate){

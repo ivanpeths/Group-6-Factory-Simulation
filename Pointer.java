@@ -18,11 +18,13 @@ public class Pointer extends SuperSmoothMover
     private boolean moving;
     private SoundManager soundMan;
     
-    public Pointer(SoundManager soundMan){
+    public Pointer(SoundManager soundMan, int startX, int startY){
         GreenfootImage img = new GreenfootImage("pointer.png");
         img.scale(xSize, ySize);
         setImage(img);
         this.soundMan = soundMan;
+        this.startX = startX;
+        this.startY = startY;
     }
     
     public void startMoving(double targetX, double targetY, double speed){
