@@ -50,7 +50,7 @@ public class FactoryWorld extends World
     private GreenfootSound startingSound;
     
     // Product variables
-    private int spawnDelay = 120;
+    private int spawnDelay = 30;
     
     // Left variables
     private Machines leftMach;
@@ -78,8 +78,8 @@ public class FactoryWorld extends World
     private Label timerLabel;
     
     // Speed variables
-    private double leftSpeed = 2;
-    private double rightSpeed = 2;
+    private double leftSpeed = 5;
+    private double rightSpeed = 5;
     
     // Upgrade variables
     private int leftUpgradeX = 50;
