@@ -198,20 +198,20 @@ public class FactoryWorld extends World
         addObject(rightSpawnUpgrade, rightUpgradeX, 402);
     }
     
-    public void updateRightSpawn () {
-        rightProductSpawn -= 5;
-    }
-    
     public void updateLeftSpawn () {
-        leftProductSpawn -= 5;
+        leftProductSpawn = Math.max(1, leftProductSpawn - 5);
+    }
+
+    public void updateRightSpawn () {
+        rightProductSpawn = Math.max(1, rightProductSpawn - 5);
     }
     
     public void updateLeftQuality () {
-        leftProductQuality--;
+        leftProductQuality = Math.max(1, leftProductQuality--);
     }
     
     public void updateRightQuality () {
-        rightProductQuality--;
+        rightProductQuality = Math.max(1, rightProductQuality--);
     }
     
     public void setBackground(){
