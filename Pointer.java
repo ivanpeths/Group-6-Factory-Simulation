@@ -32,6 +32,7 @@ public class Pointer extends SuperSmoothMover
         this.targetX = targetX;
         this.targetY = targetY;
         this.curUpgrade = upgrade;
+        getImage().setTransparency(255);
         moving = true;
     }
     
