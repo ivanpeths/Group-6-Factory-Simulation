@@ -30,8 +30,16 @@ public abstract class Upgrades extends Actor
             getImage().setTransparency(255);
         }
 
-        if (Greenfoot.mouseClicked(this) && !activated) { // Remove after pointer works
-            activate();
+        if (isTouching(Pointer.class) && !activated) { // Remove after pointer works
+            if (side == 1) {
+                if (((FactoryWorld)getWorld()).getLeftScore() >= 100) {
+                    activate();
+                }
+            } else {
+                if (((FactoryWorld)getWorld()).getRightScore() >= 100) {
+                    activate();
+                }
+            }       
         }
     }
     

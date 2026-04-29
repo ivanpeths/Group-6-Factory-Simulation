@@ -471,4 +471,12 @@ public class FactoryWorld extends World
         canUpgradeRight();
         checkWin();
     }
+    
+    public int getLeftScore () {
+        return leftScore;
+    }
+    
+    public int getRightScore () {
+        return rightScore;
+    }
 }
