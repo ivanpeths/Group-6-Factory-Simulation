@@ -32,7 +32,7 @@ public class FactoryWorld extends World
     private int rightScore;
     private int labelY = 35;
     private int labelSize = 50;
-    private int winCond = 500;
+    private int winCond = 1000;
     
     // Bar variables
     private SuperStatBar leftBar;
