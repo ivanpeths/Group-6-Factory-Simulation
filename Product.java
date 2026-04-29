@@ -62,18 +62,8 @@ public abstract class Product extends SuperSmoothMover
         // leave machine
         if (!touchingMachine && wasTouchingMachine && inMachine) {
 
-            if (currentMachine != null && !currentMachine.getBroken()) {
-                type++;
-                type = Math.min(type, 3);
-
-                if (Greenfoot.getRandomNumber(10) == 0) {
-                    type = 0;
-                }
-            }
-
             inMachine = false;
             currentMachine = null;
-            updateImage();
         }
 
         wasTouchingMachine = touchingMachine;
