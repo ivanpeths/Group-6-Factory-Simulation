@@ -54,13 +54,17 @@ public class FactoryWorld extends World
     
     // Left variables
     private Machines leftMach;
-    private Hitbox leftHit;
+    private Hitbox leftAssemHit;
+    private Hitbox leftPackHit;
+    private Hitbox leftHandHit;
     private int lastLeft = spawnDelay;
     private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
-    private Hitbox rightHit;
+    private Hitbox rightAssemHit;
+    private Hitbox rightPackHit;
+    private Hitbox rightHandHit;
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
@@ -98,12 +102,20 @@ public class FactoryWorld extends World
 
     private boolean leftBought = false;
     private boolean rightBought = false;
+<<<<<<< HEAD
     private boolean leftBoughtHandler = false;
     private boolean rightBoughtHandler = false;
     private Hitbox leftHandlerHitbox;
     private Hitbox rightHandlerHitbox;
     private Hitbox leftPackagerHitbox;
     private Hitbox rightPackagerHitbox;
+=======
+    
+    private int minScoreBuy = 200;
+    
+    private Packager leftPackager;
+    private Packager rightPackager;
+>>>>>>> ba384976085b8c36a037561f5c8b484134f85632
     
     private int upgradeCooldown = 300;
     
@@ -116,7 +128,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
-        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Assembler.class, Product.class, Conveyor.class);
+        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Assembler.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setProdQual(leftQual, rightQual);
@@ -153,8 +165,10 @@ public class FactoryWorld extends World
     }
     
     public void setupPointers(){
-        this.leftPointer = new Pointer(soundMan);
-        this.rightPointer = new Pointer(soundMan);
+        this.leftPointer = new Pointer(soundMan, getWidth() / 8 * 3, getHeight() / 2);
+        this.rightPointer = new Pointer(soundMan, getWidth() / 8 * 5, getHeight() / 2);
+        addObject(leftPointer, getWidth() / 8 * 3, getHeight() / 2);
+        addObject(rightPointer, getWidth() / 8 * 5, getHeight() / 2);
     }
     
     public void setSpawnRate(int leftRate, int rightRate){
@@ -180,10 +194,14 @@ public class FactoryWorld extends World
     }
     
     public void drawHitboxes(int leftPos, int rightPos){
-        leftHit = new Hitbox();
-        rightHit = new Hitbox();
-        addObject(leftHit, leftPos, getHeight() / 2);
-        addObject(rightHit, rightPos, getHeight() / 2);
+        leftAssemHit = new Hitbox();
+        rightAssemHit = new Hitbox();
+        leftPackHit = new Hitbox();
+        rightPackHit = new Hitbox();
+        leftHandHit = new Hitbox();
+        rightHandHit = new Hitbox();
+        addObject(leftAssemHit, leftPos, getHeight() / 2);
+        addObject(rightAssemHit, rightPos, getHeight() / 2);
     }
     
     public void drawUpgrades () {
@@ -317,28 +335,28 @@ public class FactoryWorld extends World
             return;
         }
         
-        if (leftScore > 250){
+        if (leftScore > minScoreBuy){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (leftMach.getBroken()){
-                    leftRepair.activate();
+                    leftPointer.activate(leftUpgradeX, 489, leftRepair);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
-                if (rightBrokeLeft >= 0){
-                    leftBreak.activate();
+                if (leftBrokeRight >= 0){
+                    leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
-                    leftBreak.activate();
+                    leftPointer.activate(leftUpgradeX, 750, leftBreak);
                     leftBrokeRight = 900;
                 } else if (rand == 1){
-                    leftBuy.activate();
+                    leftPointer.activate(leftUpgradeX, 663, leftBuy);
                 } else if (rand == 2){
-                    leftQuality.activate();
+                    leftPointer.activate(leftUpgradeX, 576, leftQuality);
                 } else {
-                    leftSpawnUpgrade.activate();
+                    leftPointer.activate(leftUpgradeX, 402, leftSpawnUpgrade);
                 }
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
@@ -352,28 +370,28 @@ public class FactoryWorld extends World
             return;
         }
         
-        if (rightScore > 250){
+        if (rightScore > minScoreBuy){
             if (Greenfoot.getRandomNumber(600) == 0){
                 if (rightMach.getBroken()){
-                    rightRepair.activate();
+                    rightPointer.activate(rightUpgradeX, 489, rightRepair);
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 if (rightBrokeLeft >= 0){
-                    leftBreak.activate();
-                    leftUpgradeCooldown = upgradeCooldown;
+                    rightPointer.activate(rightUpgradeX, 750, rightBreak);
+                    rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0){
-                    rightBreak.activate();
+                    rightPointer.activate(rightUpgradeX, 750, rightBreak);
                     rightBrokeLeft = 900;
                 } else if (rand == 1){
-                    rightBuy.activate();
+                    rightPointer.activate(rightUpgradeX, 663, rightBuy);
                 } else if (rand == 2){
-                    rightQuality.activate();
+                    rightPointer.activate(rightUpgradeX, 576, rightQuality);
                 } else {
-                    rightSpawnUpgrade.activate();
+                    rightPointer.activate(rightUpgradeX, 402, rightSpawnUpgrade);
                 }
                 rightUpgradeCooldown = upgradeCooldown;
                 return;
@@ -388,8 +406,12 @@ public class FactoryWorld extends World
         leftPackager = new Packager();
         addObject(leftPackager, leftPos, getHeight() / 4 * 3);
     
+<<<<<<< HEAD
         leftPackagerHitbox = new Hitbox();
         addObject(leftPackagerHitbox, leftPos, getHeight() / 4 * 3);
+=======
+        leftPackHit.setLocation(leftPos, getHeight() / 2 + 200);
+>>>>>>> ba384976085b8c36a037561f5c8b484134f85632
     }
     
     public void addRightPackager() {
@@ -399,6 +421,7 @@ public class FactoryWorld extends World
         rightPackager = new Packager();
         addObject(rightPackager, rightPos, getHeight() / 4 * 3);
     
+<<<<<<< HEAD
         rightPackagerHitbox = new Hitbox();
         addObject(rightPackagerHitbox, rightPos, getHeight() / 4 * 3);
     }
@@ -445,6 +468,9 @@ public class FactoryWorld extends World
         } else {
             return 3;
         }
+=======
+        rightPackHit.setLocation(rightPos, getHeight() / 2 + 200);
+>>>>>>> ba384976085b8c36a037561f5c8b484134f85632
     }
     
     public Machines getLeftMachine(){

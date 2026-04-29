@@ -15,12 +15,14 @@ public class Packager extends Machines
     
     public void breakMachine() {
         image = new GreenfootImage("brokenmachine2.png");
+        image.scale(150, 170);
         setImage(image);
         broken = true;
     }
     
     public void unbreakMachine(){
         image = new GreenfootImage("machine2.png");
+        image.scale(150, 170);
         setImage(image);
         broken = false;
     }
