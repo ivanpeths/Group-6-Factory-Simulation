@@ -1,9 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ConveyorBelts here.
+ * Draws the conveyor belts, allows ability to move seamlessly
  * 
- * @author (your name) 
+ * @author Ivan
  * @version (a version number or a date)
  */
 public class Conveyor extends Actor
@@ -12,13 +12,5 @@ public class Conveyor extends Actor
     public Conveyor () {
         image = new GreenfootImage("conveyor.png");
         setImage(image);
-    }
-    /**
-     * Act - do whatever the ConveyorBelts wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
     }
 }

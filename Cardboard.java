@@ -12,7 +12,8 @@ public class Cardboard extends Product
         if (type == 0) image = new GreenfootImage("brokencardboard.png");
         else if (type == 1) image = new GreenfootImage("materialcardboard.png");
         else if (type == 2) image = new GreenfootImage("cheapcardboard.png");
-        else image = new GreenfootImage("expensivecardboard.png");
+        else if (type == 3) image = new GreenfootImage("expensivecardboard.png");
+        else image = new GreenfootImage("veryexpensivecardboard.png");
 
         image.scale(50, 50);
         setImage(image);

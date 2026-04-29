@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Spawn here.
  * 
- * @author (your name) 
+ * @author Ivan
  * @version (a version number or a date)
  */
 public class Spawn extends Upgrades

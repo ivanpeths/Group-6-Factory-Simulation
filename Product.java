@@ -1,3 +1,6 @@
+// Product by Isaac
+// All images by Gemini
+
 import greenfoot.*;
 import java.util.List;
 
@@ -57,11 +60,14 @@ public abstract class Product extends SuperSmoothMover
                 inMachine = true;
                 currentMachine = m;
             }
+            
+            if (currentMachine != null) {
+                m.checkBreak();
+            }
         }
 
         // leave machine
         if (!touchingMachine && wasTouchingMachine && inMachine) {
-
             inMachine = false;
             currentMachine = null;
         }
@@ -72,17 +78,20 @@ public abstract class Product extends SuperSmoothMover
     private void checkHitbox() 
     {
         Hitbox h = (Hitbox)getOneIntersectingObject(Hitbox.class);
+        Machines m = (Machines)getOneIntersectingObject(Machines.class);
 
         if (h != null && !upgraded) {
-            type++;
-            type = Math.min(type, 3);
-
-            if (Greenfoot.getRandomNumber(10) == 0) {
-                type = 0;
+            if (!m.getBroken()) {
+                type++;
+                type = Math.min(type, 3);
+    
+                if (Greenfoot.getRandomNumber(10) == 0) {
+                    type = 0;
+                }
+                
+                upgraded = true;
+                updateImage();
             }
-
-            upgraded = true;
-            updateImage();
         } 
         else if (h == null) {
             upgraded = false;
