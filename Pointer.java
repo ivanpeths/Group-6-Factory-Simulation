@@ -73,11 +73,11 @@ public class Pointer extends SuperSmoothMover
         } else if (curUpgrade instanceof Repair){
             soundMan.playRepair();
         } else if (curUpgrade instanceof Quality){
-            soundMan.playBreak();
+            soundMan.playQuality();
         } else if (curUpgrade instanceof Spawn){
-            soundMan.playBreak();
+            soundMan.playSpawn();
         } else{
-            soundMan.playBreak(); // Buy
+            soundMan.playBuy();
         }
     }
     
