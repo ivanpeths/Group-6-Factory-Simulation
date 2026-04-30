@@ -16,9 +16,13 @@ public class Pointer extends SuperSmoothMover
     private int startY = 0;
     private double targetX;
     private double targetY;
-    private double speed = 8.0;
-    private boolean movingToUpgrade;
-    private boolean movingToStart;
+    private double idleX;
+    private double idleY;
+    private double upgradeSpeed = 8.0;
+    private double idleSpeed = 4.0;
+    private boolean movingToUpgrade = false;
+    private boolean movingToStart = false;
+    private boolean finishedIdle = true;
     private SoundManager soundMan;
     private Upgrades curUpgrade;
     private int owner;
@@ -38,6 +42,7 @@ public class Pointer extends SuperSmoothMover
         this.targetY = targetY;
         this.curUpgrade = upgrade;
         movingToUpgrade = true;
+        finishedIdle = true;
     }
     
     public void act(){
@@ -47,6 +52,26 @@ public class Pointer extends SuperSmoothMover
         
         if (movingToStart){
             slideTowardsStart();
+        }
+        
+        if (!movingToStart && !movingToUpgrade){
+            if (finishedIdle){
+                newIdlePos();
+            } else {
+                idle();
+            }
+        }
+    }
+    
+    public void newIdlePos(){
+        World w = getWorld();
+        finishedIdle = false;
+        if (owner == 1){
+            idleX = getRandomNumber(0, w.getWidth() / 2);
+            idleY = getRandomNumber(0, w.getHeight());
+        } else {
+            idleX = getRandomNumber(w.getWidth() / 2, w.getWidth());
+            idleY = getRandomNumber(0, w.getHeight());
         }
     }
     
@@ -58,7 +83,7 @@ public class Pointer extends SuperSmoothMover
         double distance = Math.sqrt(dx * dx + dy * dy);
 
         // If close to target
-        if (distance <= speed) {
+        if (distance <= upgradeSpeed) {
             // Snap to target
             setLocation(targetX, targetY);
             movingToUpgrade = false;
@@ -68,7 +93,7 @@ public class Pointer extends SuperSmoothMover
             playSound();
             curUpgrade = null;
         } else {
-            double ratio = speed / distance;
+            double ratio = upgradeSpeed / distance;
             setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
         }
     }
@@ -98,6 +123,30 @@ public class Pointer extends SuperSmoothMover
         }
     }
     
+    public void idle(){
+        // Get difference in x and y
+        double dx = idleX - getPreciseX();
+        double dy = idleY - getPreciseY();
+        // Hypotenuse
+        double distance = Math.sqrt(dx * dx + dy * dy);
+    
+        // If close to target
+        if (distance <= idleSpeed) {
+            setLocation(idleX, idleY);
+            finishedIdle = true;
+        } else {
+            double ratio = idleSpeed / distance;
+            setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
+        }
+    }
+    
+    // From https://www.greenfoot.org/topics/1986
+    public int getRandomNumber(int start,int end)
+    {
+       int normal = Greenfoot.getRandomNumber(end-start+1);
+       return normal+start;
+    }
+
     public void slideTowardsStart(){
         // Get difference in x and y
         double dx = startX - getPreciseX();
@@ -106,12 +155,12 @@ public class Pointer extends SuperSmoothMover
         double distance = Math.sqrt(dx * dx + dy * dy);
     
         // If close to target
-        if (distance <= speed) {
+        if (distance <= upgradeSpeed) {
             // Snap to target
             setLocation(startX, startY);
             movingToStart = false;
         } else {
-            double ratio = speed / distance;
+            double ratio = upgradeSpeed / distance;
             setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
         }
     }
