@@ -18,6 +18,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Menu: https://pixabay.com/music/main-title-dramatic-436882/
  * Settings click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/ but tuned down
  * Break: https://pixabay.com/sound-effects/film-special-effects-powerful-cannon-254542/
+ * Repair: https://pixabay.com/sound-effects/film-special-effects-socket-wrench-90293/
  * 
  * @author Kolby Ng
  */
@@ -36,6 +37,7 @@ public class SoundManager
     private GreenfootSound[] clickSounds;
     private GreenfootSound[] menuClickSounds;
     private GreenfootSound[] breakSounds;
+    private GreenfootSound[] repairSounds;
     
     // Indexes
     private int leftCoinIndex = 0;
@@ -44,6 +46,7 @@ public class SoundManager
     private int clickIndex = 0;
     private int menuClickIndex = 0;
     private int breakIndex = 0;
+    private int repairIndex = 0;
     
     // Volumes
     private int startingSoundVolume = 30;
@@ -55,13 +58,14 @@ public class SoundManager
     private int errorVolume = 40;
     private int menuClickVolume = 30;
     private int breakVolume = 30;
+    private int repairVolume = 30;
     
     // Lengths
     private int coinLength = 5;
     private int errorLength = 5;
     private int clickLength = 3;
     private int menuClickLength = 3;
-    private int breakLength = 2;
+    private int upgradeLength = 2;
     
     
     public SoundManager(){
@@ -111,10 +115,16 @@ public class SoundManager
             menuClickSounds[i].setVolume(menuClickVolume);
         }
         
-        breakSounds = new GreenfootSound[clickLength];
-        for (int i = 0; i < breakLength; i++){
+        breakSounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
             breakSounds[i] = new GreenfootSound("break.mp3");
             breakSounds[i].setVolume(breakVolume);
+        }
+        
+        repairSounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
+            repairSounds[i] = new GreenfootSound("repair.mp3");
+            repairSounds[i].setVolume(repairVolume);
         }
     }
     
@@ -196,6 +206,12 @@ public class SoundManager
     // Break machine
     public void playBreak(){
         breakSounds[breakIndex].play();
-        breakIndex = (breakIndex + 1) % breakLength;
+        breakIndex = (breakIndex + 1) % upgradeLength;
+    }
+    
+    // Repair machine
+    public void playRepair(){
+        repairSounds[repairIndex].play();
+        repairIndex = (repairIndex + 1) % upgradeLength;
     }
 }
