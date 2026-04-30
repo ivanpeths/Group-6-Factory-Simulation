@@ -32,7 +32,7 @@ public abstract class Upgrades extends Actor
         if (activated) { //start reset timer when activated
             rechargeTimer++;
         }
-        if (rechargeTimer >= 900) { //15 seconds
+        if (rechargeTimer >= 420) { //7 seconds
             activated = false; //reactivate and become opaque
             rechargeTimer = 0;
             getImage().setTransparency(255);
