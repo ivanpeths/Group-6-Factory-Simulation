@@ -11,7 +11,7 @@ public abstract class Upgrades extends Actor
     protected int rechargeTimer; //timer for recharging
     protected boolean activated; //has this been used recently?
     protected int side;
-    private int cost = 50;
+    protected int cost = 50;
     
     public Upgrades (int side) {
         if (side == 50) { //which pixel are products spawning?
