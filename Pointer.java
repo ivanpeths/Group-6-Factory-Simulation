@@ -59,10 +59,25 @@ public class Pointer extends SuperSmoothMover
             movingToStart = true;
             soundMan.playClick();
             curUpgrade.activate();
+            playSound();
             curUpgrade = null;
         } else {
             double ratio = speed / distance;
             setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
+        }
+    }
+    
+    public void playSound(){
+        if (curUpgrade instanceof Break){
+            soundMan.playBreak();
+        } else if (curUpgrade instanceof Repair){
+            soundMan.playRepair();
+        } else if (curUpgrade instanceof Quality){
+            soundMan.playBreak();
+        } else if (curUpgrade instanceof Spawn){
+            soundMan.playBreak();
+        } else{
+            soundMan.playBreak(); // Buy
         }
     }
     

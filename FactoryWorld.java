@@ -330,22 +330,20 @@ public class FactoryWorld extends World
         }
         
         if (leftScore > minScoreBuy){
+            if (leftMach.getBroken()){
+                leftPointer.activate(leftUpgradeX, 489, leftRepair);
+                leftUpgradeCooldown = upgradeCooldown;
+                return;
+            }
             if (Greenfoot.getRandomNumber(600) == 0){
-                if (leftMach.getBroken()){
-                    leftPointer.activate(leftUpgradeX, 489, leftRepair);
-                    leftUpgradeCooldown = upgradeCooldown;
-                    return;
-                }
                 if (rightBrokeLeft >= 0 && !rightMach.getBroken()){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
-                    soundMan.playBreak();
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0 && !rightMach.getBroken()){
                     leftPointer.activate(leftUpgradeX, 750, leftBreak);
-                    soundMan.playBreak();
                     leftBrokeRight = 900;
                 } else if (rand == 1){
                     leftPointer.activate(leftUpgradeX, 663, leftBuy);
@@ -367,22 +365,20 @@ public class FactoryWorld extends World
         }
         
         if (rightScore > minScoreBuy){
+            if (rightMach.getBroken()){
+                rightPointer.activate(rightUpgradeX, 489, rightRepair);
+                rightUpgradeCooldown = upgradeCooldown;
+                return;
+            }
             if (Greenfoot.getRandomNumber(600) == 0){
-                if (rightMach.getBroken()){
-                    rightPointer.activate(rightUpgradeX, 489, rightRepair);
-                    rightUpgradeCooldown = upgradeCooldown;
-                    return;
-                }
                 if (leftBrokeRight >= 0 && !leftMach.getBroken()){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
-                    soundMan.playBreak();
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0 && !leftMach.getBroken()){
                     rightPointer.activate(rightUpgradeX, 750, rightBreak);
-                    soundMan.playBreak();
                     rightBrokeLeft = 900;
                 } else if (rand == 1){
                     rightPointer.activate(rightUpgradeX, 663, rightBuy);

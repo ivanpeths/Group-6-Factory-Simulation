@@ -51,14 +51,13 @@ public class SoundManager
     // Volumes
     private int startingSoundVolume = 30;
     private int coinVolume = 30;
-    // private int bgmVolume = 50;
     private int ambienceVolume = 20;
     private int menuVolume = 30;
     private int clickVolume = 50;
     private int errorVolume = 40;
     private int menuClickVolume = 30;
     private int breakVolume = 30;
-    private int repairVolume = 30;
+    private int repairVolume = 40;
     
     // Lengths
     private int coinLength = 5;
@@ -75,9 +74,6 @@ public class SoundManager
     public void setFiles(){
         startingSound = new GreenfootSound("starting_beep.mp3");
         startingSound.setVolume(startingSoundVolume);
-        
-        // bgm = new GreenfootSound("bgm.mp3");
-        // bgm.setVolume(bgmVolume);
         
         ambience = new GreenfootSound("ambience.mp3");
         ambience.setVolume(ambienceVolume);
@@ -147,17 +143,6 @@ public class SoundManager
     public void pauseStarting(){
         startingSound.pause();
     }
-    
-    /*
-    // BGM
-    public void playBgm(){
-        bgm.playLoop();
-    }
-    
-    public void pauseBgm(){
-        bgm.pause();
-    }
-    */
     
     // Error
     public void playError(){
