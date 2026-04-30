@@ -327,13 +327,13 @@ public class FactoryWorld extends World
         }
         
         if (leftScore > minScoreBuy){
-            if (leftMach.getBroken()){
+            if (leftMach.getBroken() && !leftRepair.getActivated()){
                 leftPointer.activate(leftUpgradeX, repairY, leftRepair);
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
             }
             if (Greenfoot.getRandomNumber(upgradeChance) == 0){
-                if (rightBrokeLeft >= 0 && !rightMach.getBroken()){
+                if (rightBrokeLeft >= 0 && !rightMach.getBroken() && !leftBreak.getActivated()){
                     leftPointer.activate(leftUpgradeX, breakY, leftBreak);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
@@ -342,11 +342,11 @@ public class FactoryWorld extends World
                 if (rand == 0 && !rightMach.getBroken()){
                     leftPointer.activate(leftUpgradeX, breakY, leftBreak);
                     leftBrokeRight = 900;
-                } else if (rand == 1){
+                } else if (rand == 1 && !leftBuy.getActivated()){
                     leftPointer.activate(leftUpgradeX, buyY, leftBuy);
-                } else if (rand == 2){
+                } else if (rand == 2 && !leftQuality.getActivated()){
                     leftPointer.activate(leftUpgradeX, qualityY, leftQuality);
-                } else {
+                } else if (rand == 3 && !leftSpawnUpgrade.getActivated()) {
                     leftPointer.activate(leftUpgradeX, spawnUpgradeY, leftSpawnUpgrade);
                 }
                 leftUpgradeCooldown = upgradeCooldown;
@@ -362,26 +362,26 @@ public class FactoryWorld extends World
         }
         
         if (rightScore > minScoreBuy){
-            if (rightMach.getBroken()){
+            if (rightMach.getBroken() && !rightRepair.getActivated()){
                 rightPointer.activate(rightUpgradeX, repairY, rightRepair);
                 rightUpgradeCooldown = upgradeCooldown;
                 return;
             }
             if (Greenfoot.getRandomNumber(upgradeChance) == 0){
-                if (leftBrokeRight >= 0 && !leftMach.getBroken()){
+                if (leftBrokeRight >= 0 && !leftMach.getBroken() && !rightBreak.getActivated()){
                     rightPointer.activate(rightUpgradeX, breakY, rightBreak);
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
-                if (rand == 0 && !leftMach.getBroken()){
+                if (rand == 0 && !leftMach.getBroken() && !rightBreak.getActivated()){
                     rightPointer.activate(rightUpgradeX, breakY, rightBreak);
                     rightBrokeLeft = 900;
-                } else if (rand == 1){
+                } else if (rand == 1 && !rightBuy.getActivated()){
                     rightPointer.activate(rightUpgradeX, buyY, rightBuy);
-                } else if (rand == 2){
+                } else if (rand == 2 && !rightQuality.getActivated()){
                     rightPointer.activate(rightUpgradeX, qualityY, rightQuality);
-                } else {
+                } else if (rand == 3 && !rightSpawnUpgrade.getActivated()){
                     rightPointer.activate(rightUpgradeX, spawnUpgradeY, rightSpawnUpgrade);
                 }
                 rightUpgradeCooldown = upgradeCooldown;
