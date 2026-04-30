@@ -20,9 +20,9 @@ public abstract class Product extends SuperSmoothMover
     protected boolean inMachine;
     protected boolean upgraded;
 
-    private boolean wasTouchingMachine;
-    private Machines currentMachine;
-    private int machinesRemaining;
+    protected boolean wasTouchingMachine;
+    protected Machines currentMachine;
+    protected int machinesRemaining;
 
     public Product(int owner, double speed)
     {
