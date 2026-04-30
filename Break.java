@@ -16,6 +16,7 @@ public class Break extends Upgrades
     public void activate () {
         FactoryWorld w = (FactoryWorld) getWorld();
         super.activate();
+        // break the enemy's machine
         if (side == 1){
             w.breakRightMachine();
         } else {
