@@ -98,7 +98,6 @@ public class Label extends Actor
         this.transparency = transparency;
         fillColor = new Color(255, 255, 255, transparency);
         lineColor = new Color(0, 0, 0, transparency);
-        color = new Color(0, 0, 0, 0);
         updateImage();
     }
     
