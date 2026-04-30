@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * First screen of the game
@@ -12,7 +12,7 @@ public class TitleScreen extends World
     private Label startLabel;
     private Label nameLabel;
     private GreenfootImage buttonImg;
-    private Actor buttonActor;
+    private Button buttonActor;
     private Label buttonTitle;
     private GreenfootImage background;
     private int fontSize = 75;
@@ -44,8 +44,7 @@ public class TitleScreen extends World
     
     public void setupButton(){
         buttonImg = new GreenfootImage("button.png");
-        buttonActor = new BlankActor();
-        buttonActor.setImage(buttonImg);
+        buttonActor = new Button(buttonImg);
         startLabel = new Label("Start", fontSize);
         addObject(buttonActor, getWidth() / 2, getHeight() / 8 * 7);
         addObject(startLabel, getWidth() / 2, getHeight() / 8 * 7 - 10);

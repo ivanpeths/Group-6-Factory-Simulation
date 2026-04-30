@@ -1,10 +1,9 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Write a description of class ProductQuality here.
+ * This upgrade increases the chance of more expensive Products spawning
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Ivan Ma
  */
 public class Quality extends Upgrades
 {

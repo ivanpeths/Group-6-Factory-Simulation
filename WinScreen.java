@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Win screen
@@ -7,7 +7,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Button to return to SettingsWorld and replay
  * 
  * @author Kolby Ng
- * @version 20260424
  */
 public class WinScreen extends World
 {
@@ -17,7 +16,7 @@ public class WinScreen extends World
     private int size = 75;
     
     private GreenfootImage buttonImg;
-    private Actor buttonActor;
+    private Button buttonActor;
     private Label buttonTitle;
     
     private GreenfootImage background;
@@ -49,8 +48,7 @@ public class WinScreen extends World
     
     public void setupButton(){
         buttonImg = new GreenfootImage("button.png");
-        buttonActor = new BlankActor();
-        buttonActor.setImage(buttonImg);
+        buttonActor = new Button(buttonImg);
         restartLabel = new Label("Restart", size);
         addObject(buttonActor, getWidth() / 2, getHeight() / 4 * 3);
         addObject(restartLabel, getWidth() / 2, getHeight() / 4 * 3 - 10);

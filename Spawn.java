@@ -1,10 +1,9 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Write a description of class Spawn here.
+ * This upgrade increases product spawn rates by 5 frames, around 83 milliseconds
  * 
- * @author Ivan
- * @version (a version number or a date)
+ * @author Ivan Ma
  */
 public class Spawn extends Upgrades
 {
