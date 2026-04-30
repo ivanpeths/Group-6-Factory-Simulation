@@ -14,7 +14,7 @@ public abstract class Machines extends Actor
     }
     
     public void checkBreak () {
-        if (Greenfoot.getRandomNumber(15) == 0) {
+        if (!broken && Greenfoot.getRandomNumber(15) == 0) {
             ((FactoryWorld) getWorld()).getSoundMan().playBreak();
             breakMachine(); //random 1/15 chance to break for every product made
         }

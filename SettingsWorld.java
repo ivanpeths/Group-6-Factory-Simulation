@@ -134,10 +134,10 @@ public class SettingsWorld extends World
         
     }
     
-    // Clamp max
+    // Clamp min and max
     public void changeLeftScore(int amt){
         int oldAmt = leftScoreAmt;
-        leftScoreAmt = Math.min(500, leftScoreAmt + amt);
+        leftScoreAmt = (Math.max(Math.min(1000, leftScoreAmt + amt), 0));
         leftScoreAmtLabel.setValue(leftScoreAmt);
         if (oldAmt == leftScoreAmt){
             soundMan.playError();
@@ -160,10 +160,10 @@ public class SettingsWorld extends World
         addObject(rightScoreRight, getWidth() / 8 * 7, rightScoreY);
     }
     
-    // Clamp max
+    // Clamp min and max
     public void changeRightScore(int amt){
         int oldAmt = rightScoreAmt;
-        rightScoreAmt = Math.min(500, rightScoreAmt + amt);
+        rightScoreAmt = (Math.max(Math.min(1000, rightScoreAmt + amt), 0));
         rightScoreAmtLabel.setValue(rightScoreAmt);
         if (oldAmt == rightScoreAmt){
             soundMan.playError();
@@ -426,4 +426,3 @@ public class SettingsWorld extends World
         }
     }
 }
-

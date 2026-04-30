@@ -17,6 +17,7 @@ public abstract class Product extends SuperSmoothMover
 
     private boolean wasTouchingMachine;
     private Machines currentMachine;
+    private int machinesRemaining;
 
     public Product(int owner, double speed)
     {
@@ -77,11 +78,18 @@ public abstract class Product extends SuperSmoothMover
         Hitbox h = (Hitbox)getOneIntersectingObject(Hitbox.class);
         Machines m = (Machines)getOneIntersectingObject(Machines.class);
 
-        if (h != null && !upgraded) {
+        if (h != null && m != null && !upgraded) {
             if (!m.getBroken()) {
                 type++;
-                type = Math.min(type, 3);
-    
+                FactoryWorld fw = (FactoryWorld) getWorld();
+                if (owner == 1){
+                    machinesRemaining = fw.leftMachinesRemaining();
+                } else {
+                    machinesRemaining = fw.rightMachinesRemaining();
+                }
+                int maxType = 2 + machinesRemaining;
+                type = Math.min(type, maxType);
+
                 if (Greenfoot.getRandomNumber(10) == 0) {
                     type = 0;
                 }

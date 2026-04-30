@@ -11,7 +11,7 @@ public abstract class Upgrades extends Actor
     protected int rechargeTimer; //timer for recharging
     protected boolean activated; //has this been used recently?
     protected int side;
-    private int cost = 50;
+    protected int cost = 50;
     
     public Upgrades (int side) {
         if (side == 50) { //which pixel are products spawning?
@@ -27,22 +27,9 @@ public abstract class Upgrades extends Actor
         }
         if (rechargeTimer >= 900) { //15 seconds
             activated = false; //reactivate and become opaque
+            rechargeTimer = 0;
             getImage().setTransparency(255);
         }
-            
-        /* Not the effect I had in mind - Kolby
-        if (isTouching(Pointer.class) && !activated) { // Remove after pointer works
-            if (side == 1) {
-                if (((FactoryWorld)getWorld()).getLeftScore() >= 100) {
-                    activate();
-                }
-            } else {
-                if (((FactoryWorld)getWorld()).getRightScore() >= 100) {
-                    activate();
-                }
-            }       
-        }
-        */
     }
     
     public void activate () { //activate upgrade, changed by each subclass
