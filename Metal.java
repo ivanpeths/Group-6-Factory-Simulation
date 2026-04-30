@@ -1,5 +1,10 @@
-// Metal by Isaac
 import greenfoot.*;
+
+/**
+ * Most expensive Product
+ * 
+ * @author Isaac Law
+ */
 
 public class Metal extends Product
 {

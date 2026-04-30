@@ -1,9 +1,16 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Upgrades randomly used by the computer
+ * Upgrades superclass 
  * 
- * @author Ivan
+ * Five upgrades in total
+ * Break - breaks one machine on the other side
+ * Buy - buys an extra machine on your side
+ * Quality - increase chance of expensive products spawning
+ * Repair - repair all your machines
+ * Spawn - increase product spawn rate
+ * 
+ * @author Ivan Ma
  */
 public abstract class Upgrades extends Actor
 {

@@ -1,9 +1,9 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Third machine
  * 
- * @author Ivan
+ * @author Ivan Ma
  */
 public class Packager extends Machines
 {

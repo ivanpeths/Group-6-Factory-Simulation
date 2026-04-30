@@ -1,10 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Second screen of the game, can tweak the following
  * - Starting scores
- * - Starting positions
- * - Product spawn rate
+ * - Spawn rate of more expensive items, the smaller the value the more common it is
+ * - Product spawn rate, the smaller the value the faster products spawn
  * 
  * Click on arrows to adjust value
  * Hold Shift while clicking on arrows to adjust with a larger increment

@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 import java.util.Arrays;
 /**
  * <p>New and Improved Stat Bar (Formerly Health Bar). This stat bar can be set to follow

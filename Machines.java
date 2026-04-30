@@ -1,9 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Machines upgrade items into new types, they can be broken and repaired.
+ * Superclass for different types of Machines 
+ * Machines upgrade Products into new types, they can be broken and repaired.
  * 
- * @author Ivan 
+ * @author Ivan Ma
  */
 public abstract class Machines extends Actor
 {
@@ -20,9 +21,9 @@ public abstract class Machines extends Actor
         }
     }
     
-    public abstract void breakMachine (); //break
+    public abstract void breakMachine (); //break self
     
-    public abstract void unbreakMachine(); //repair
+    public abstract void unbreakMachine(); //repair self
     
     public boolean getBroken() {
         return broken; //check if products should be upgraded

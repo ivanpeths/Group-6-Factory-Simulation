@@ -1,6 +1,10 @@
-// Product by Isaac
-// All images by Gemini
-
+/**
+ * Product superclass
+ * 
+ * @author Isaac Law, with help from Ivan Ma
+ * 
+ * All images by Gemini
+ */
 import greenfoot.*;
 import java.util.List;
 

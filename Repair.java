@@ -1,9 +1,9 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Write a description of class RepairMachine here.
+ * This upgrade repair all broken machines
  * 
- * @author (your name) 
+ * @author Kolby Ng, with help from Ivan Ma
  * @version (a version number or a date)
  */
 public class Repair extends Upgrades

@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Win screen
@@ -7,7 +7,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Button to return to SettingsWorld and replay
  * 
  * @author Kolby Ng
- * @version 20260424
  */
 public class WinScreen extends World
 {

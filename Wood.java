@@ -1,4 +1,8 @@
-// Wood by Isaac
+/**
+ * Middle tier product
+ * 
+ * @author Isaac Law
+ */
 import greenfoot.*;
 
 public class Wood extends Product
