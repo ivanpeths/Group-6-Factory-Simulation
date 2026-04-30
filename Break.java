@@ -18,9 +18,9 @@ public class Break extends Upgrades
         FactoryWorld w = (FactoryWorld) getWorld();
         super.activate();
         if (side == 1){
-            w.getRightMachine().breakMachine();
+            w.breakRightMachine();
         } else {
-            w.getLeftMachine().breakMachine();
+            w.breakLeftMachine();
         }
     }
 }

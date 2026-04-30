@@ -18,9 +18,9 @@ public class Repair extends Upgrades
         FactoryWorld w = (FactoryWorld) getWorld();
         super.activate();
         if (side == 1){
-            w.getLeftMachine().unbreakMachine();
+            w.repairLeftMachines();
         } else {
-            w.getRightMachine().unbreakMachine();
+            w.repairRightMachines();
         }
     }
 }
