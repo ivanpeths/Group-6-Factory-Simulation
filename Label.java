@@ -20,8 +20,8 @@ public class Label extends Actor
     private String value;
     private int fontSize;
     private Color lineColor = Color.BLACK;
-    private Color fillColor = Color.WHITE;
-    private int transparency = 255;
+    private Color fillColor = new Color(255,255,255,255);
+    private int transparency = 0;
     
     private Color color = new Color(0,0,0,transparency);
 
@@ -96,7 +96,9 @@ public class Label extends Actor
     public void setTransparency(int transparency)
     {
         this.transparency = transparency;
-        color = new Color(0,0,0,transparency);
+        fillColor = new Color(255, 255, 255, transparency);
+        lineColor = new Color(0, 0, 0, transparency);
+        color = new Color(0, 0, 0, 0);
         updateImage();
     }
     

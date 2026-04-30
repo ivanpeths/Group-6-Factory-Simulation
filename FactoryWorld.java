@@ -90,6 +90,9 @@ public class FactoryWorld extends World
     private Label leftSpawnLabel;
     private int leftBrokeRight = -1;
     private int leftUpgradeCooldown = 0;
+    private int leftLabelTransparency = 255;
+    private Label leftLabelShown;
+    private int leftLabelCounter;
     
     private int rightUpgradeX = 1150;
     private Break rightBreak;
@@ -101,6 +104,9 @@ public class FactoryWorld extends World
     private Label rightSpawnLabel;
     private int rightBrokeLeft = -1;
     private int rightUpgradeCooldown = 0;
+    private int rightLabelTransparency = 255;
+    private Label rightLabelShown;
+    private int rightLabelCounter = 0;
 
     private int spawnUpgradeY = 402;
     private int repairY = 489;
@@ -369,8 +375,12 @@ public class FactoryWorld extends World
                     leftPointer.activate(leftUpgradeX, buyY, leftBuy);
                 } else if (rand == 2 && !leftQuality.getActivated()){
                     leftPointer.activate(leftUpgradeX, qualityY, leftQuality);
+                    leftLabelShown = leftQualityLabel;
+                    addObject(leftQualityLabel, getWidth() / 4, getHeight() / 4);
                 } else if (rand == 3 && !leftSpawnUpgrade.getActivated()) {
                     leftPointer.activate(leftUpgradeX, spawnUpgradeY, leftSpawnUpgrade);
+                    leftLabelShown = leftSpawnLabel;
+                    addObject(leftSpawnLabel, getWidth() / 4, getHeight() / 4);
                 }
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
@@ -410,8 +420,12 @@ public class FactoryWorld extends World
                     rightPointer.activate(rightUpgradeX, buyY, rightBuy);
                 } else if (rand == 2 && !rightQuality.getActivated()){
                     rightPointer.activate(rightUpgradeX, qualityY, rightQuality);
+                    rightLabelShown = rightQualityLabel;
+                    addObject(rightQualityLabel, getWidth() / 4 * 3, getHeight() / 4);
                 } else if (rand == 3 && !rightSpawnUpgrade.getActivated()){
                     rightPointer.activate(rightUpgradeX, spawnUpgradeY, rightSpawnUpgrade);
+                    rightLabelShown = rightSpawnLabel;
+                    addObject(rightSpawnLabel, getWidth() / 4 * 3, getHeight() / 4);
                 }
                 rightUpgradeCooldown = upgradeCooldown;
                 return;
@@ -593,6 +607,36 @@ public class FactoryWorld extends World
         }
     }
 
+    public void checkLeftLabel(){
+        if (leftLabelShown != null){
+            if (leftLabelCounter <= 60){
+                leftLabelCounter++;
+            } else if (leftLabelCounter <= 145){ // 60 + 255 / 3
+                leftLabelTransparency -= 3;
+                leftLabelShown.setTransparency(leftLabelTransparency);
+                leftLabelCounter++;
+            } else {
+                removeObject(leftLabelShown);
+                leftLabelShown = null;
+            }
+        }
+    }
+
+    public void checkRightLabel(){
+        if (rightLabelShown != null){
+            if (rightLabelCounter <= 60){
+                rightLabelCounter++;
+            } else if (rightLabelCounter <= 145){ // 60 + 255 / 3
+                rightLabelTransparency -= 3;
+                rightLabelShown.setTransparency(rightLabelTransparency);
+                rightLabelCounter++;
+            } else {
+                removeObject(rightLabelShown);
+                rightLabelShown = null;
+            }
+        }
+    }
+
     public void act(){
         // Logic only for before game started
         if (!gameStarted){
@@ -630,6 +674,9 @@ public class FactoryWorld extends World
         // Check for upgrades
         canUpgradeLeft();
         canUpgradeRight();
+
+        checkLeftLabel();
+        checkRightLabel();
     }
     
     public int getLeftScore () {
