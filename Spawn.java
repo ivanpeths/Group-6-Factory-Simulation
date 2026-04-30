@@ -8,16 +8,16 @@ import greenfoot.*;
 public class Spawn extends Upgrades
 {
     public Spawn (int side) {
-        super(side);
-        image = new GreenfootImage("spawning.png");
+        super(side); //calls superclass constructor
+        image = new GreenfootImage("spawning.png"); //image for upgrade
         setImage(image);
     }
     
     public void activate () {
-        super.activate();
-        if (side == 1) {
+        super.activate(); //calls superclass method
+        if (side == 1) { //left
             ((FactoryWorld)getWorld()).updateLeftSpawn();
-        } else {
+        } else { //right
             ((FactoryWorld)getWorld()).updateRightSpawn();
         }
     }
