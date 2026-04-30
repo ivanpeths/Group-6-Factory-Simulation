@@ -21,14 +21,16 @@ public class Pointer extends SuperSmoothMover
     private boolean movingToStart;
     private SoundManager soundMan;
     private Upgrades curUpgrade;
+    private int owner;
     
-    public Pointer(SoundManager soundMan, int startX, int startY){
+    public Pointer(SoundManager soundMan, int startX, int startY, int owner){
         GreenfootImage img = new GreenfootImage("pointer.png");
         img.scale(xSize, ySize);
         setImage(img);
         this.soundMan = soundMan;
         this.startX = startX;
         this.startY = startY;
+        this.owner = owner;
     }
     
     public void activate(double targetX, double targetY, Upgrades upgrade){
@@ -72,14 +74,25 @@ public class Pointer extends SuperSmoothMover
     }
     
     public void playSound(){
+        FactoryWorld fw = (FactoryWorld) getWorld();
         if (curUpgrade instanceof Break){
             soundMan.playBreak();
         } else if (curUpgrade instanceof Repair){
             soundMan.playRepair();
         } else if (curUpgrade instanceof Quality){
             soundMan.playQuality();
+            if (owner == 1){
+                fw.addLeftQualityLabel();
+            } else {
+                fw.addRightQualityLabel();
+            }
         } else if (curUpgrade instanceof Spawn){
             soundMan.playSpawn();
+            if (owner == 1){
+                fw.addLeftSpawnLabel();
+            } else {
+                fw.addRightSpawnLabel();
+            }
         } else{
             soundMan.playBuy();
         }

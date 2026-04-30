@@ -175,8 +175,8 @@ public class FactoryWorld extends World
     }
     
     public void setupPointers(){
-        this.leftPointer = new Pointer(soundMan, getWidth() / 8 * 3, getHeight() / 2);
-        this.rightPointer = new Pointer(soundMan, getWidth() / 8 * 5, getHeight() / 2);
+        this.leftPointer = new Pointer(soundMan, getWidth() / 8 * 3, getHeight() / 2, 1);
+        this.rightPointer = new Pointer(soundMan, getWidth() / 8 * 5, getHeight() / 2, 2);
         addObject(leftPointer, getWidth() / 8 * 3, getHeight() / 2);
         addObject(rightPointer, getWidth() / 8 * 5, getHeight() / 2);
     }
@@ -375,8 +375,6 @@ public class FactoryWorld extends World
                     leftPointer.activate(leftUpgradeX, buyY, leftBuy);
                 } else if (rand == 2 && !leftQuality.getActivated()){
                     leftPointer.activate(leftUpgradeX, qualityY, leftQuality);
-                    leftLabelShown = leftQualityLabel;
-                    addObject(leftQualityLabel, getWidth() / 4, getHeight() / 4);
                 } else if (rand == 3 && !leftSpawnUpgrade.getActivated()) {
                     leftPointer.activate(leftUpgradeX, spawnUpgradeY, leftSpawnUpgrade);
                     leftLabelShown = leftSpawnLabel;
@@ -431,6 +429,26 @@ public class FactoryWorld extends World
                 return;
             }
         }
+    }
+
+    public void addLeftQualityLabel(){
+        leftLabelShown = leftQualityLabel;
+        addObject(leftQualityLabel, getWidth() / 4, getHeight() / 4);
+    }
+
+    public void addLeftSpawnLabel(){
+        leftLabelShown = leftSpawnLabel;
+        addObject(leftSpawnLabel, getWidth() / 4, getHeight() / 4);
+    }
+
+    public void addRightQualityLabel(){
+        rightLabelShown = rightQualityLabel;
+        addObject(rightQualityLabel, getWidth() / 4, getHeight() / 4);
+    }
+
+    public void addRightSpawnLabel(){
+        rightLabelShown = rightSpawnLabel;
+        addObject(rightSpawnLabel, getWidth() / 4, getHeight() / 4);
     }
 
     public void addLeftPackager() {
@@ -618,6 +636,8 @@ public class FactoryWorld extends World
             } else {
                 removeObject(leftLabelShown);
                 leftLabelShown = null;
+                leftLabelCounter = 0;
+                leftLabelTransparency = 255;
             }
         }
     }
@@ -633,6 +653,8 @@ public class FactoryWorld extends World
             } else {
                 removeObject(rightLabelShown);
                 rightLabelShown = null;
+                rightLabelCounter = 0;
+                rightLabelTransparency = 255;
             }
         }
     }
