@@ -88,6 +88,9 @@ public class FactoryWorld extends World
     private Repair leftRepair;
     private Spawn leftSpawnUpgrade;
     private Label leftSpawnLabel;
+    private Label leftRepairLabel;
+    private Label leftBuyLabel;
+    private Label leftBreakLabel;
     private int leftBrokeRight = -1;
     private int leftUpgradeCooldown = 0;
     private int leftLabelTransparency = 255;
@@ -102,6 +105,9 @@ public class FactoryWorld extends World
     private Repair rightRepair;
     private Spawn rightSpawnUpgrade;
     private Label rightSpawnLabel;
+    private Label rightRepairLabel;
+    private Label rightBuyLabel;
+    private Label rightBreakLabel;
     private int rightBrokeLeft = -1;
     private int rightUpgradeCooldown = 0;
     private int rightLabelTransparency = 255;
@@ -241,6 +247,12 @@ public class FactoryWorld extends World
         leftSpawnLabel = new Label("Product spawn rate increased!", upgradeLabelSize);
         rightQualityLabel = new Label("Metal spawn rate increased!", upgradeLabelSize);
         rightSpawnLabel = new Label("Product spawn rate increased!", upgradeLabelSize);
+        leftBreakLabel = new Label("Opponent machine broken!", upgradeLabelSize);
+        leftBuyLabel = new Label("New machine bought!", upgradeLabelSize);
+        leftRepairLabel = new Label("Machine repaired!", upgradeLabelSize);
+        rightBreakLabel = new Label("Opponent machine broken!", upgradeLabelSize);
+        rightBuyLabel = new Label("New machine bought!", upgradeLabelSize);
+        rightRepairLabel = new Label("Machine repaired!", upgradeLabelSize);
     }
     
     public void updateLeftSpawn () {
@@ -443,6 +455,36 @@ public class FactoryWorld extends World
     public void addRightSpawnLabel(){
         rightLabelShown = rightSpawnLabel;
         addObject(rightSpawnLabel, getWidth() / 4 * 3, getHeight() / 4);
+    }
+    
+    public void addLeftRepairLabel(){
+        leftLabelShown = leftRepairLabel;
+        addObject(leftRepairLabel, getWidth() / 4, getHeight() / 4);
+    }
+    
+    public void addLeftBuyLabel(){
+        leftLabelShown = leftBuyLabel;
+        addObject(leftBuyLabel, getWidth() / 4, getHeight() / 4);
+    }
+    
+    public void addLeftBreakLabel(){
+        leftLabelShown = leftBreakLabel;
+        addObject(leftBreakLabel, getWidth() / 4, getHeight() / 4);
+    }
+    
+    public void addRightRepairLabel(){
+        rightLabelShown = rightRepairLabel;
+        addObject(rightRepairLabel, getWidth() / 4 * 3, getHeight() / 4);
+    }
+    
+    public void addRightBuyLabel(){
+        rightLabelShown = rightBuyLabel;
+        addObject(rightBuyLabel, getWidth() / 4 * 3, getHeight() / 4);
+    }
+    
+    public void addRightBreakLabel(){
+        rightLabelShown = rightBreakLabel;
+        addObject(rightBreakLabel, getWidth() / 4 * 3, getHeight() / 4);
     }
 
     public void addLeftPackager() {

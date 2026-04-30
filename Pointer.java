@@ -10,8 +10,8 @@ import greenfoot.*;
  */
 public class Pointer extends SuperSmoothMover
 {
-    private int xSize = 30;
-    private int ySize = 50;
+    private int xSize = 20;
+    private int ySize = 35;
     private int startX = 0;
     private int startY = 0;
     private double targetX;
