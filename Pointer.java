@@ -1,10 +1,10 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Fake pointer the simulated player use
  * to click on upgrades
  * 
- * 
+ * Uses SuperSmoothMover to move smoothly
  * 
  * @author Kolby Ng 
  */
@@ -49,11 +49,15 @@ public class Pointer extends SuperSmoothMover
     }
     
     public void slideTowardsUpgrade(){
+        // Get difference in x and y
         double dx = targetX - getPreciseX();
         double dy = targetY - getPreciseY();
+        // Hypotenuse
         double distance = Math.sqrt(dx * dx + dy * dy);
-    
+
+        // If close to target
         if (distance <= speed) {
+            // Snap to target
             setLocation(targetX, targetY);
             movingToUpgrade = false;
             movingToStart = true;
@@ -82,11 +86,15 @@ public class Pointer extends SuperSmoothMover
     }
     
     public void slideTowardsStart(){
+        // Get difference in x and y
         double dx = startX - getPreciseX();
         double dy = startY - getPreciseY();
+        // Hypotenuse
         double distance = Math.sqrt(dx * dx + dy * dy);
     
+        // If close to target
         if (distance <= speed) {
+            // Snap to target
             setLocation(startX, startY);
             movingToStart = false;
         } else {

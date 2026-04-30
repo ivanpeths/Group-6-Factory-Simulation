@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Sound Manager for entire game
@@ -230,19 +230,19 @@ public class SoundManager
         repairIndex = (repairIndex + 1) % upgradeLength;
     }
     
-    // Increase spawn rate upgrade
+    // Spawn upgrade
     public void playSpawn(){
         spawnSounds[spawnIndex].play();
         spawnIndex = (spawnIndex + 1) % upgradeLength;
     }
     
-    // New machine upgrade
+    // Buy upgrade
     public void playBuy(){
         buySounds[buyIndex].play();
         buyIndex = (buyIndex + 1) % upgradeLength;
     }
     
-    // Increase chance of high quality materials upgrade
+    // Quality upgrade
     public void playQuality(){
         qualitySounds[qualityIndex].play();
         qualityIndex = (qualityIndex + 1) % upgradeLength;

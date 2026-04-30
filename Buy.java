@@ -1,10 +1,9 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
- * Write a description of class Buy here.
+ * This upgrade adds up to two other machines. 
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Ivan Ma
  */
 public class Buy extends Upgrades
 {

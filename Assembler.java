@@ -1,9 +1,9 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 /**
  * Starting machine
  * 
- * @author Ivan
+ * @author Ivan Ma
  */
 public class Assembler extends Machines
 {
@@ -15,7 +15,7 @@ public class Assembler extends Machines
     public void breakMachine() {
         image = new GreenfootImage("brokenmachine.png");
         setImage(image);
-        broken = true; //change broken to true
+        broken = true;
     }
     
     public void unbreakMachine(){
