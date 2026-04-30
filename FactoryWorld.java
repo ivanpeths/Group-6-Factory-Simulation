@@ -151,7 +151,7 @@ public class FactoryWorld extends World
     
     public void started(){
         if (gameStarted) {
-            //soundMan.playBgm();
+            soundMan.playMenu();
             soundMan.playAmbience();
         }
     }

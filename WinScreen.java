@@ -33,6 +33,14 @@ public class WinScreen extends World
         
     }
     
+    public void started(){
+        soundMan.playMenu();
+    }
+    
+    public void stopped(){
+        soundMan.pauseMenu();
+    }
+    
     public void setupLabel(String winner, int loseScore){
         titleLabel = new Label(winner + " wins!", size);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
