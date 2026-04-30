@@ -68,8 +68,8 @@ public class SoundManager
     private int breakVolume = 25;
     private int repairVolume = 40;
     private int buyVolume = 40;
-    private int spawnVolume = 40;
-    private int qualityVolume = 40;
+    private int spawnVolume = 30;
+    private int qualityVolume = 60;
     
     // Lengths
     private int coinLength = 5;

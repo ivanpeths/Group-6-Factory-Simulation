@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.ArrayList;
 
 /**
  * Main game world
@@ -32,7 +33,7 @@ public class FactoryWorld extends World
     private int rightScore;
     private int labelY = 35;
     private int labelSize = 50;
-    private int winCond = 500;
+    private int winCond = 1000;
     
     // Bar variables
     private SuperStatBar leftBar;
@@ -329,19 +330,19 @@ public class FactoryWorld extends World
         }
         
         if (leftScore > minScoreBuy){
-            if (leftMach.getBroken() && !leftRepair.getActivated()){
+            if (hasBrokenLeftMachine() && !leftRepair.getActivated()){
                 leftPointer.activate(leftUpgradeX, repairY, leftRepair);
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
             }
             if (Greenfoot.getRandomNumber(upgradeChance) == 0){
-                if (rightBrokeLeft >= 0 && !rightMach.getBroken() && !leftBreak.getActivated()){
+                if (rightBrokeLeft >= 0 && hasWorkingRightMachine() && !leftBreak.getActivated()){
                     leftPointer.activate(leftUpgradeX, breakY, leftBreak);
                     leftUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
-                if (rand == 0 && !rightMach.getBroken() && !leftBreak.getActivated()){
+                if (rand == 0 && hasWorkingRightMachine() && !leftBreak.getActivated()){
                     leftPointer.activate(leftUpgradeX, breakY, leftBreak);
                     leftBrokeRight = 900;
                 } else if (rand == 1 && !leftBuy.getActivated()){
@@ -364,19 +365,19 @@ public class FactoryWorld extends World
         }
         
         if (rightScore > minScoreBuy){
-            if (rightMach.getBroken() && !rightRepair.getActivated()){
+            if (hasBrokenRightMachine() && !rightRepair.getActivated()){
                 rightPointer.activate(rightUpgradeX, repairY, rightRepair);
                 rightUpgradeCooldown = upgradeCooldown;
                 return;
             }
             if (Greenfoot.getRandomNumber(upgradeChance) == 0){
-                if (leftBrokeRight >= 0 && !leftMach.getBroken() && !rightBreak.getActivated()){
+                if (leftBrokeRight >= 0 && hasWorkingLeftMachine() && !rightBreak.getActivated()){
                     rightPointer.activate(rightUpgradeX, breakY, rightBreak);
                     rightUpgradeCooldown = upgradeCooldown;
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
-                if (rand == 0 && !leftMach.getBroken() && !rightBreak.getActivated()){
+                if (rand == 0 && hasWorkingLeftMachine() && !rightBreak.getActivated()){
                     rightPointer.activate(rightUpgradeX, breakY, rightBreak);
                     rightBrokeLeft = 900;
                 } else if (rand == 1 && !rightBuy.getActivated()){
@@ -450,6 +451,71 @@ public class FactoryWorld extends World
         return count;
     }
     
+    private boolean isBroken(Machines machine){
+        return machine != null && machine.getBroken();
+    }
+
+    private boolean isWorking(Machines machine){
+        return machine != null && !machine.getBroken();
+    }
+
+    private void repairMachine(Machines machine){
+        if (isBroken(machine)){
+            machine.unbreakMachine();
+        }
+    }
+
+    private Machines chooseWorkingMachine(Machines first, Machines second, Machines third){
+        ArrayList<Machines> workingMachines = new ArrayList<Machines>();
+        if (isWorking(first)) workingMachines.add(first);
+        if (isWorking(second)) workingMachines.add(second);
+        if (isWorking(third)) workingMachines.add(third);
+        if (workingMachines.isEmpty()) return null;
+        return workingMachines.get(Greenfoot.getRandomNumber(workingMachines.size()));
+    }
+
+    public boolean hasBrokenLeftMachine(){
+        return isBroken(leftMach) || isBroken(leftHandler) || isBroken(leftPackager);
+    }
+
+    public boolean hasBrokenRightMachine(){
+        return isBroken(rightMach) || isBroken(rightHandler) || isBroken(rightPackager);
+    }
+
+    public boolean hasWorkingLeftMachine(){
+        return isWorking(leftMach) || isWorking(leftHandler) || isWorking(leftPackager);
+    }
+
+    public boolean hasWorkingRightMachine(){
+        return isWorking(rightMach) || isWorking(rightHandler) || isWorking(rightPackager);
+    }
+
+    public void repairLeftMachines(){
+        repairMachine(leftMach);
+        repairMachine(leftHandler);
+        repairMachine(leftPackager);
+    }
+
+    public void repairRightMachines(){
+        repairMachine(rightMach);
+        repairMachine(rightHandler);
+        repairMachine(rightPackager);
+    }
+
+    public void breakLeftMachine(){
+        Machines target = chooseWorkingMachine(leftMach, leftHandler, leftPackager);
+        if (target != null){
+            target.breakMachine();
+        }
+    }
+
+    public void breakRightMachine(){
+        Machines target = chooseWorkingMachine(rightMach, rightHandler, rightPackager);
+        if (target != null){
+            target.breakMachine();
+        }
+    }
+
     public Machines getLeftMachine(){
         return leftMach;
     }
