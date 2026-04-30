@@ -59,9 +59,6 @@ public abstract class Product extends SuperSmoothMover
             if (!m.getBroken() && type != 0) {
                 inMachine = true;
                 currentMachine = m;
-            }
-            
-            if (currentMachine != null) {
                 m.checkBreak();
             }
         }

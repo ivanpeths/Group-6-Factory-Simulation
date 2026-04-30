@@ -5,7 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * Manages creating, playing and pausing of all game sounds
  * 
- * Coins and Error sound effects uses arrays to allow simultatneous playing of the same sound
+ * Some sound effects uses arrays to allow simultatneous playing of the same sound
  * 
  * Credits
  * Left coin: https://pixabay.com/sound-effects/film-special-effects-drop-coin-384921/ but tuned down
@@ -17,6 +17,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Ambience: https://pixabay.com/sound-effects/technology-steam-engine-loop-43171/
  * Menu: https://pixabay.com/music/main-title-dramatic-436882/
  * Settings click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/ but tuned down
+ * Break: https://pixabay.com/sound-effects/film-special-effects-powerful-cannon-254542/
+ * Repair: https://pixabay.com/sound-effects/film-special-effects-socket-wrench-90293/
+ * Spawn: https://elements.envato.com/cooking-game-abilities-rush-01-Q4JTAFB
+ * Buy: https://pixabay.com/sound-effects/film-special-effects-giant-fall-impact-352446/
+ * Quality: Made in Musescore by me
  * 
  * @author Kolby Ng
  */
@@ -34,6 +39,11 @@ public class SoundManager
     private GreenfootSound[] errorSounds;
     private GreenfootSound[] clickSounds;
     private GreenfootSound[] menuClickSounds;
+    private GreenfootSound[] breakSounds;
+    private GreenfootSound[] repairSounds;
+    private GreenfootSound[] buySounds;
+    private GreenfootSound[] spawnSounds;
+    private GreenfootSound[] qualitySounds;
     
     // Indexes
     private int leftCoinIndex = 0;
@@ -41,22 +51,32 @@ public class SoundManager
     private int errorIndex = 0;
     private int clickIndex = 0;
     private int menuClickIndex = 0;
+    private int breakIndex = 0;
+    private int repairIndex = 0;
+    private int buyIndex = 0;
+    private int spawnIndex = 0;
+    private int qualityIndex = 0;
     
     // Volumes
     private int startingSoundVolume = 30;
     private int coinVolume = 30;
-    // private int bgmVolume = 50;
     private int ambienceVolume = 20;
-    private int menuVolume = 40;
+    private int menuVolume = 20;
     private int clickVolume = 50;
-    private int errorVolume = 50;
-    private int menuClickVolume = 50;
+    private int errorVolume = 20;
+    private int menuClickVolume = 40;
+    private int breakVolume = 25;
+    private int repairVolume = 40;
+    private int buyVolume = 40;
+    private int spawnVolume = 40;
+    private int qualityVolume = 40;
     
     // Lengths
     private int coinLength = 5;
     private int errorLength = 5;
     private int clickLength = 3;
     private int menuClickLength = 3;
+    private int upgradeLength = 2;
     
     
     public SoundManager(){
@@ -66,9 +86,6 @@ public class SoundManager
     public void setFiles(){
         startingSound = new GreenfootSound("starting_beep.mp3");
         startingSound.setVolume(startingSoundVolume);
-        
-        // bgm = new GreenfootSound("bgm.mp3");
-        // bgm.setVolume(bgmVolume);
         
         ambience = new GreenfootSound("ambience.mp3");
         ambience.setVolume(ambienceVolume);
@@ -105,6 +122,36 @@ public class SoundManager
             menuClickSounds[i] = new GreenfootSound("menu_click.mp3");
             menuClickSounds[i].setVolume(menuClickVolume);
         }
+        
+        breakSounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
+            breakSounds[i] = new GreenfootSound("break.mp3");
+            breakSounds[i].setVolume(breakVolume);
+        }
+        
+        repairSounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
+            repairSounds[i] = new GreenfootSound("repair.mp3");
+            repairSounds[i].setVolume(repairVolume);
+        }
+        
+        buySounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
+            buySounds[i] = new GreenfootSound("buy.mp3");
+            buySounds[i].setVolume(buyVolume);
+        }
+        
+        qualitySounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
+            qualitySounds[i] = new GreenfootSound("quality.mp3");
+            qualitySounds[i].setVolume(qualityVolume);
+        }
+        
+        spawnSounds = new GreenfootSound[upgradeLength];
+        for (int i = 0; i < upgradeLength; i++){
+            spawnSounds[i] = new GreenfootSound("spawn.mp3");
+            spawnSounds[i].setVolume(spawnVolume);
+        }
     }
     
     // Coins
@@ -126,17 +173,6 @@ public class SoundManager
     public void pauseStarting(){
         startingSound.pause();
     }
-    
-    /*
-    // BGM
-    public void playBgm(){
-        bgm.playLoop();
-    }
-    
-    public void pauseBgm(){
-        bgm.pause();
-    }
-    */
     
     // Error
     public void playError(){
@@ -180,5 +216,35 @@ public class SoundManager
     public void playMenuClick(){
         menuClickSounds[menuClickIndex].play();
         menuClickIndex = (menuClickIndex + 1) % menuClickLength;
+    }
+    
+    // Break machine
+    public void playBreak(){
+        breakSounds[breakIndex].play();
+        breakIndex = (breakIndex + 1) % upgradeLength;
+    }
+    
+    // Repair machine
+    public void playRepair(){
+        repairSounds[repairIndex].play();
+        repairIndex = (repairIndex + 1) % upgradeLength;
+    }
+    
+    // Increase spawn rate upgrade
+    public void playSpawn(){
+        spawnSounds[spawnIndex].play();
+        spawnIndex = (spawnIndex + 1) % upgradeLength;
+    }
+    
+    // New machine upgrade
+    public void playBuy(){
+        buySounds[buyIndex].play();
+        buyIndex = (buyIndex + 1) % upgradeLength;
+    }
+    
+    // Increase chance of high quality materials upgrade
+    public void playQuality(){
+        qualitySounds[qualityIndex].play();
+        qualityIndex = (qualityIndex + 1) % upgradeLength;
     }
 }

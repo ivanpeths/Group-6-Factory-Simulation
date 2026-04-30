@@ -1,10 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Pointer here.
+ * Fake pointer the simulated player use
+ * to click on upgrades
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * 
+ * 
+ * @author Kolby Ng 
  */
 public class Pointer extends SuperSmoothMover
 {
@@ -14,15 +16,15 @@ public class Pointer extends SuperSmoothMover
     private int startY = 0;
     private double targetX;
     private double targetY;
-    private double speed = 5.0;
-    private boolean moving;
+    private double speed = 8.0;
+    private boolean movingToUpgrade;
+    private boolean movingToStart;
     private SoundManager soundMan;
     private Upgrades curUpgrade;
     
     public Pointer(SoundManager soundMan, int startX, int startY){
         GreenfootImage img = new GreenfootImage("pointer.png");
         img.scale(xSize, ySize);
-        img.setTransparency(0);
         setImage(img);
         this.soundMan = soundMan;
         this.startX = startX;
@@ -33,29 +35,60 @@ public class Pointer extends SuperSmoothMover
         this.targetX = targetX;
         this.targetY = targetY;
         this.curUpgrade = upgrade;
-        getImage().setTransparency(255);
-        moving = true;
+        movingToUpgrade = true;
     }
     
     public void act(){
-        if (moving){
-            slideTowards();
+        if (movingToUpgrade){
+            slideTowardsUpgrade();
+        }
+        
+        if (movingToStart){
+            slideTowardsStart();
         }
     }
     
-    public void slideTowards(){
+    public void slideTowardsUpgrade(){
         double dx = targetX - getPreciseX();
         double dy = targetY - getPreciseY();
         double distance = Math.sqrt(dx * dx + dy * dy);
     
         if (distance <= speed) {
             setLocation(targetX, targetY);
-            moving = false;
+            movingToUpgrade = false;
+            movingToStart = true;
             soundMan.playClick();
-            getImage().setTransparency(0);
             curUpgrade.activate();
-            setLocation(startX, startY);
+            playSound();
             curUpgrade = null;
+        } else {
+            double ratio = speed / distance;
+            setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
+        }
+    }
+    
+    public void playSound(){
+        if (curUpgrade instanceof Break){
+            soundMan.playBreak();
+        } else if (curUpgrade instanceof Repair){
+            soundMan.playRepair();
+        } else if (curUpgrade instanceof Quality){
+            soundMan.playQuality();
+        } else if (curUpgrade instanceof Spawn){
+            soundMan.playSpawn();
+        } else{
+            soundMan.playBuy();
+        }
+    }
+    
+    public void slideTowardsStart(){
+        double dx = startX - getPreciseX();
+        double dy = startY - getPreciseY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+    
+        if (distance <= speed) {
+            setLocation(startX, startY);
+            movingToStart = false;
         } else {
             double ratio = speed / distance;
             setLocation(getPreciseX() + dx * ratio, getPreciseY() + dy * ratio);
