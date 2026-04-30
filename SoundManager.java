@@ -59,14 +59,14 @@ public class SoundManager
     
     // Volumes
     private int startingSoundVolume = 30;
-    private int coinVolume = 30;
+    private int coinVolume = 25;
     private int ambienceVolume = 20;
-    private int menuVolume = 20;
+    private int menuVolume = 25;
     private int clickVolume = 50;
-    private int errorVolume = 20;
+    private int errorVolume = 35;
     private int menuClickVolume = 40;
     private int breakVolume = 25;
-    private int repairVolume = 40;
+    private int repairVolume = 50;
     private int buyVolume = 40;
     private int spawnVolume = 30;
     private int qualityVolume = 60;

@@ -69,6 +69,7 @@ public class WinScreen extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(restartLabel)){
+            soundMan.playMenuClick();
             Greenfoot.setWorld(new SettingsWorld(soundMan));
         }
     }

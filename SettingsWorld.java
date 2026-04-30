@@ -283,6 +283,7 @@ public class SettingsWorld extends World
     
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
+            soundMan.playMenuClick();
             Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftQualityAmt, rightQualityAmt, leftRateAmt, rightRateAmt, soundMan));
         }
         
