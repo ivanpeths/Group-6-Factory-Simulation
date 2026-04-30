@@ -54,17 +54,13 @@ public class FactoryWorld extends World
     
     // Left variables
     private Machines leftMach;
-    private Hitbox leftAssemHit;
-    private Hitbox leftPackHit;
-    private Hitbox leftHandHit;
+    private Hitbox leftAssemblerHitbox;
     private int lastLeft = spawnDelay;
     private int leftPos = 300;
 
     // Right variables
     private Machines rightMach;
-    private Hitbox rightAssemHit;
-    private Hitbox rightPackHit;
-    private Hitbox rightHandHit;
+    private Hitbox rightAssemblerHitbox;
     private int lastRight = spawnDelay;
     private int rightPos = 900;
     
@@ -100,8 +96,8 @@ public class FactoryWorld extends World
     private int rightBrokeLeft = -1;
     private int rightUpgradeCooldown = 0;
 
-    private boolean leftBought = false;
-    private boolean rightBought = false;
+    private boolean leftBoughtPackager = false;
+    private boolean rightBoughtPackager = false;
     private boolean leftBoughtHandler = false;
     private boolean rightBoughtHandler = false;
     private Hitbox leftHandlerHitbox;
@@ -188,14 +184,10 @@ public class FactoryWorld extends World
     }
     
     public void drawHitboxes(int leftPos, int rightPos){
-        leftAssemHit = new Hitbox();
-        rightAssemHit = new Hitbox();
-        leftPackHit = new Hitbox();
-        rightPackHit = new Hitbox();
-        leftHandHit = new Hitbox();
-        rightHandHit = new Hitbox();
-        addObject(leftAssemHit, leftPos, getHeight() / 2);
-        addObject(rightAssemHit, rightPos, getHeight() / 2);
+        leftAssemblerHitbox = new Hitbox();
+        rightAssemblerHitbox = new Hitbox();
+        addObject(leftAssemblerHitbox, leftPos, getHeight() / 2);
+        addObject(rightAssemblerHitbox, rightPos, getHeight() / 2);
     }
     
     public void drawUpgrades () {
@@ -394,8 +386,8 @@ public class FactoryWorld extends World
     }
 
     public void addLeftPackager() {
-        if (leftBought) return;
-        leftBought = true;
+        if (leftBoughtPackager) return;
+        leftBoughtPackager = true;
     
         leftPackager = new Packager();
         addObject(leftPackager, leftPos, (getHeight() / 4 * 3) + 40);
@@ -405,8 +397,8 @@ public class FactoryWorld extends World
     }
     
     public void addRightPackager() {
-        if (rightBought) return;
-        rightBought = true;
+        if (rightBoughtPackager) return;
+        rightBoughtPackager = true;
     
         rightPackager = new Packager();
         addObject(rightPackager, rightPos, (getHeight() / 4 * 3) + 40);
@@ -438,9 +430,9 @@ public class FactoryWorld extends World
     }
     
     public int leftMachinesRemaining () {
-        if (!leftBought && !leftBoughtHandler) {
+        if (!leftBoughtPackager && !leftBoughtHandler) {
             return 0;
-        } else if (!leftBought) {
+        } else if (!leftBoughtPackager) {
             return 1;
         } else {
             return 2;
@@ -448,9 +440,9 @@ public class FactoryWorld extends World
     }
     
     public int rightMachinesRemaining () {
-        if (!rightBought && !rightBoughtHandler) {
+        if (!rightBoughtPackager && !rightBoughtHandler) {
             return 0;
-        } else if (!rightBought) {
+        } else if (!rightBoughtPackager) {
             return 1;
         } else {
             return 2;
