@@ -156,7 +156,7 @@ public class FactoryWorld extends World
     
     public void stopped(){
         soundMan.pauseStarting();
-        // soundMan.pauseBgm();
+        soundMan.pauseMenu();
         soundMan.pauseAmbience();
     }
     
