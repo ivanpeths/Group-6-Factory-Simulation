@@ -21,7 +21,7 @@ public abstract class Product extends SuperSmoothMover
     protected boolean inMachine;
     protected boolean upgraded;
 
-    // track machine collision (enter/exit)
+    // track machine collision (enter/exit)     
     protected boolean wasTouchingMachine;
     protected Machines currentMachine;
     
