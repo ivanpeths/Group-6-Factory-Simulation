@@ -49,9 +49,6 @@ public class FactoryWorld extends World
     private int countdownSize = 100;
     private Overlay overlay; 
     
-    // Starting beep
-    private GreenfootSound startingSound;
-    
     // Product variables
     private int spawnDelay = 30;
     

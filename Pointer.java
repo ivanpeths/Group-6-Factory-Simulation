@@ -102,8 +102,18 @@ public class Pointer extends SuperSmoothMover
         FactoryWorld fw = (FactoryWorld) getWorld();
         if (curUpgrade instanceof Break){
             soundMan.playBreak();
+            if (owner == 1){
+                fw.addLeftBreakLabel();
+            } else {
+                fw.addRightBreakLabel();
+            }
         } else if (curUpgrade instanceof Repair){
             soundMan.playRepair();
+            if (owner == 1){
+                fw.addLeftRepairLabel();
+            } else {
+                fw.addRightRepairLabel();
+            }
         } else if (curUpgrade instanceof Quality){
             soundMan.playQuality();
             if (owner == 1){
@@ -120,6 +130,11 @@ public class Pointer extends SuperSmoothMover
             }
         } else{
             soundMan.playBuy();
+            if (owner == 1){
+                fw.addLeftBuyLabel();
+            } else {
+                fw.addRightBuyLabel();
+            }
         }
     }
     
