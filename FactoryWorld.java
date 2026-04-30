@@ -45,7 +45,7 @@ public class FactoryWorld extends World
     private int startingTimer = 180;
     private Label countdownLabel;
     private int countdownSize = 100;
-    private Actor overlay; 
+    private Overlay overlay; 
     
     // Starting beep
     private GreenfootSound startingSound;
@@ -125,7 +125,7 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
-        setPaintOrder(Label.class, BlankActor.class, SuperStatBar.class, Pointer.class, Machines.class, Product.class, Conveyor.class);
+        setPaintOrder(Label.class, Overlay.class, SuperStatBar.class, Pointer.class, Machines.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
         setProdQual(leftQual, rightQual);
@@ -266,8 +266,7 @@ public class FactoryWorld extends World
         overlayColour.setColor(new Color(0, 0, 0, 150));
         overlayColour.fill();
         
-        overlay = new BlankActor();
-        overlay.setImage(overlayColour);
+        overlay = new Overlay(overlayColour);
         addObject(overlay, getWidth() / 2, getHeight() / 2);
         
         countdownLabel = new Label(3, countdownSize);
