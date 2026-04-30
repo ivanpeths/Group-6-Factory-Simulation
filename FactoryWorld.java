@@ -230,11 +230,13 @@ public class FactoryWorld extends World
     }
     
     public void updateLeftQuality () {
-        leftProductQuality = Math.max(1, leftProductQuality--);
+        leftProductQuality--;
+        leftProductQuality = Math.max(1, leftProductQuality);
     }
     
     public void updateRightQuality () {
-        rightProductQuality = Math.max(1, rightProductQuality--);
+        rightProductQuality--;
+        rightProductQuality = Math.max(1, rightProductQuality);
     }
     
     public void setBackground(){
@@ -339,7 +341,7 @@ public class FactoryWorld extends World
                     return;
                 }
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
-                if (rand == 0 && !rightMach.getBroken()){
+                if (rand == 0 && !rightMach.getBroken() && !leftBreak.getActivated()){
                     leftPointer.activate(leftUpgradeX, breakY, leftBreak);
                     leftBrokeRight = 900;
                 } else if (rand == 1 && !leftBuy.getActivated()){
@@ -435,22 +437,17 @@ public class FactoryWorld extends World
     }
     
     public int leftMachinesRemaining () {
-        if (!leftBoughtPackager && !leftBoughtHandler) {
-            return 0;
-        } else if (!leftBoughtPackager) {
-            return 1;
-        } else {
-            return 2;
-        }
+        int count = 0;
+        if (leftBoughtPackager) count++;
+        if (leftBoughtHandler) count++;
+        return count;
     }
     
     public int rightMachinesRemaining () {
-        if (!rightBoughtPackager && !rightBoughtHandler) {
-            return 0;
-        } else if (!rightBoughtPackager) {
-            return 1;
-        } else {
-            return 2;
+        int count = 0;
+        if (rightBoughtPackager) count++;
+        if (rightBoughtHandler) count++;
+        return count;
         }
     }
     
