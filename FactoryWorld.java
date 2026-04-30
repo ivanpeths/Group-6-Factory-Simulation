@@ -448,7 +448,6 @@ public class FactoryWorld extends World
         if (rightBoughtPackager) count++;
         if (rightBoughtHandler) count++;
         return count;
-        }
     }
     
     public Machines getLeftMachine(){

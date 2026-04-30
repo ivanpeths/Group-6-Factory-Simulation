@@ -27,5 +27,6 @@ public class Metal extends Product
         else if (type == 1) addScore(20);
         else if (type == 2) addScore(30);
         else if (type == 3) addScore(50);
+        else addScore(75);
     }
 }

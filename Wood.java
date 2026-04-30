@@ -24,8 +24,9 @@ public class Wood extends Product
     public void sell() 
     {
         if (type == 0) addScore(5);
-        else if (type == 1) addScore(10);
-        else if (type == 2) addScore(15);
+        else if (type == 1) addScore(15);
+        else if (type == 2) addScore(20);
         else if (type == 3) addScore(30);
+        else addScore(50);
     }
 }

@@ -22,8 +22,10 @@ public class Cardboard extends Product
     @Override
     public void sell() 
     {
-        if (type == 1) addScore(10);
+        if (type == 0) addScore(1);
+        else if (type == 1) addScore(10);
         else if (type == 2) addScore(15);
         else if (type == 3) addScore(25);
+        else addScore(40);
     }
 }
