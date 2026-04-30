@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class BreakMachine here.
+ * This upgrade breaks one of the other side's machine
  * 
- * @author (your name) 
- * @version (a version number or a date) 
+ * @author Isaac Law
  */
 public class Break extends Upgrades
 {

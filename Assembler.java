@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Starting machine
  * 
- * @author Ivan
+ * @author Ivan Ma
  */
 public class Assembler extends Machines
 {

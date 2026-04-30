@@ -1,5 +1,9 @@
 import greenfoot.*;
-
+/**
+ * Cheapest product. 
+ * 
+ * @author Isaac Law
+ */
 public class Cardboard extends Product
 {
     public Cardboard (int owner, double speed) {
