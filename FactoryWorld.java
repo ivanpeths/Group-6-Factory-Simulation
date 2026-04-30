@@ -377,8 +377,6 @@ public class FactoryWorld extends World
                     leftPointer.activate(leftUpgradeX, qualityY, leftQuality);
                 } else if (rand == 3 && !leftSpawnUpgrade.getActivated()) {
                     leftPointer.activate(leftUpgradeX, spawnUpgradeY, leftSpawnUpgrade);
-                    leftLabelShown = leftSpawnLabel;
-                    addObject(leftSpawnLabel, getWidth() / 4, getHeight() / 4);
                 }
                 leftUpgradeCooldown = upgradeCooldown;
                 return;
@@ -418,12 +416,8 @@ public class FactoryWorld extends World
                     rightPointer.activate(rightUpgradeX, buyY, rightBuy);
                 } else if (rand == 2 && !rightQuality.getActivated()){
                     rightPointer.activate(rightUpgradeX, qualityY, rightQuality);
-                    rightLabelShown = rightQualityLabel;
-                    addObject(rightQualityLabel, getWidth() / 4 * 3, getHeight() / 4);
                 } else if (rand == 3 && !rightSpawnUpgrade.getActivated()){
                     rightPointer.activate(rightUpgradeX, spawnUpgradeY, rightSpawnUpgrade);
-                    rightLabelShown = rightSpawnLabel;
-                    addObject(rightSpawnLabel, getWidth() / 4 * 3, getHeight() / 4);
                 }
                 rightUpgradeCooldown = upgradeCooldown;
                 return;
