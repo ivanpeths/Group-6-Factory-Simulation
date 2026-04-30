@@ -27,22 +27,9 @@ public abstract class Upgrades extends Actor
         }
         if (rechargeTimer >= 900) { //15 seconds
             activated = false; //reactivate and become opaque
+            rechargeTimer = 0;
             getImage().setTransparency(255);
         }
-            
-        /* Not the effect I had in mind - Kolby
-        if (isTouching(Pointer.class) && !activated) { // Remove after pointer works
-            if (side == 1) {
-                if (((FactoryWorld)getWorld()).getLeftScore() >= 100) {
-                    activate();
-                }
-            } else {
-                if (((FactoryWorld)getWorld()).getRightScore() >= 100) {
-                    activate();
-                }
-            }       
-        }
-        */
     }
     
     public void activate () { //activate upgrade, changed by each subclass
