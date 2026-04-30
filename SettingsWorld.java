@@ -9,7 +9,7 @@ import greenfoot.*;
  * Click on arrows to adjust value
  * Hold Shift while clicking on arrows to adjust with a larger increment
  * 
- * Makes a sound when the minimum or maximum value is reached
+ * Makes error sound when the minimum or maximum value is reached
  * 
  * @author Kolby Ng
  */

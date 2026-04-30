@@ -1,3 +1,6 @@
+import greenfoot.*;
+import java.util.List;
+
 /**
  * Product superclass
  * 
@@ -5,8 +8,6 @@
  * 
  * All images by Gemini
  */
-import greenfoot.*;
-import java.util.List;
 
 public abstract class Product extends SuperSmoothMover  
 {
