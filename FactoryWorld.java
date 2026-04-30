@@ -437,12 +437,12 @@ public class FactoryWorld extends World
 
     public void addRightQualityLabel(){
         rightLabelShown = rightQualityLabel;
-        addObject(rightQualityLabel, getWidth() / 4, getHeight() / 4);
+        addObject(rightQualityLabel, getWidth() / 4 * 3, getHeight() / 4);
     }
 
     public void addRightSpawnLabel(){
         rightLabelShown = rightSpawnLabel;
-        addObject(rightSpawnLabel, getWidth() / 4, getHeight() / 4);
+        addObject(rightSpawnLabel, getWidth() / 4 * 3, getHeight() / 4);
     }
 
     public void addLeftPackager() {
