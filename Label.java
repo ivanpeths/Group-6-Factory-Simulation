@@ -10,6 +10,10 @@ import greenfoot.*;
  *
  * @author Amjad Altadmri 
  * @version 1.1
+ * 
+ * Added adjustable transparency
+ * @author Kolby Ng
+ * @version 1.2 
  */
 public class Label extends Actor
 {
@@ -17,8 +21,9 @@ public class Label extends Actor
     private int fontSize;
     private Color lineColor = Color.BLACK;
     private Color fillColor = Color.WHITE;
+    private int transparency = 255;
     
-    private static final Color transparent = new Color(0,0,0,0);
+    private Color color = new Color(0,0,0,transparency);
 
     
     /**
@@ -83,12 +88,24 @@ public class Label extends Actor
         updateImage();
     }
     
+    /**
+     * Sets the transparency of the Label
+     * 
+     * @param fillColor the fill color of the text
+     */
+    public void setTransparency(int transparency)
+    {
+        this.transparency = transparency;
+        color = new Color(0,0,0,transparency);
+        updateImage();
+    }
+    
 
     /**
      * Update the image on screen to show the current value.
      */
     private void updateImage()
     {
-        setImage(new GreenfootImage(value, fontSize, fillColor, transparent, lineColor));
+        setImage(new GreenfootImage(value, fontSize, fillColor, color, lineColor));
     }
 }

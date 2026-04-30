@@ -84,8 +84,10 @@ public class FactoryWorld extends World
     private Break leftBreak;
     private Buy leftBuy;
     private Quality leftQuality;
+    private Label leftQualityLabel;
     private Repair leftRepair;
     private Spawn leftSpawnUpgrade;
+    private Label leftSpawnLabel;
     private int leftBrokeRight = -1;
     private int leftUpgradeCooldown = 0;
     
@@ -93,8 +95,10 @@ public class FactoryWorld extends World
     private Break rightBreak;
     private Buy rightBuy;
     private Quality rightQuality;
+    private Label rightQualityLabel;
     private Repair rightRepair;
     private Spawn rightSpawnUpgrade;
+    private Label rightSpawnLabel;
     private int rightBrokeLeft = -1;
     private int rightUpgradeCooldown = 0;
 
@@ -103,6 +107,7 @@ public class FactoryWorld extends World
     private int qualityY = 576;
     private int buyY = 663;
     private int breakY = 750;
+    private int upgradeLabelSize = 50;
         
     private boolean leftBoughtPackager = false;
     private boolean rightBoughtPackager = false;
@@ -133,6 +138,7 @@ public class FactoryWorld extends World
         setProdQual(leftQual, rightQual);
         setSpawnRate(leftRate, rightRate);
         drawUpgrades();
+        drawUpgradeLabels();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
         drawHitboxes(leftPos, rightPos);
@@ -222,6 +228,13 @@ public class FactoryWorld extends World
         addObject(rightQuality, rightUpgradeX, qualityY);
         addObject(rightRepair, rightUpgradeX, repairY);
         addObject(rightSpawnUpgrade, rightUpgradeX, spawnUpgradeY);
+    }
+    
+    public void drawUpgradeLabels(){
+        leftQualityLabel = new Label("Metal spawn rate increased!", upgradeLabelSize);
+        leftSpawnLabel = new Label("Product spawn rate increased!", upgradeLabelSize);
+        rightQualityLabel = new Label("Metal spawn rate increased!", upgradeLabelSize);
+        rightSpawnLabel = new Label("Product spawn rate increased!", upgradeLabelSize);
     }
     
     public void updateLeftSpawn () {
