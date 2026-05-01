@@ -9,7 +9,7 @@ public class Conveyor extends Actor
 {
     private GreenfootImage image;
     public Conveyor () {
-        image = new GreenfootImage("conveyor.png");
+        image = new GreenfootImage("conveyor.png"); //image for conveyors
         setImage(image);
     }
 }
