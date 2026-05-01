@@ -11,12 +11,11 @@ public class TitleScreen extends World
     private Label titleLabel;
     private Label startLabel;
     private Label nameLabel;
-    private GreenfootImage buttonImg;
-    private Button buttonActor;
     private Label buttonTitle;
-    private GreenfootImage background;
     private int fontSize = 75;
-    
+    private GreenfootImage buttonImg;
+    private GreenfootImage background;
+    private Button buttonActor;
     private SoundManager soundMan = new SoundManager();
     
     public TitleScreen()
@@ -27,6 +26,7 @@ public class TitleScreen extends World
         setBackground();
     }
     
+    // Start and stop menu music as needed
     public void stopped(){
         soundMan.pauseMenu();
     }
@@ -35,6 +35,7 @@ public class TitleScreen extends World
         soundMan.playMenu();
     }
     
+    // Draw labels, start button and background
     public void setupLabel(){
         titleLabel = new Label("Factory Simulation", fontSize);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
@@ -55,6 +56,7 @@ public class TitleScreen extends World
         setBackground(background);
     }
     
+    // Change world to SettingsWorld with a SoundManager passed
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(startLabel)){
             soundMan.playMenuClick();

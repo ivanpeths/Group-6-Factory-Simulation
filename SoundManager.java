@@ -84,6 +84,7 @@ public class SoundManager
     }
     
     public void setFiles(){
+        // Long audios
         startingSound = new GreenfootSound("starting_beep.mp3");
         startingSound.setVolume(startingSoundVolume);
         
@@ -93,6 +94,7 @@ public class SoundManager
         menu = new GreenfootSound("menu.mp3");
         menu.setVolume(menuVolume);
 
+        // Use arrays for sounds with potential simultaneous plays
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
             leftCoinSounds[i] = new GreenfootSound("left_coin.mp3");
