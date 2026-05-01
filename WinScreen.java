@@ -13,13 +13,11 @@ public class WinScreen extends World
     private Label titleLabel;
     private Label loseLabel;
     private Label restartLabel;
-    private int size = 75;
-    
-    private GreenfootImage buttonImg;
-    private Button buttonActor;
     private Label buttonTitle;
-    
+    private int size = 75;
+    private GreenfootImage buttonImg;
     private GreenfootImage background;
+    private Button buttonActor;
     private SoundManager soundMan;
     
     public WinScreen(String winner, int loseScore, SoundManager soundMan)
@@ -33,6 +31,7 @@ public class WinScreen extends World
         
     }
     
+    // Start and stop music as needed
     public void started(){
         soundMan.playMenu();
     }
@@ -41,6 +40,7 @@ public class WinScreen extends World
         soundMan.pauseMenu();
     }
     
+    // Draw winner and loser score, restart button, background
     public void setupLabel(String winner, int loseScore){
         titleLabel = new Label(winner + " wins!", size);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
@@ -51,7 +51,6 @@ public class WinScreen extends World
             loseLabel = new Label("Left only had $" + loseScore + "!", size);
             addObject(loseLabel, getWidth() / 2, getHeight() / 4 * 2);
         }
-        
     }
     
     public void setupButton(){
@@ -67,6 +66,7 @@ public class WinScreen extends World
         setBackground (background);
     }
     
+    // Change world back to SetttingsWorld to restart simulation
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(restartLabel)){
             soundMan.playMenuClick();
