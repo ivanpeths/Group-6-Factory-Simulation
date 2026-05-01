@@ -202,10 +202,6 @@ public class SoundManager
         menu.stop();
     }
     
-    public boolean menuPlaying(){
-        return menu.isPlaying();
-    }
-    
     // Pointer click
     public void playClick(){
         clickSounds[clickIndex].play();
