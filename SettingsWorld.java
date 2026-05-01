@@ -3,8 +3,8 @@ import greenfoot.*;
 /**
  * Second screen of the game, can tweak the following
  * - Starting scores
- * - Spawn rate of more expensive items, the smaller the value the more common it is
- * - Product spawn rate, the smaller the value the faster products spawn
+ * - Spawn rate of more expensive items, the larger the value the more common it is
+ * - Product spawn rate, the larger the value the faster products spawn
  * 
  * Click on arrows to adjust value
  * Hold Shift while clicking on arrows to adjust with a larger increment
@@ -305,7 +305,7 @@ public class SettingsWorld extends World
         // Pass arguments to FactoryWorld
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
             soundMan.playMenuClick();
-            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftQualityAmt, rightQualityAmt, leftRateAmt, rightRateAmt, soundMan));
+            Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, 11 - leftQualityAmt, 11 - rightQualityAmt, 101 - leftRateAmt, 101 - rightRateAmt, soundMan));
         }
         
         // Score increments while holding Shift

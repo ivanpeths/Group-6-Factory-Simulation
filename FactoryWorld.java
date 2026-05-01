@@ -174,7 +174,7 @@ public class FactoryWorld extends World
         if (gameStarted) {
             soundMan.playAmbience();
         } else {
-            soundMan.playBeep();
+            soundMan.playStarting();
         }
     }
     
