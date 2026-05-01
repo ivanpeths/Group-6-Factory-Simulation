@@ -14,15 +14,18 @@ public abstract class Product extends SuperSmoothMover
     protected int owner; // which player it belongs to 
     protected double speed; // movement speed
 
-    protected int type;
+    protected int type; // affects products image and type
     protected GreenfootImage image;
 
+    // machine interaction
     protected boolean inMachine;
     protected boolean upgraded;
 
-    private boolean wasTouchingMachine;
-    private Machines currentMachine;
-    private int machinesRemaining;
+    // track machine collision (enter/exit)     
+    protected boolean wasTouchingMachine;
+    protected Machines currentMachine;
+    
+    protected int machinesRemaining;
 
     public Product(int owner, double speed)
     {
@@ -53,6 +56,10 @@ public abstract class Product extends SuperSmoothMover
         setLocation(getExactX(), getPreciseY() + speed);
     }
 
+     /**
+     * handles entering and exiting machines
+     * detects collisions and updates machine interaction state
+     */
     private void handleMachineInteraction()
     {
         List<Machines> machines = getIntersectingObjects(Machines.class);
@@ -69,7 +76,7 @@ public abstract class Product extends SuperSmoothMover
             }
         }
 
-        // leave machine
+        // exit machine
         if (!touchingMachine && wasTouchingMachine && inMachine) {
             inMachine = false;
             currentMachine = null;
@@ -95,6 +102,7 @@ public abstract class Product extends SuperSmoothMover
                 int maxType = 2 + machinesRemaining;
                 type = Math.min(type, maxType);
 
+                // Broken chance (10%)
                 if (Greenfoot.getRandomNumber(10) == 0) {
                     type = 0;
                 }
@@ -119,7 +127,8 @@ public abstract class Product extends SuperSmoothMover
             world.changeRightScore(score);
         }
     }
-    
+
+    // checks if product reached the bottom of world
     private void checkEnd()
     {
         World w = getWorld();

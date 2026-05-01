@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 /**
- * This upgrade repair all broken machines
+ * This upgrade repairs all broken machines
  * 
  * @author Kolby Ng, with help from Ivan Ma
  * @version (a version number or a date)
@@ -16,10 +16,10 @@ public class Repair extends Upgrades
     
     public void activate () {
         FactoryWorld w = (FactoryWorld) getWorld();
-        super.activate();
-        if (side == 1){
+        super.activate(); //superclass method
+        if (side == 1){ //left
             w.repairLeftMachines();
-        } else {
+        } else { //right
             w.repairRightMachines();
         }
     }
