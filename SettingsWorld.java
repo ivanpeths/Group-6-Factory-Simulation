@@ -235,6 +235,9 @@ public class SettingsWorld extends World
     public void changeLeftRate(int amt){
         int oldAmt = leftRateAmt;
         leftRateAmt = (Math.max(Math.min(100, leftRateAmt + amt), 1));
+        if (oldAmt == 1 && amt > 0){
+            leftRateAmt--;
+        }
         leftRateAmtLabel.setValue(leftRateAmt);
         if (oldAmt == leftRateAmt){
             soundMan.playError();
@@ -260,6 +263,9 @@ public class SettingsWorld extends World
     public void changeRightRate(int amt){
         int oldAmt = rightRateAmt;
         rightRateAmt = (Math.max(Math.min(100, rightRateAmt + amt), 1));
+        if (oldAmt == 1 && amt > 0){
+            rightRateAmt--;
+        }
         rightRateAmtLabel.setValue(rightRateAmt);
         if (oldAmt == rightRateAmt){
             soundMan.playError();
