@@ -3,15 +3,17 @@ import greenfoot.*;
 /**
  * Most expensive Product
  * 
- * @author Isaac Law
+ * @author Isaac Law, with help from Ivan Ma
  */
 
 public class Metal extends Product
 {
+    //contructor
     public Metal (int owner, double speed) {
         super(owner, speed);
     }
 
+    //change image for each quality
     @Override
     public void updateImage() 
     {
@@ -25,10 +27,11 @@ public class Metal extends Product
         setImage(image);
     }
 
+    //sell item for score
     @Override
     public void sell() 
     {
-        if (type == 0) addScore(10);
+        if (type == 0) addScore(15);
         else if (type == 1) addScore(20);
         else if (type == 2) addScore(30);
         else if (type == 3) addScore(50);

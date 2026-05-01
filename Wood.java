@@ -1,16 +1,18 @@
 /**
  * Middle tier product
  * 
- * @author Isaac Law
+ * @author Isaac Law, with help from Ivan Ma
  */
 import greenfoot.*;
 
 public class Wood extends Product
 {
+    //contructor
     public Wood (int owner, double speed) {
-        super(owner, speed);
+        super(owner, speed); //calls superclass constructor
     }
 
+    //change image for each quality
     @Override
     public void updateImage() 
     {
@@ -24,13 +26,13 @@ public class Wood extends Product
         setImage(image);
     }
 
+    //sell item for score
     @Override
-    public void sell() 
-    {
-        if (type == 0) addScore(5);
+    public void sell() {
+        if (type == 0) addScore(10); //adds score depending on type & quality
         else if (type == 1) addScore(15);
-        else if (type == 2) addScore(20);
-        else if (type == 3) addScore(30);
+        else if (type == 2) addScore(25);
+        else if (type == 3) addScore(35);
         else addScore(50);
     }
 }

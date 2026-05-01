@@ -8,12 +8,14 @@ import greenfoot.*;
  */
 public class Repair extends Upgrades
 {
+    //constructor
     public Repair (int side) {
-        super(side);
+        super(side); //calls superclass constructor
         image = new GreenfootImage("repair.png");
         setImage(image);
     }
     
+    //activates upgrade
     public void activate () {
         FactoryWorld w = (FactoryWorld) getWorld();
         super.activate(); //superclass method

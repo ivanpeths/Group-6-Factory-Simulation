@@ -7,20 +7,23 @@ import greenfoot.*;
  */
 public class Handler extends Machines
 {
+    //constructor
     public Handler () {
         image = new GreenfootImage("machine3.png");
         setImage(image);
     }
     
+    //break machine
     public void breakMachine() {
-        image = new GreenfootImage("brokenmachine3.png");
+        image = new GreenfootImage("brokenmachine3.png"); //broken image
         setImage(image);
-        broken = true;
+        broken = true; //breaks
     }
     
+    //fixes machine
     public void unbreakMachine(){
-        image = new GreenfootImage("machine3.png");
+        image = new GreenfootImage("machine3.png"); //reverts image
         setImage(image);
-        broken = false;
+        broken = false; //fixes
     }
 }

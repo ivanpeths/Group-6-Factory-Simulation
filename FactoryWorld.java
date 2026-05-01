@@ -126,7 +126,7 @@ public class FactoryWorld extends World
     private Hitbox leftPackagerHitbox;
     private Hitbox rightPackagerHitbox;
     
-    private int minScoreBuy = 100;
+    private int minScoreBuy = 125;
     private int upgradeCooldown = 300;
     private int upgradeChance = 60;
     
