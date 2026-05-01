@@ -3,7 +3,7 @@ import greenfoot.*;
 /**
  * This upgrade breaks one of the other side's machine
  * 
- * @author Isaac Law
+ * @author Isaac Law with help from Ivan Ma
  */
 public class Break extends Upgrades
 {

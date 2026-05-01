@@ -3,7 +3,7 @@ import greenfoot.*;
 /**
  * Second machine
  * 
- * @author Ivan
+ * @author Ivan Ma
  */
 public class Handler extends Machines
 {
