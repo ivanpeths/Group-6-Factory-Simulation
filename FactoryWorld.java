@@ -27,7 +27,6 @@ public class FactoryWorld extends World
     private int leftProductQuality = 6;
     private int rightProductQuality = 6;
     
-    
     // Score variables
     private Label leftScoreLabel;
     private Label rightScoreLabel;
@@ -53,7 +52,7 @@ public class FactoryWorld extends World
     private int spawnDelay = 30;
     
     // Left variables
-    private Machines leftMach;
+    private Machines leftAssembler;
     private Hitbox leftAssemblerHitbox;
     private int lastLeft = spawnDelay;
     private int leftPos = 300;
@@ -61,7 +60,7 @@ public class FactoryWorld extends World
     private Machines leftPackager;
 
     // Right variables
-    private Machines rightMach;
+    private Machines rightAssembler;
     private Hitbox rightAssemblerHitbox;
     private int lastRight = spawnDelay;
     private int rightPos = 900;
@@ -141,42 +140,52 @@ public class FactoryWorld extends World
     {    
         super(1200, 800, 1); 
         
+        // Draw UI and art
         setPaintOrder(Label.class, Overlay.class, SuperStatBar.class, Pointer.class, Machines.class, Product.class, Conveyor.class);
         setBackground();
         drawConveyor(leftPos, rightPos);
-        setProdQual(leftQual, rightQual);
-        setSpawnRate(leftRate, rightRate);
         drawUpgrades();
         drawUpgradeLabels();
         drawLabels(leftStarting, rightStarting);
         drawMachines(leftPos, rightPos);
         drawHitboxes(leftPos, rightPos);
         drawCountdown();
+
+        // Set values from parameters
+        setProdQual(leftQual, rightQual);
+        setSpawnRate(leftRate, rightRate);
         
+        // Run last since Pointers needs soundMan
         this.soundMan = soundMan;
-        // Run last since it needs soundMan
         setupPointers();
         
         soundMan.playStarting();
     }
-        
+    
+    // Get game started status
     public boolean getStarted(){
         return gameStarted;
     }
     
+    // Play BGM when start button pressed
+    // If game started play ambience too, if not play starting beep
     public void started(){
+        soundMan.playMenu();
         if (gameStarted) {
-            soundMan.playMenu();
             soundMan.playAmbience();
+        } else {
+            soundMan.playBeep();
         }
     }
     
+    // Stop all sounds
     public void stopped(){
         soundMan.pauseStarting();
         soundMan.pauseMenu();
         soundMan.pauseAmbience();
     }
     
+    // Place pointers initial near the middle
     public void setupPointers(){
         this.leftPointer = new Pointer(soundMan, getWidth() / 8 * 3, getHeight() / 2, 1);
         this.rightPointer = new Pointer(soundMan, getWidth() / 8 * 5, getHeight() / 2, 2);
@@ -184,6 +193,7 @@ public class FactoryWorld extends World
         addObject(rightPointer, getWidth() / 8 * 5, getHeight() / 2);
     }
     
+    // Set spawn rate and product quality from constructor parameters
     public void setSpawnRate(int leftRate, int rightRate){
         this.leftProductSpawn = leftRate;
         this.rightProductSpawn = rightRate;
@@ -194,16 +204,17 @@ public class FactoryWorld extends World
         this.rightProductQuality = rightQual;
     }
     
+    // Draw machines and conveyor in the middle of the left and right side
     public void drawConveyor (int leftPos, int rightPos){
         addObject(new Conveyor(), leftPos, getHeight() / 2);
         addObject(new Conveyor(), rightPos, getHeight() / 2);
     }
     
     public void drawMachines(int leftPos, int rightPos){
-        leftMach = new Assembler();
-        rightMach = new Assembler();
-        addObject(leftMach, leftPos, getHeight() / 2);
-        addObject(rightMach, rightPos, getHeight() / 2);
+        leftAssembler = new Assembler();
+        rightAssembler = new Assembler();
+        addObject(leftAssembler, leftPos, getHeight() / 2);
+        addObject(rightAssembler, rightPos, getHeight() / 2);
     }
     
     public void drawHitboxes(int leftPos, int rightPos){
@@ -213,6 +224,7 @@ public class FactoryWorld extends World
         addObject(rightAssemblerHitbox, rightPos, getHeight() / 2);
     }
     
+    // Draw upgrades on the far left and right side
     public void drawUpgrades () {
         leftBreak = new Break(leftUpgradeX);
         leftBuy = new Buy(leftUpgradeX);
@@ -239,6 +251,8 @@ public class FactoryWorld extends World
         addObject(rightSpawnUpgrade, rightUpgradeX, spawnUpgradeY);
     }
     
+    // Draw labels indicating what upgrades was purchased
+    // Not added to world until needed
     public void drawUpgradeLabels(){
         leftQualityLabel = new Label("Metal spawn rate increased!", upgradeLabelSize);
         leftSpawnLabel = new Label("Product spawn rate increased!", upgradeLabelSize);
@@ -252,29 +266,7 @@ public class FactoryWorld extends World
         rightRepairLabel = new Label("Machine repaired!", upgradeLabelSize);
     }
     
-    public void updateLeftSpawn () {
-        leftProductSpawn = Math.max(1, leftProductSpawn - 5);
-    }
-
-    public void updateRightSpawn () {
-        rightProductSpawn = Math.max(1, rightProductSpawn - 5);
-    }
-    
-    public void updateLeftQuality () {
-        leftProductQuality--;
-        leftProductQuality = Math.max(1, leftProductQuality);
-    }
-    
-    public void updateRightQuality () {
-        rightProductQuality--;
-        rightProductQuality = Math.max(1, rightProductQuality);
-    }
-    
-    public void setBackground(){
-        background = new GreenfootImage ("background.png");
-        setBackground (background);
-    }
-    
+    // Draw score labels
     public void drawLabels(int leftStarting, int rightStarting){
         leftScoreLabel = new Label("$" + leftStarting + "/$" + winCond, labelSize);
         leftScore = leftStarting;
@@ -285,9 +277,11 @@ public class FactoryWorld extends World
         addObject(rightScoreLabel, getWidth() / 32 * 29, labelY);
     }
     
+    // Draw starting countdown with a translucent dark gray overlay
     public void drawCountdown(){
         leftBar = new SuperStatBar(barProgress, 0, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
         rightBar = new SuperStatBar(barProgress, 0, null, getWidth() / 2, barHeight, 0, Color.GREEN, Color.GRAY);
+        // Right bar rotated 180 degrees, so both start from middle and go towards the side
         rightBar.setRotation(180);
         addObject(leftBar, getWidth() / 4, 0);
         addObject(rightBar, getWidth() / 4 * 3, 0);
@@ -303,6 +297,35 @@ public class FactoryWorld extends World
         addObject(countdownLabel, getWidth() / 2, getHeight() / 2);
     }
     
+    // Increase product spawn rate by around 5 frames, which is 83 milliseconds
+    // Minimum clamped at 1 to prevent zero division
+    public void updateLeftSpawn () {
+        leftProductSpawn = Math.max(1, leftProductSpawn - 5);
+    }
+
+    public void updateRightSpawn () {
+        rightProductSpawn = Math.max(1, rightProductSpawn - 5);
+    }
+    
+    // Increase chance of metal spawning
+    // Minimum clamped at 1 to prevent zero division
+    public void updateLeftQuality () {
+        leftProductQuality--;
+        leftProductQuality = Math.max(1, leftProductQuality);
+    }
+    
+    public void updateRightQuality () {
+        rightProductQuality--;
+        rightProductQuality = Math.max(1, rightProductQuality);
+    }
+    
+    public void setBackground(){
+        background = new GreenfootImage ("background.png");
+        setBackground (background);
+    }
+    
+    // Score functions
+    // Updates the score shown
     public void updateLeftScore(){
         leftScoreLabel.setValue("$" + leftScore + "/$" + winCond);
     }
@@ -321,6 +344,8 @@ public class FactoryWorld extends World
         updateRightScore();
     }
     
+    // Countdown methods
+    // Ticks the bar
     public void updateCountdown(){
         barProgress--;
         leftBar.update(barProgress);
@@ -334,6 +359,7 @@ public class FactoryWorld extends World
         removeObject(overlay);
     }
     
+    // Main game timer functions
     public void updateTimer(){
         timerLabel.setValue(timer / 60 + "s");
     }
@@ -343,6 +369,7 @@ public class FactoryWorld extends World
         addObject(timerLabel, getWidth() / 2, labelY);
     }
     
+    // Check if any side has won
     public void checkWin(){
         if (leftScore >= winCond){
             Greenfoot.setWorld(new WinScreen("Left", rightScore, soundMan));
@@ -378,6 +405,7 @@ public class FactoryWorld extends World
                 // Leave other upgrades up to chance
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0 && hasWorkingRightMachine() && !leftBreak.getActivated()){
+                    // Start moving towards the upgrade image
                     leftPointer.activate(leftUpgradeX, breakY, leftBreak);
                     leftBrokeRight = 900;
                 } else if (rand == 1 && !leftBuy.getActivated()){
@@ -419,6 +447,7 @@ public class FactoryWorld extends World
                 // Leave other upgrades up to chance
                 int rand = Greenfoot.getRandomNumber(4); // 0 Break, 1 Buy, 2 Quality, 3 Spawn
                 if (rand == 0 && hasWorkingLeftMachine() && !rightBreak.getActivated()){
+                    // Start moving towards the upgrade image
                     rightPointer.activate(rightUpgradeX, breakY, rightBreak);
                     rightBrokeLeft = 900;
                 } else if (rand == 1 && !rightBuy.getActivated()){
@@ -434,6 +463,8 @@ public class FactoryWorld extends World
         }
     }
 
+    // Upgrade label functions
+    // Called from Pointer class when it finally reaches the upgrades
     public void addLeftQualityLabel(){
         leftLabelShown = leftQualityLabel;
         addObject(leftQualityLabel, getWidth() / 4, getHeight() / 4);
@@ -442,16 +473,6 @@ public class FactoryWorld extends World
     public void addLeftSpawnLabel(){
         leftLabelShown = leftSpawnLabel;
         addObject(leftSpawnLabel, getWidth() / 4, getHeight() / 4);
-    }
-
-    public void addRightQualityLabel(){
-        rightLabelShown = rightQualityLabel;
-        addObject(rightQualityLabel, getWidth() / 4 * 3, getHeight() / 4);
-    }
-
-    public void addRightSpawnLabel(){
-        rightLabelShown = rightSpawnLabel;
-        addObject(rightSpawnLabel, getWidth() / 4 * 3, getHeight() / 4);
     }
     
     public void addLeftRepairLabel(){
@@ -469,6 +490,16 @@ public class FactoryWorld extends World
         addObject(leftBreakLabel, getWidth() / 4, getHeight() / 4);
     }
     
+    public void addRightQualityLabel(){
+        rightLabelShown = rightQualityLabel;
+        addObject(rightQualityLabel, getWidth() / 4 * 3, getHeight() / 4);
+    }
+
+    public void addRightSpawnLabel(){
+        rightLabelShown = rightSpawnLabel;
+        addObject(rightSpawnLabel, getWidth() / 4 * 3, getHeight() / 4);
+    }
+
     public void addRightRepairLabel(){
         rightLabelShown = rightRepairLabel;
         addObject(rightRepairLabel, getWidth() / 4 * 3, getHeight() / 4);
@@ -483,7 +514,8 @@ public class FactoryWorld extends World
         rightLabelShown = rightBreakLabel;
         addObject(rightBreakLabel, getWidth() / 4 * 3, getHeight() / 4);
     }
-
+    
+    // Add upgrade machines to world
     public void addLeftPackager() {
         if (leftBoughtPackager) return;
         leftBoughtPackager = true;
@@ -528,6 +560,7 @@ public class FactoryWorld extends World
         addObject(rightHandlerHitbox, rightPos, (getHeight() / 4) - 40);
     }
     
+    // Count if side still has machines left
     public int leftMachinesRemaining () {
         int count = 0;
         if (leftBoughtPackager) count++;
@@ -542,6 +575,7 @@ public class FactoryWorld extends World
         return count;
     }
     
+    // Get working status of given machine
     private boolean isBroken(Machines machine){
         return machine != null && machine.getBroken();
     }
@@ -550,6 +584,7 @@ public class FactoryWorld extends World
         return machine != null && !machine.getBroken();
     }
 
+    // Fix machine if it's broken
     private void repairMachine(Machines machine){
         if (isBroken(machine)){
             machine.unbreakMachine();
@@ -566,66 +601,66 @@ public class FactoryWorld extends World
         return workingMachines.get(Greenfoot.getRandomNumber(workingMachines.size()));
     }
 
+    // Return whether any machines are broken on a side
     public boolean hasBrokenLeftMachine(){
-        return isBroken(leftMach) || isBroken(leftHandler) || isBroken(leftPackager);
+        return isBroken(leftAssembler) || isBroken(leftHandler) || isBroken(leftPackager);
     }
 
     public boolean hasBrokenRightMachine(){
-        return isBroken(rightMach) || isBroken(rightHandler) || isBroken(rightPackager);
+        return isBroken(rightAssembler) || isBroken(rightHandler) || isBroken(rightPackager);
     }
-
+    
+    // Return whether any machines are working on a side
     public boolean hasWorkingLeftMachine(){
-        return isWorking(leftMach) || isWorking(leftHandler) || isWorking(leftPackager);
+        return isWorking(leftAssembler) || isWorking(leftHandler) || isWorking(leftPackager);
     }
 
     public boolean hasWorkingRightMachine(){
-        return isWorking(rightMach) || isWorking(rightHandler) || isWorking(rightPackager);
+        return isWorking(rightAssembler) || isWorking(rightHandler) || isWorking(rightPackager);
     }
 
+    // Fix all machines on a side
     public void repairLeftMachines(){
-        repairMachine(leftMach);
+        repairMachine(leftAssembler);
         repairMachine(leftHandler);
         repairMachine(leftPackager);
     }
 
     public void repairRightMachines(){
-        repairMachine(rightMach);
+        repairMachine(rightAssembler);
         repairMachine(rightHandler);
         repairMachine(rightPackager);
     }
 
+    // Break a random machine on a side
     public void breakLeftMachine(){
-        Machines target = chooseWorkingMachine(leftMach, leftHandler, leftPackager);
+        Machines target = chooseWorkingMachine(leftAssembler, leftHandler, leftPackager);
         if (target != null){
             target.breakMachine();
         }
     }
 
     public void breakRightMachine(){
-        Machines target = chooseWorkingMachine(rightMach, rightHandler, rightPackager);
+        Machines target = chooseWorkingMachine(rightAssembler, rightHandler, rightPackager);
         if (target != null){
             target.breakMachine();
         }
     }
-
-    public Machines getLeftMachine(){
-        return leftMach;
-    }
     
-    public Machines getRightMachine(){
-        return rightMach;
-    }
-    
+    // Return Sound Manager
     public SoundManager getSoundMan(){
         return soundMan;
     }
     
+    // Spawn product on a side
     public void spawnLeftProd(){
+        // If last product spawned longer than set cooldown
         if (lastLeft >= spawnDelay) {
+            // If random num out of spawn rate is 0
             if (Greenfoot.getRandomNumber(leftProductSpawn) == 0) {
-                
+                // Get random product quality
                 int rand = Greenfoot.getRandomNumber(leftProductQuality);
-                
+                // Add corresponding product to world
                 if (rand == 0) {
                     addObject(new Metal(1, leftSpeed), leftPos, 0);
                 } else if (rand == 1 || rand == 2) {
@@ -640,11 +675,13 @@ public class FactoryWorld extends World
     }
 
     public void spawnRightProd(){
+        // If last product spawned longer than set cooldown
         if (lastRight >= spawnDelay) {
+            // If random num out of spawn rate is 0
             if (Greenfoot.getRandomNumber(rightProductSpawn) == 0) {
-                
+                // Get random product quality
                 int rand = Greenfoot.getRandomNumber(rightProductQuality);
-                
+                // Add corresponding product to world
                 if (rand == 0) {
                     addObject(new Metal(2, rightSpeed), rightPos, 0);
                 } else if (rand == 1 || rand == 2) {
@@ -658,15 +695,21 @@ public class FactoryWorld extends World
         }
     }
 
+    // Used for upgrade labels
     public void checkLeftLabel(){
+        // If an upgrade label is currently shown
         if (leftLabelShown != null){
+            // Check if label has been on screen for at least a second
             if (leftLabelCounter <= 60){
                 leftLabelCounter++;
+            // Check if label is fading out
             } else if (leftLabelCounter <= 145){ // 60 + 255 / 3
+                // Deduct transparency by 3 steps
                 leftLabelTransparency -= 3;
                 leftLabelShown.setTransparency(leftLabelTransparency);
                 leftLabelCounter++;
             } else {
+                // Remove object after transparent
                 removeObject(leftLabelShown);
                 leftLabelShown = null;
                 leftLabelCounter = 0;
@@ -677,13 +720,17 @@ public class FactoryWorld extends World
 
     public void checkRightLabel(){
         if (rightLabelShown != null){
+            // If an upgrade label is currently shown
             if (rightLabelCounter <= 60){
                 rightLabelCounter++;
+            // Check if label is fading out
             } else if (rightLabelCounter <= 145){ // 60 + 255 / 3
+                // Deduct transparency by 3 steps
                 rightLabelTransparency -= 3;
                 rightLabelShown.setTransparency(rightLabelTransparency);
                 rightLabelCounter++;
             } else {
+                // Remove object after transparent
                 removeObject(rightLabelShown);
                 rightLabelShown = null;
                 rightLabelCounter = 0;
@@ -709,10 +756,11 @@ public class FactoryWorld extends World
 
         checkWin();
         
+        // Spawn products
         spawnLeftProd();
         spawnRightProd();
 
-        // Act from last product spawn
+        // Increment act from last product spawn
         lastLeft++;
         lastRight++;
         
@@ -734,6 +782,7 @@ public class FactoryWorld extends World
         checkRightLabel();
     }
     
+    // Return current score on a side
     public int getLeftScore () {
         return leftScore;
     }
