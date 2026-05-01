@@ -7,12 +7,14 @@ import greenfoot.*;
  */
 public class Spawn extends Upgrades
 {
+    //constructor
     public Spawn (int side) {
         super(side); //calls superclass constructor
         image = new GreenfootImage("spawning.png"); //image for upgrade
         setImage(image);
     }
     
+    //activate upgrade
     public void activate () {
         super.activate(); //calls superclass method
         if (side == 1) { //left

@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 /**
- * Upgrades superclass 
+ * Upgrades superclass
  * 
  * Five upgrades in total
  * Break - breaks one machine on the other side
@@ -17,8 +17,10 @@ public abstract class Upgrades extends Actor
     protected GreenfootImage image;
     protected int rechargeTimer; //timer for recharging
     protected boolean activated; //has this been used recently?
-    protected int side;
-    protected int cost = 50;
+    protected int side; //which lane?
+    protected int cost = 50; //cost for each upgrade
+    
+    //constructor
     
     public Upgrades (int side) {
         if (side == 50) { //which pixel are products spawning?
@@ -28,29 +30,31 @@ public abstract class Upgrades extends Actor
         }
     }
     
+    //called every frame
     public void act () {
         if (activated) { //start reset timer when activated
             rechargeTimer++;
         }
         if (rechargeTimer >= 420) { //7 seconds
             activated = false; //reactivate and become opaque
-            rechargeTimer = 0;
+            rechargeTimer = 0; //reset timer
             getImage().setTransparency(255);
         }
     }
     
+    //activates upgrade
     public void activate () { //activate upgrade, changed by each subclass
         getImage().setTransparency(50); //transparency down to show used
-        activated = true; 
-        rechargeTimer = 0;
-        if (side == 1) {
+        activated = true; //start counting for timer
+        rechargeTimer = 0; //resets timer after activation
+        if (side == 1) { //left
             ((FactoryWorld)getWorld()).changeLeftScore(cost * -1); //costs $50
-        } else {
+        } else { //right
             ((FactoryWorld)getWorld()).changeRightScore(cost * -1);
         }
     }
     
-    public boolean getActivated () {
+    public boolean getActivated () { //returns to check if upgrade can be called again
         return activated;
     }
 }
