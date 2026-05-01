@@ -37,6 +37,7 @@ public class Pointer extends SuperSmoothMover
         this.owner = owner;
     }
     
+    // Called from FactoryWorld, ready to move to upgrade
     public void activate(double targetX, double targetY, Upgrades upgrade){
         this.targetX = targetX;
         this.targetY = targetY;
@@ -54,7 +55,9 @@ public class Pointer extends SuperSmoothMover
             slideTowardsStart();
         }
         
+        // If not moving to upgrade or start position
         if (!movingToStart && !movingToUpgrade){
+            // If reached random idle position, find new pos, else continue moving
             if (finishedIdle){
                 newIdlePos();
             } else {
@@ -63,6 +66,7 @@ public class Pointer extends SuperSmoothMover
         }
     }
     
+    // Find random position in own side
     public void newIdlePos(){
         World w = getWorld();
         finishedIdle = false;
@@ -75,6 +79,7 @@ public class Pointer extends SuperSmoothMover
         }
     }
     
+    // Move towards upgrade
     public void slideTowardsUpgrade(){
         // Get difference in x and y
         double dx = targetX - getPreciseX();
@@ -98,6 +103,8 @@ public class Pointer extends SuperSmoothMover
         }
     }
     
+    // Doesn't only play upgrade sound
+    // Also calls FactoryWorld to add upgradeLabel, or else we would need a lot more variables
     public void playSound(){
         FactoryWorld fw = (FactoryWorld) getWorld();
         if (curUpgrade instanceof Break){
@@ -138,6 +145,7 @@ public class Pointer extends SuperSmoothMover
         }
     }
     
+    // Move to random location when not upgrading
     public void idle(){
         // Get difference in x and y
         double dx = idleX - getPreciseX();
@@ -162,6 +170,7 @@ public class Pointer extends SuperSmoothMover
        return normal+start;
     }
 
+    // Slide to start position after moving to upgrade
     public void slideTowardsStart(){
         // Get difference in x and y
         double dx = startX - getPreciseX();

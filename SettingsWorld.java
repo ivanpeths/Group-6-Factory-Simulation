@@ -102,16 +102,17 @@ public class SettingsWorld extends World
         
     }
     
+    // Pause menu music when game is stopped
     public void stopped(){
         soundMan.pauseMenu();
     }
     
+    // Play menu music when game starts
     public void started(){
-        if (!soundMan.menuPlaying()){
-            soundMan.playMenu();
-        }
+        soundMan.playMenu();
     }
     
+    // Set left and right arrow images
     public void setupImages(){
         leftImg = new GreenfootImage("left_arrow.png");
         leftImg.scale(imgSize, imgSize);
@@ -119,6 +120,7 @@ public class SettingsWorld extends World
         rightImg.scale(imgSize, imgSize);
     }
     
+    // Draw left score buttons
     public void setupLeftScore(){
         leftScoreLabel = new Label("Left Starting Score", labelSize);
         leftScoreAmtLabel = new Label(leftScoreAmt, labelSize);
@@ -132,11 +134,12 @@ public class SettingsWorld extends World
         
     }
     
-    // Clamp min and max
     public void changeLeftScore(int amt){
         int oldAmt = leftScoreAmt;
+        // Clamp min and max
         leftScoreAmt = (Math.max(Math.min(1000, leftScoreAmt + amt), 0));
         leftScoreAmtLabel.setValue(leftScoreAmt);
+        // If new value is same as old one i.e. clamped
         if (oldAmt == leftScoreAmt){
             soundMan.playError();
         } else {
@@ -144,6 +147,7 @@ public class SettingsWorld extends World
         }
     }
     
+    // Draw right score buttons
     public void setupRightScore(){
         rightScoreLabel = new Label("Right Starting Score", labelSize);
         rightScoreAmtLabel = new Label(rightScoreAmt, labelSize);
@@ -156,11 +160,12 @@ public class SettingsWorld extends World
         addObject(rightScoreRight, getWidth() / 8 * 7, rightScoreY);
     }
     
-    // Clamp min and max
     public void changeRightScore(int amt){
         int oldAmt = rightScoreAmt;
+        // Clamp min and max
         rightScoreAmt = (Math.max(Math.min(1000, rightScoreAmt + amt), 0));
         rightScoreAmtLabel.setValue(rightScoreAmt);
+        // If new value is same as old one i.e. clamped
         if (oldAmt == rightScoreAmt){
             soundMan.playError();
         } else {
@@ -168,6 +173,7 @@ public class SettingsWorld extends World
         }
     }
     
+    // Draw left quality buttons
     public void setupLeftQuality(){
         leftQualityLabel = new Label("Left Starting Quality", labelSize);
         leftQualityAmtLabel = new Label(leftQualityAmt, labelSize);
@@ -181,11 +187,12 @@ public class SettingsWorld extends World
         
     }
     
-    // Clamp min and max
     public void changeLeftQuality(int amt){
         int oldAmt = leftQualityAmt;
+        // Clamp min and max
         leftQualityAmt = (Math.max(Math.min(10, leftQualityAmt + amt), 1));
         leftQualityAmtLabel.setValue(leftQualityAmt);
+        // If new value is same as old one i.e. clamped
         if (oldAmt == leftQualityAmt){
             soundMan.playError();
         } else {
@@ -193,6 +200,7 @@ public class SettingsWorld extends World
         }
     }
     
+    // Draw right quality buttons
     public void setupRightQuality(){
         rightQualityLabel = new Label("Right Starting Quality", labelSize);
         rightQualityAmtLabel = new Label(rightQualityAmt, labelSize);
@@ -203,14 +211,14 @@ public class SettingsWorld extends World
         addObject(rightQualityLeft, getWidth() / 8 * 5, rightQualityY);
         addObject(rightQualityAmtLabel, getWidth() / 8 * 6, rightQualityY);
         addObject(rightQualityRight, getWidth() / 8 * 7, rightQualityY);
-        
     }
     
-    // Clamp min and max
     public void changeRightQuality(int amt){
         int oldAmt = rightQualityAmt;
+        // Clamp min and max
         rightQualityAmt = (Math.max(Math.min(10, rightQualityAmt + amt), 1));
         rightQualityAmtLabel.setValue(rightQualityAmt);
+        // If new value is same as old one i.e. clamped
         if (oldAmt == rightQualityAmt){
             soundMan.playError();
         } else {
@@ -218,6 +226,7 @@ public class SettingsWorld extends World
         }
     }
     
+    // Draw left product spawn rate buttons
     public void setupLeftRate(){
         leftRateLabel = new Label("Left Starting Rate", labelSize);
         leftRateAmtLabel = new Label(leftRateAmt, labelSize);
@@ -230,11 +239,15 @@ public class SettingsWorld extends World
         addObject(leftRateRight, getWidth() / 8 * 7, leftRateY);
         
     }
-    
-    // Clamp min and max
+
     public void changeLeftRate(int amt){
         int oldAmt = leftRateAmt;
+        // Clamp min and max
         leftRateAmt = (Math.max(Math.min(100, leftRateAmt + amt), 1));
+        // Since clamped value is 1, if you add 5 or 10 it'll become 6 and 11, decrease by 1
+        if (oldAmt == 1 && amt > 0){
+            leftRateAmt--;
+        }
         leftRateAmtLabel.setValue(leftRateAmt);
         if (oldAmt == leftRateAmt){
             soundMan.playError();
@@ -243,6 +256,7 @@ public class SettingsWorld extends World
         }
     }
     
+    // Right product spawn rate buttons
     public void setupRightRate(){
         rightRateLabel = new Label("Right Starting Rate", labelSize);
         rightRateAmtLabel = new Label(rightRateAmt, labelSize);
@@ -256,10 +270,14 @@ public class SettingsWorld extends World
         
     }
     
-    // Clamp min and max
     public void changeRightRate(int amt){
         int oldAmt = rightRateAmt;
+        // Clamp min and max
         rightRateAmt = (Math.max(Math.min(100, rightRateAmt + amt), 1));
+        // Since clamped value is 1, if you add 5 or 10 it'll become 6 and 11, decrease by 1
+        if (oldAmt == 1 && amt > 0){
+            rightRateAmt--;
+        }
         rightRateAmtLabel.setValue(rightRateAmt);
         if (oldAmt == rightRateAmt){
             soundMan.playError();
@@ -268,6 +286,7 @@ public class SettingsWorld extends World
         }
     }
     
+    // Draw Start button
     public void setupButton(){
         buttonImg = new GreenfootImage("button.png");
         buttonActor = new Button(buttonImg);
@@ -281,7 +300,9 @@ public class SettingsWorld extends World
         setBackground (background);
     }
     
+    // Check for button clicks every act
     public void act(){
+        // Pass arguments to FactoryWorld
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(buttonTitle)){
             soundMan.playMenuClick();
             Greenfoot.setWorld(new FactoryWorld(leftScoreAmt, rightScoreAmt, leftQualityAmt, rightQualityAmt, leftRateAmt, rightRateAmt, soundMan));
