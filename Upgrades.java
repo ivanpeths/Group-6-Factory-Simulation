@@ -18,7 +18,7 @@ public abstract class Upgrades extends Actor
     protected int rechargeTimer; //timer for recharging
     protected boolean activated; //has this been used recently?
     protected int side; //which lane?
-    protected int cost = 50; //cost for each upgrade
+    protected int cost = 100; //cost for each upgrade
     
     //constructor
     
@@ -48,7 +48,7 @@ public abstract class Upgrades extends Actor
         activated = true; //start counting for timer
         rechargeTimer = 0; //resets timer after activation
         if (side == 1) { //left
-            ((FactoryWorld)getWorld()).changeLeftScore(cost * -1); //costs $50
+            ((FactoryWorld)getWorld()).changeLeftScore(cost * -1); //costs $100
         } else { //right
             ((FactoryWorld)getWorld()).changeRightScore(cost * -1);
         }

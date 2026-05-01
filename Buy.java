@@ -26,7 +26,7 @@ public class Buy extends Upgrades
             } else if (world.leftMachinesRemaining() == 1) { //first one bought
                 world.addLeftPackager(); //last machine
             } else {
-                ((FactoryWorld)getWorld()).changeLeftScore(50); //reinburse
+                ((FactoryWorld)getWorld()).changeLeftScore(100); //reinburse
             }
         } else { //left
             if (world.rightMachinesRemaining() == 0) { //same as above
@@ -34,7 +34,7 @@ public class Buy extends Upgrades
             } else if (world.rightMachinesRemaining() == 1) {
                 world.addRightPackager();
             } else {
-                ((FactoryWorld)getWorld()).changeRightScore(5);
+                ((FactoryWorld)getWorld()).changeRightScore(100);
             }
         }
     }
