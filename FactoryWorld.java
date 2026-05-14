@@ -372,9 +372,11 @@ public class FactoryWorld extends World
     // Check if any side has won
     public void checkWin(){
         if (leftScore >= winCond){
+			soundMan.pauseAmbience();
             Greenfoot.setWorld(new WinScreen("Left", rightScore, soundMan));
         }
         else if (rightScore >= winCond){
+			soundMan.pauseAmbience();
             Greenfoot.setWorld(new WinScreen("Right", leftScore, soundMan));
         }
     }
